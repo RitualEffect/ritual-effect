@@ -1,0 +1,1003 @@
+@import url('https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&family=Tillana:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000 url(../images/u_symbol_dark_grey.png) fixed no-repeat center center / contain;
+    font-family: 'Tillana', sans-serif;
+    color: #fff;
+}
+
+body a {
+    color: #fff;
+    text-decoration: none;
+}
+
+body a:hover {
+    color: #8b817f;
+}
+
+h1, h2, h3 {
+    font-family: 'Skranji', sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+hr {
+    border-top: 1px solid #8b817f;
+    width: 66%;
+    margin: 10px auto 0;   
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* main header */
+
+#main-header {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+/* header logo */
+
+#header-logo {
+    height: 100px;
+    margin-left: 20px;
+}
+
+#header-logo img {
+    height: 100px;
+}
+
+/* header navigation links */
+
+#main-menu {
+    font-family: 'Skranji', sans-serif;
+    font-size: 1.125rem;
+    margin-right: 20px;
+    padding-top: 38px;
+}
+
+#main-menu-inline li {
+    display: inline;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* drop-down navigation menu for smaller screen widths */
+
+#main-menu-dropdown {
+    position: absolute;
+    right: 20px;
+}
+
+#main-menu-dropdown summary {
+    list-style-type: none;
+    text-align: right;
+}
+
+#main-menu-dropdown summary:hover {
+    color: #8b817f;
+    cursor: pointer;
+}
+
+#main-menu-dropdown[open] summary {
+    text-transform: uppercase;
+}
+
+#main-menu-dropdown ul {
+    background-color: #000;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#main-menu-dropdown li {
+    padding-top: 5px;
+    text-align: center;
+}
+
+/* active links */
+
+.active-link {
+    text-transform: uppercase;
+    border-bottom: double #fff;
+}
+
+/* homepage */
+
+#homepage-main-content {
+    height: 100vh;
+    overflow: hidden;
+}
+
+#homepage-hero-image {
+    background: url(../images/band_outside_sin_e.jpg) fixed no-repeat center center / cover;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* homepage call to action insert */
+
+#call-to-action {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100px;
+    width: 300px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+    
+}
+
+#call-to-action img {
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+}
+
+#call-to-action div {
+    float: right;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.125rem;
+}
+
+#call-to-action span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#call-to-action p:nth-of-type(2) {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#call-to-action i {
+    padding: 0 9px;
+}
+
+/* band bio page */
+
+#band-bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#band-bio a {
+    text-decoration: underline;
+}
+
+/* heading */
+
+#band-bio-head {
+    margin: 120px auto 20px;
+}
+
+#band-bio-head h2 {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#band-bio-head p {
+    padding: 0 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+#band-bio-head img {
+    margin-top: 20px;
+    width: 100vw;
+    max-width: 1280px;
+}
+
+/* general band page styling */
+
+.band-bio-body {
+    margin: 10px 20px;
+    max-width: 950px;
+}
+
+.band-bio-body p {
+    padding: 10px 0;
+    font-size: 1.125rem;
+}
+
+.band-bio-body div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.band-bio-body h3 {
+    padding-top: 10px;
+    text-align: center;
+}
+
+/* band page main body images */
+
+.bio-image {
+    width: 33%;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+/* band members */
+
+#band-members img {
+    border-radius: 50%;
+}
+
+/* afterword */
+
+#band-bio-afterword {
+    margin: 10px 20px;
+    max-width: 950px;
+    font-size: 1.125rem;
+}
+
+#band-bio-afterword p:last-of-type {
+    padding: 30px 0 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#band-bio-afterword div {
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* general styles for following pages - applies to music, video, news, gallery and contact pages */
+
+.general-main-body {
+    margin: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.media-page-heading {
+    margin: 120px 0 10px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.media-page-heading img {
+    height: 20px;
+}
+
+.page-divider-heading {
+    padding: 70px 0 10px;
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.page-divider-heading img {
+    height: 20px;
+}
+
+iframe {
+    width: 300px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+details[open] summary {
+    color: #8b817f;
+}
+
+summary {
+    list-style-type: none;
+}
+
+/* The following is an attempt to fix a bug I noticed in Safari alone, where the  default marker on the summary element was still showing. According to various searches, this is apparently because `list-style-type` isn't supported on the summary element in webkit-based browsers, although it seems to work on ul and li elements. I found one suggestion on Stack Overflow, here: https://stackoverflow.com/a/66814239; another on GitHub, here: https://github.com/Fyrd/caniuse/issues/5869; and a third on Stack Overflow, here: https://stackoverflow.com/a/70834941. I've combined two of them below. */
+
+summary::marker {
+    display: none;
+    content: none;
+  }
+
+summary:hover {
+    color: #8b817f;
+    cursor: pointer;
+}
+
+/* music page */
+
+#music h1, #music h2, #music h3 {
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* albums */
+
+#albums {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#albums section {
+    margin: 10px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#albums hr {
+    width: 260px;
+}
+
+#fossils img, #fossils audio, #too-late img {
+    width: 260px;
+}
+
+#fossils ul {
+    text-align: center;
+}
+
+#fossils-stream li {
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#fossils-listen, #too-late p {
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#fossils-listen audio {
+    display: block;
+    height: 20px;
+}
+
+/* video page */
+
+#video h2 {
+    text-transform: uppercase;
+}
+
+#video hr {
+    margin-bottom: 20px;
+}
+
+#video h2, #video p {   
+    text-align: center;
+}
+
+#video p {
+    font-size: 1.125rem;
+}
+
+.video-box {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#music-video, #home-video {
+    display: flex;
+    flex-direction: column;
+}
+
+#music-video-text a, #home-video-text a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+#interview-video-text a {
+    text-decoration: underline;
+}
+
+/* This solution to making an embedded YouTube video responsive while maintaining its aspect ratio was to be found all over after a single google search, but this specific code came from https://css-tricks.com/fluid-width-video */
+
+.iframe-box {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+}
+
+.iframe-box iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* news & events page - general page styles */
+
+#news-events {
+    align-items: center;
+}
+
+#news-events h2 {
+    text-transform: uppercase;
+}
+
+#news-events > h3 {
+    text-decoration: underline;
+    margin-bottom: 40px;
+}
+
+#news-header-image, #gigs-header-image {
+    margin-top: 20px;
+    width: 100vw;
+    max-width: 1280px;
+}
+
+#news, #gigs {
+    margin: 10px 20px;
+    width: 100%;
+    max-width: 950px;
+    align-self: center;
+}
+
+.news-item, .gig-listing {
+    margin: 20px 0;
+}
+
+.news-item-heading, .gig-listing-heading {
+    position: relative;
+    border-top: 1px solid #8b817f;
+    padding-top: 5px;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.news-item-heading h3, .gig-listing-heading h3 {
+    margin: 10px 10px 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* This code for creating a fieldset-type effect came from the CSS Tricks website, posted by Chris Coyier on Jul 9, 2011 & updated on Apr 28, 2020.
+https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
+
+.date-fieldset {
+    position: absolute;
+    top: 0;
+    line-height: 1;
+    background-color: #000;
+    margin: -0.5em 0 0 10px;
+    padding: 0 3px;
+}
+
+.news-item-main, .gig-listing-main {
+    width: 100%;
+}
+
+.news-item-main summary, .gig-listing-main summary {
+    text-align: right;
+    text-decoration: underline;
+}
+
+.news-item-main article, .gig-listing-main section, .gig-link {
+    font-size: 1.125rem;
+}
+
+/* news items only */
+
+.news-item-main section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: justify;
+}
+
+.news-item-main span {
+    font-family: 'Skranji', sans-serif;
+    font-weight: 400;
+}
+
+.news-item-main img {
+    width: 200px;
+    margin: 10px 0 10px 20px;
+}
+
+.news-item-main iframe {
+    margin: 10px 0 10px 20px;
+}
+
+.news-item-link, .gig-link {
+    text-align: center;   
+}
+
+.news-item-link a, .gig-link a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+#too-late-news section {
+    flex-direction: column;
+    align-items: center;
+}
+
+#too-late-news section p:last-of-type {
+    text-align: center;
+}
+
+#too-late-news ul {
+    text-align: center;
+}
+
+#too-late-news figure {
+    width: 220px;
+}
+
+#too-late-news img {
+    margin: 10px;
+}
+
+#too-late-news figcaption {
+    font-size: 1rem;
+    line-height: 1;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* gig listings only */
+
+.gig-listing-main section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: justify;
+}
+
+.gig-listing-main section div {
+    max-width: 300px;
+}
+
+.gig-listing-main ul {
+    list-style-type: none;
+}
+
+.gig-listing-main img {
+    width: 300px;
+    margin: 10px;
+}
+
+/* gallery page */
+
+#gallery-header-image {
+    width: 100vw;
+}
+
+#gallery-header-image, .gallery-box {
+    margin-top: 20px;
+    max-width: 1280px;
+    align-self: center;
+}
+
+.gallery-box p, .gallery-box h3 {
+    text-align: center;
+}
+
+.gallery-box h3:last-of-type {
+    text-decoration: underline;
+}
+
+.picture-box {
+    line-height: 0;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;  
+}
+
+.picture-box img {
+    height: 200px;
+    margin: 2.5px;
+    border: 1px solid #8b817f;
+    padding: 5px;
+}
+
+#gallery-insta-link {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* contact page */
+
+#contact-box {
+    margin: 20px 0 40px;
+    
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* signup form */
+
+#signup {
+    background: url(../images/moe_sil_bg_1.jpg) no-repeat center center / cover;
+    height: 600px;
+    max-width: 400px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#signup h2 {
+    margin: 5px;
+    text-align: center;
+}
+
+.signup-form {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 0 5px 5px 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.signup-form legend span {
+    font-family: 'Skranji', sans-serif;
+}
+
+.text-input {
+    background: transparent;
+    color: #fff;
+    width: 100%;
+    height: 24px;
+    margin: 5px 0;
+    border: 1px solid #8b817f;
+    border-radius: 5px;
+}
+
+.text-input:hover {
+    background-color: rgba(139, 129, 127, 0.3);
+    transition: background-color 1s;
+}
+
+#age-range p {
+    text-align: center;
+}
+
+#age-range label {
+    padding: 0 5px;
+}
+
+#age-range label:nth-of-type(2n) {
+    margin-left: 50px;
+}
+
+.click-input:hover {
+    cursor: pointer;
+}
+
+#signup-button-box {
+    margin-top: 5px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.signup-button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #8b817f;
+    padding: 5px 10px;
+    border: 1.5px solid;
+    border-radius: 5px;    
+}
+
+/* The basic code for the following hover effect on the form's submit button came from Colt Steele's Udemy course, 'The Web Developer Bootcamp' */
+
+.signup-button:hover {
+    color: #fff;
+    background: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 2.5px 2.5px -1px;
+    cursor: pointer;
+    transition: all 0.25s ;
+}
+
+/* contact information */
+
+#management, #contact-info {
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#management img {
+    width: 300px;
+}
+
+.social-media-link a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.email-link {
+    text-align: center;
+}
+
+.email-link span {
+    font-family: 'Skranji', sans-serif;
+}
+
+#contact-info img {
+    width: 100px;
+}
+
+/* dummy page for signup form */
+
+#dummy {
+    margin: 0 20px;
+    align-items: center;
+    text-align: center;
+}
+
+#u-dummy {
+    margin: 150px 0 5px;
+    justify-content: center;
+    align-items: baseline;
+}
+
+#u-dummy img {
+    height: 22px;
+    margin-left: 15px;
+}
+
+#dummy h2, #dummy h3 {
+    margin-bottom: 20px;
+}
+
+#dummy audio {
+    height: 20px;
+    width: 300px;
+}
+
+#dummy-logo {
+    width: 100px;
+    margin: 20px 0;
+}
+
+#dummy h3:last-of-type {
+    margin-bottom: 100px;
+    text-decoration: underline;
+}
+
+/* footer */
+
+footer {
+    background-color: #000;
+    height: 100px;
+}
+
+.social-networks {
+    line-height: 3rem;
+    font-size: 0.875rem;
+    list-style-type: none;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.social-networks i {
+    color: #fff;
+}
+
+.social-networks i:hover {
+    color: #8b817f;
+}
+
+#copyright-statement {
+    font-family: 'Skranji', sans-serif;
+    color: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+
+/* media queries */
+
+/* for medium-large screens, up to 962 pixels wide */
+
+@media screen and (max-width: 962px) {
+    
+    /* gallery page */
+    .picture-box img {
+        height: 150px;
+    }        
+}
+
+/* for larger screens, wider than 800 pixels */
+
+@media screen and (min-width: 801px) {
+
+    /* header navigation menu */
+    #main-menu-dropdown {
+        display: none;
+    }
+
+    /* music page */
+    #albums hr {
+        display: none;
+    }
+    
+}
+
+/* for medium-sized screens, up to 800 pixels wide */
+
+@media screen and (max-width: 800px) {
+
+    /* header navigation menu */
+    #main-menu-inline {
+        display: none;
+    }
+
+    /* band page */
+
+    #band-bio-foreword div {
+        flex-direction: column;
+    }
+
+    #band-bio-foreword img {
+        width: 100%;
+    }
+
+    /* music & video pages */
+    #albums, .video-box {
+        flex-direction: column;
+    }
+
+    /* news-events page */
+
+    .news-item-main section, .gig-listing-main section {
+        flex-direction: column;
+    }
+
+    .news-item-main img, .news-item-main iframe {
+        margin: 10px;
+    }
+
+    /* contact page */
+
+    #contact-box {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #management, #contact-info {
+        width: 100%;
+    }
+
+}
+
+/* for medium-sized screens, up to 700 pixels wide */
+
+@media screen and (max-width: 700px) {
+
+    /* gallery page */
+    .picture-box img {
+        height: 100px;
+    }
+}
+
+/* for medium to smaller screens, wider than 600 pixels */
+
+@media screen and (min-width: 601px) {
+
+    /* band page */
+
+    #band-members hr {
+        display: none;
+    }
+
+    #paul-bio, #moe-bio {
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+    
+}
+
+/* for smaller screens, up to 600 pixels wide */
+
+@media screen and (max-width: 600px) {
+
+    /* header navigation menu */
+    #main-menu {
+        font-size: 1rem;
+    }
+
+    /* band page */
+
+    .band-bio-body div {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .band-bio-body img {
+        width: 100%;
+    }
+
+    .band-bio-body p, #band-bio-afterword {
+        font-size: 1rem;
+    }
+
+    /* media pages */
+
+    .media-page-heading h1, .page-divider-heading h1  {
+        font-size: 1.75rem;
+    }
+
+    .general-main-body h2 {
+        font-size: 1.25rem;
+    }
+
+    /* video & news-events pages */
+    #video p, .news-item article, .gig-listing-main section, .gig-link {
+        font-size: 1rem;
+    }
+
+}
+
+/* for small screens, up to 400 pixels wide */
+
+@media screen and (max-width: 400px) {
+
+    /* gallery page */
+
+    #gallery-page-heading {
+        flex-direction: column;
+    }
+    
+    #gallery-page-heading img {
+        height: 10px;
+    }
+
+    /* contact page */
+    .signup-form {
+        max-width: 275px;
+        margin: 0 10px 10px;
+    }
+
+}

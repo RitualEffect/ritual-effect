@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ritual Effect, alternative rock band based in Dublin, Ireland">
+    <meta name="keywords" content="Ritual Effect, band, music, rock, alternative, alternative rock, hard rock, grunge, metal, ireland, dublin">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Ritual Effect</title>
+</head>
+<body>
+    
+    <header id="main-header">
+        
+        <div id="header-logo">
+            <a href="index.html">
+                <img src="assets/images/ritual_effect_logo_white_transbg.png" alt="Ritual Effect logo">
+            </a>
+        </div>
+
+        <nav id="main-menu">
+
+            <!-- inline menu for larger screens -->
+            <div id="main-menu-inline">
+                <ul>
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="band.html">Band</a>
+                    </li>
+                    <li>
+                        <a href="music.html">Music</a>
+                    </li>
+                    <li>
+                        <a href="video.html">Videos</a>
+                    </li>
+                    <li>
+                        <a href="news.html">News/Events</a>
+                    </li>
+                    <li>
+                        <a href="gallery.html">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="contact.html" class="active-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- drop-down menu for smaller screens -->
+            <details id="main-menu-dropdown">
+                <summary><i class="fas fa-bars"></i> Menu</summary>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="band.html">Band</a>
+                        </li>
+                        <li>
+                            <a href="music.html">Music</a>
+                        </li>
+                        <li>
+                            <a href="video.html">Videos</a>
+                        </li>
+                        <li>
+                            <a href="news.html">News/Events</a>
+                        </li>
+                        <li>
+                            <a href="gallery.html">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="active-link">Contact</a>
+                        </li>
+                    </ul>
+            </details>
+
+        </nav>
+        
+    </header>
+
+    <main id="contact" class="general-main-body">
+        <!-- page heading -->
+        <div class="media-page-heading">
+            <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+            <h1>Contact Us</h1>
+            <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+        </div>
+        <hr>
+        <div id="contact-box">
+            <!-- signup form for newsletter that's yet to be fully implemented, so instead uses method="GET" instead of "POST" to link to dummy.html containing a disclaimer & playable track from 'Fossils' album  -->
+            <section id="signup">
+                <h2>Sign Up for our Newsletter</h2>
+                <form method="GET" action="dummy.html" class="signup-form">
+                   <section id="name-email"> 
+                        <fieldset>
+                            <legend>
+                                <span>Contact Info</span> (required)
+                            </legend>
+                            <label for="fname">First Name</label>
+                            <input id="fname" name="first_name" type="text" class="text-input" required>
+                            <label for="lname">Last Name</label>
+                            <input id="lname" name="last_name" type="text" class="text-input" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email_address" class="text-input" required>
+                        </fieldset>
+                    </section>
+                    <section id="age-range">
+                        <fieldset>
+                            <legend>
+                                <span>Age</span> (optional)
+                            </legend>
+                            <p>
+                            <label for="under-18">Under 18</label>
+                            <input type="radio" id="under-18" name="age_range" value="under-18" class="click-input">
+                            <label for="18-30">18-30</label>
+                            <input type="radio" id="18-30" name="age_range" value="18-30" class="click-input">
+                            </p>
+                            <p>
+                            <label for="31-45">31-45</label>
+                            <input type="radio" id="31-45" name="age_range" value="31-45" class="click-input">
+                            <label for="over-45">Over 45</label>
+                            <input type="radio" id="over-45" name="age_range" value="over-45" class="click-input">
+                            </p>
+                        </fieldset>
+                    </section>
+                    <section id="signup-button-box">
+                        <input class="signup-button" type="submit" value="Sign Up">
+                    </section>
+                </form>
+            </section>
+            <!-- contact details section -->
+            <section id="contact-details">
+                <!-- management details section heading -->
+                <div class="page-divider-heading">
+                    <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+                    <h2>Management</h2>
+                    <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+                </div>
+                <!-- management details section -->
+                <div id="management">
+                    <!-- Split Screen Management log & external link to website  -->
+                    <a href="http://www.splitscreenproduction.com/" target="_blank" rel="noopener" aria-label="Split Screen Management Website (opens in a new tab)">
+                        <img src="assets/images/ssm_trans.png" alt="Split Screen Management">
+                    </a>
+                    <!-- Split Screen Management facebook & email links -->
+                    <div class="social-media-link">
+                        <p>Find us on:
+                           <a href="https://www.facebook.com/SplitScreenManagement/" target="_blank" rel="noopener" aria-label="Split Screen Management facebook page (opens in a new tab)">facebook <i class="fab fa-facebook"></i></a>
+                        </p>
+                    </div>
+                    <div class="email-link">
+                    <p>
+                        <span><i class="fas fa-at"></i> Email:</span>
+                        <a href="mailto:kimmo@splitscreenproduction.com" target="_blank">kimmo@splitscreenproduction.com</a>
+                    </p>
+                    </div>
+                </div>
+                <!-- band details section heading -->
+                <div class="page-divider-heading">
+                    <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+                    <h2>Contact Info</h2>
+                    <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
+                </div>
+                <!-- band details section -->
+                <div id="contact-info">
+                    <!-- band logo -->
+                    <img src="assets/images/ritual_effect_logo_white_transbg.png" alt="Ritual Effect">
+                    <!-- band social media & email links -->
+                    <p>can be found on:</p>
+                    <div class="social-media-link">
+                        <p>
+                            <a href="https://www.facebook.com/ritualeffect/" target="_blank" rel="noopener" aria-label="Link opens in a new tab"><i class="fab fa-facebook"></i> facebook</a>
+                        <p>
+                            <a href="https://twitter.com/ritualeffect" target="_blank" rel="noopener" aria-label="Link opens in a new tab"><i class="fab fa-twitter"></i> Twitter</a>
+                        </p>
+                        <p>
+                            <a href="https://www.instagram.com/ritualeffect/?hl=en" target="_blank" rel="noopener" aria-label="Link opens in a new tab"><i class="fab fa-instagram"></i> Instagram</a>
+                        </p>
+                    </div>
+                    <div class="email-link">
+                        <p>
+                            <span><i class="fas fa-at"></i> Email:</span>
+                            <a href="mailto:band@ritualeffect.com" target="_blank">band@ritualeffect.com</a>
+                        </p>
+                        </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <!-- footer links to external sites/pages related to band -->
+        <ul class="social-networks">
+            <li>
+                <a href="https://soundcloud.com/user-401438334-115246783" target="_blank" rel="noopener" aria-label="Stream our music on soundcloud (opens in a new tab)"><i class="fab fa-soundcloud"></i></a>
+            </li>
+            <li>
+                <a href="https://open.spotify.com/artist/5qX3SpXJjpVVjVjmGVFwTL" target="_blank" rel="noopener" aria-label="Stream our music on spotify (opens in a new tab)"><i class="fab fa-spotify"></i></a>
+            </li>
+            <li>
+                <a href="https://music.apple.com/us/artist/ritual-effect/1462308458" target="_blank" rel="noopener" aria-label="Stream our music on Apple Music (opens in a new tab)"><i class="fab fa-apple"></i></a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UCXrYUA6jJI4EcwqTGKXV8Pw" target="_blank" rel="noopener" aria-label="Watch us on youtube (opens in a new tab)"><i class="fab fa-youtube"></i></a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/ritualeffect/" target="_blank" rel="noopener" aria-label="Visit our facebook page (opens in a new tab)"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+                <a href="https://twitter.com/ritualeffect" target="_blank" rel="noopener" aria-label="Visit our twitter page (opens in a new tab)"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/ritualeffect/?hl=en" target="_blank" rel="noopener" aria-label="Visit our instagram page (opens in a new tab)"><i class="fab fa-instagram"></i></a>
+            </li>
+        </ul>
+        <!-- copyright statement -->
+        <div id="copyright-statement">
+            &copy; 2020 Ritual Effect: all rights reserved
+        </div>
+
+    </footer>
+
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/e5bba26aba.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
