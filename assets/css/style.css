@@ -766,6 +766,19 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     box-shadow: 0 2.5px 2.5px #fff;
 }
 
+/* gallery animations */
+
+@keyframes fade-out-in {
+    0% {opacity: 1;}
+    25% {opacity: 0;}
+    75% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.img-fade {
+    animation: fade-out-in 1s forwards;
+}
+
 /* gallery social links */
 
 #gallery-insta-link {
@@ -998,7 +1011,7 @@ footer {
     .picture-box img {
         height: 150px;
     }
-           
+
 }
 
 /* for larger screens, wider than 800 pixels */

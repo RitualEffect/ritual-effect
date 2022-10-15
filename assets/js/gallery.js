@@ -13,6 +13,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to thumbnail buttons
 
+    const thumbButtons = document.querySelectorAll('.gallery-thumb-btn');
+
+    thumbButtons.forEach(button => {
+        button.addEventListener('click', e => {
+            let targetButton = e.target.closest('button');
+            if (!targetButton) return;
+            
+            setImageFromThumb(targetButton);
+        });
+    });
+
     // Add event listeners to 'next' buttons
 
     // Add event listeners to 'previous' buttons
@@ -134,7 +145,7 @@ function setImageIndex(parent, imageList) {
  * setImageIndex functions. 
  * 
  * @param {HTMLElement} targetButton - Target thumbnail button passed in from event handler function
- * * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel 
+ * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel 
  */
 function updateActiveImage(targetButton, imageList) {
     let buttons = imageList.querySelectorAll('.gallery-thumb-btn');
@@ -149,4 +160,32 @@ function updateActiveImage(targetButton, imageList) {
 
     setActiveImage(carousel);
     setImageIndex(parent, imageList);
+}
+
+/**
+ * Get element containing target thumbnail button's
+ * siblings.
+ * 
+ * Get target carousel's main image container.
+ * 
+ * Apply CSS animation to container (1s duration).
+ * 
+ * Pass target button toupdateActiveImage function
+ * after 500ms.
+ * 
+ * Remove animation 50ms after completion.
+ * 
+ * @param {HTMLElement} targetButton - Target thumbnail button passed in from event listener 
+ */
+function setImageFromThumb(targetButton) {
+    let imageList = targetButton.parentElement;
+    let mainImage = imageList.parentElement.querySelector('.gallery-active-img-wrap');
+
+    mainImage.classList.add('img-fade');
+    setTimeout(function() {
+        updateActiveImage(targetButton, imageList);
+    }, 500);
+    setTimeout(function() {
+        mainImage.classList.remove('img-fade');
+    }, 1050);
 }
