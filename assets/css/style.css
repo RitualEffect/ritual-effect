@@ -766,7 +766,15 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     box-shadow: 0 2.5px 2.5px #fff;
 }
 
-/* old gallery styles */
+/* gallery social links */
+
+#gallery-insta-link {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* old gallery page */
+
 .picture-box {
     line-height: 0;
     margin-bottom: 20px;
@@ -782,13 +790,6 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     margin: 2.5px;
     border: 1px solid #8b817f;
     padding: 5px;
-}
-
-/* gallery social links */
-
-#gallery-insta-link {
-    text-align: center;
-    margin: 20px 0;
 }
 
 /* contact page */
@@ -987,16 +988,17 @@ footer {
     text-align: center;
 }
 
-/* media queries */
+/* media queries for responsive design on various screen sizes */
 
 /* for medium-large screens, up to 962 pixels wide */
 
 @media screen and (max-width: 962px) {
     
-    /* gallery page */
+    /* old gallery page */
     .picture-box img {
         height: 150px;
-    }        
+    }
+           
 }
 
 /* for larger screens, wider than 800 pixels */
@@ -1073,15 +1075,16 @@ footer {
 @media screen and (max-width: 700px) {
 
     /* gallery page */
-
-    .picture-box img {
-        height: 100px;
-    }
-
     .gallery-thumb-btn {
         height: 55px;
         width: 55px;
     }
+
+    /* old gallery page */
+    .picture-box img {
+        height: 100px;
+    }
+
 }
 
 /* for medium to smaller screens, wider than 600 pixels */
