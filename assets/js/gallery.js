@@ -39,6 +39,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to 'previous' buttons
 
+    const prevButtons = document.querySelectorAll('.prev-btn');
+
+    prevButtons.forEach(button => {
+        button.addEventListener('click', e => {
+            let targetButton = e.target.closest('button');
+
+            previousImage(targetButton);
+        });
+    });
+
     /* Add touch event listeners to image carousels for swiping between images. */
 });
 
@@ -248,5 +258,55 @@ function nextImage(targetButton) {
     }, 500);
     setTimeout(function() {
         mainImage.classList.remove('img-slide-left');
+    }, 1050);
+}
+
+/**
+ * Get target arrow button's icon and target
+ * carousel's main image container.
+ * 
+ * Get element containing target thumbnail button's
+ * siblings and construct iterable array from it.  
+ * 
+ * Get current active thumbnail button.
+ * 
+ * Set active thumbnail to previous thumbnail in list
+ * or, if current active thumbnail is first in array,
+ * set active thumbnail to last in array.
+ * 
+ * Apply CSS animations to main image container 
+ * (1s duration) and CSS transition to arrow button
+ * (0.5s duration).
+ * 
+ * Pass new active button to updateActiveImage function
+ * after 500ms and remove transition from arrow button.
+ * 
+ * Remove animation from container 50ms after
+ * completion.
+ * 
+ * @param {HTMLElement} targetButton - Target left arrow button passed in from event listener 
+ */
+function previousImage(targetButton) {
+    let leftButton = targetButton.querySelector('i');
+    let mainImage = targetButton.parentElement.parentElement.querySelector('.gallery-active-img-wrap');
+    let imageList = targetButton.parentElement.parentElement.nextElementSibling;
+    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
+    let activeImageButton = imageList.querySelector('.active-thumb');
+    let newActiveImageButton;
+
+    if (activeImageButton === imageArray[0]) {
+        newActiveImageButton = imageArray[imageArray.length - 1];
+    } else {
+        newActiveImageButton = activeImageButton.previousElementSibling;
+    }
+
+    leftButton.classList.add('highlight-left');
+    mainImage.classList.add('img-slide-right');
+    setTimeout(function() {
+        updateActiveImage(newActiveImageButton, imageList);
+        leftButton.classList.remove('highlight-left');
+    }, 500);
+    setTimeout(function() {
+        mainImage.classList.remove('img-slide-right');
     }, 1050);
 }

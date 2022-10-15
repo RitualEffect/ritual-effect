@@ -790,6 +790,29 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     animation: slide-left 1s forwards;
 }
 
+@keyframes slide-right {
+    0% {right: 0; width: 100%;}
+    25% {right: 0; width: 0;}
+    75% {left: 0;  width: 0;}
+    100% {left: 0; width: 100%;}
+}
+
+.img-slide-right {
+    animation: slide-right 1s forwards;
+}
+
+.highlight-right {
+    background-color: #fff;
+    transform: translateX(5px);
+    transition: all 0.5s;
+}
+
+.highlight-left {
+    background: #fff;
+    transform: translateX(-5px);
+    transition: all 0.5s;
+}
+
 /* gallery social links */
 
 #gallery-insta-link {
