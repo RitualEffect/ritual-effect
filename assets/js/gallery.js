@@ -26,6 +26,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to 'next' buttons
 
+    const nextButtons = document.querySelectorAll('.next-btn');
+
+    nextButtons.forEach(button => {
+        button.addEventListener('click', e => {
+            let targetButton = e.target.closest('button');
+            if (!targetButton) return;
+
+            nextImage(targetButton);
+        });
+    });
+
     // Add event listeners to 'previous' buttons
 
     /* Add touch event listeners to image carousels for swiping between images. */
@@ -170,7 +181,7 @@ function updateActiveImage(targetButton, imageList) {
  * 
  * Apply CSS animation to container (1s duration).
  * 
- * Pass target button toupdateActiveImage function
+ * Pass target button to updateActiveImage function
  * after 500ms.
  * 
  * Remove animation 50ms after completion.
@@ -187,5 +198,55 @@ function setImageFromThumb(targetButton) {
     }, 500);
     setTimeout(function() {
         mainImage.classList.remove('img-fade');
+    }, 1050);
+}
+
+/**
+ * Get target arrow button's icon and target
+ * carousel's main image container.
+ * 
+ * Get element containing target thumbnail button's
+ * siblings and construct iterable array from it.  
+ * 
+ * Get current active thumbnail button.
+ * 
+ * Set active thumbnail to next thumbnail in list or,
+ * if current active thumbnail is last in array, set
+ * active thumbnail to first in array.
+ * 
+ * Apply CSS animations to main image container 
+ * (1s duration) and CSS transition to arrow button
+ * (0.5s duration).
+ * 
+ * Pass new active button to updateActiveImage function
+ * after 500ms and remove transition from arrow button.
+ * 
+ * Remove animation from container 50ms after
+ * completion.
+ * 
+ * @param {HTMLElement} targetButton - Target right arrow button passed in from event listener 
+ */
+function nextImage(targetButton) {
+    let rightButton = targetButton.querySelector('i');
+    let mainImage = targetButton.parentElement.parentElement.querySelector('.gallery-active-img-wrap');
+    let imageList = targetButton.parentElement.parentElement.nextElementSibling;
+    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
+    let activeImageButton = imageList.querySelector('.active-thumb');
+    let newActiveImageButton;
+
+    if (activeImageButton === imageArray[imageArray.length - 1]) {
+        newActiveImageButton = imageArray[0];
+    } else {
+        newActiveImageButton = activeImageButton.nextElementSibling;
+    }
+
+    rightButton.classList.add('highlight-right');
+    mainImage.classList.add('img-slide-left');
+    setTimeout(function() {
+        updateActiveImage(newActiveImageButton, imageList);
+        rightButton.classList.remove('highlight-right');
+    }, 500);
+    setTimeout(function() {
+        mainImage.classList.remove('img-slide-left');
     }, 1050);
 }

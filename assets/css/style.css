@@ -779,6 +779,17 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     animation: fade-out-in 1s forwards;
 }
 
+@keyframes slide-left {
+    0% {left: 0; width: 100%;}
+    25% {left: 0; width: 0;}
+    50% {right: 0;  width: 0;}
+    100% {right: 0; width: 100%;}
+}
+
+.img-slide-left {
+    animation: slide-left 1s forwards;
+}
+
 /* gallery social links */
 
 #gallery-insta-link {
