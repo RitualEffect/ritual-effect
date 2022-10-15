@@ -408,26 +408,90 @@
             </div>
             <!-- Paul section containing 18 images, each one a link to the full-size image in a new tab -->
             <h3>Paul</h3>
-            <p>Click on an image to view it full size: (Opens in a new tab)</p>
-            <div id="paul-pics" class="picture-box">
-                <a href="assets/images/gallery/paul/paul_shades_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_shades_1.jpg" alt="A black and white shot of Paul smiling, wearing Lennon shades"></a>
-                <a href="assets/images/gallery/paul/paul_kit_fibbers_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_fibbers_1.jpg" alt="Paul giving his all live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_live_fibbers_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_live_fibbers_1.jpg" alt="Paul playing contemplatively live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_1.jpg" alt="Paul belting the kit live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_fibbers_bw_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_fibbers_bw_1.jpg" alt="A black and white shot of Paul smiling during a break between songs"></a>
-                <a href="assets/images/gallery/paul/paul_kit_tongue.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_tongue.jpg" alt="Paul playing to the camera, tongue out, live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_live_fibbers_2.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_live_fibbers_2.jpg" alt="Paul counting in on the sticks live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_3.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_3.jpg" alt="Paul playing in shades live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_bw_2.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_bw_2.jpg" alt="A black and white image of playing in shades live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_2.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_2.jpg" alt="Paul enjoying playing live"></a>
-                <a href="assets/images/gallery/paul/paul_live_fibbers_3.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_live_fibbers_3.jpg" alt="Paul in the swing of it live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_kit_4.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_kit_4.jpg" alt="Paul smiling, wearing shades, during a break between songs"></a>
-                <a href="assets/images/gallery/paul/paul_bw_jul_22_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_bw_jul_22_1.jpg" alt="A black and white image of Paul playing live on stage"></a>
-                <a href="assets/images/gallery/paul/pauL_bw_jul_22_2.jpg" target="_blank"><img src="assets/images/gallery/paul/pauL_bw_jul_22_2.jpg" alt="A black and white image of Paul playing live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_bw_jul_22_3.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_bw_jul_22_3.jpg" alt="A black and white image of Paul playing live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_jul_22_1.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_jul_22_1.jpg" alt="An image of Paul playing live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_jul_22_2.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_jul_22_2.jpg" alt="An image of Paul playing live on stage"></a>
-                <a href="assets/images/gallery/paul/paul_jul_22_3.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_jul_22_3.jpg" alt="An image of Paul playing live on stage"></a>
+            <p>
+                <strong>
+                    (<span class="paul-pics-count"></span> Images)
+                </strong>
+            </p>
+            <div class="gallery-carousel">
+                <div class="gallery-active-section">
+                    <div class="gallery-active-img-wrap">
+                        <a class="gallery-active-img-link" href="assets/images/u_symbol_dark_grey.png" target="_blank" aria-label="View this image full size in a new tab">
+                            <img class="gallery-active-img" src="assets/images/u_symbol_dark_grey.png" alt="Placeholder image">
+                        </a>
+                    </div>
+                    <div class="img-counter">
+                        <p>
+                            Image <span class="paul-pics-index"></span> of <span class="paul-pics-count"></span>
+                        </p>
+                    </div>
+                    <div class="prev-btn-container">
+                        <button class="prev-btn" aria-label="Display the previous image">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="next-btn-container">
+                        <button class="next-btn" aria-label="Display the next image">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="paul-pics" class="gallery-thumbnails">
+                    <button class="active-thumb gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_shades_1.jpg" alt="A black and white shot of Paul smiling, wearing Lennon shades">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_fibbers_1.jpg" alt="Paul giving his all live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_live_fibbers_1.jpg" alt="Paul playing contemplatively live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_1.jpg" alt="Paul belting the kit live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_fibbers_bw_1.jpg" alt="A black and white shot of Paul smiling during a break between songs">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_tongue.jpg" alt="Paul playing to the camera, tongue out, live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_live_fibbers_2.jpg" alt="Paul counting in on the sticks live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_3.jpg" alt="Paul playing in shades live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_bw_2.jpg" alt="A black and white image of playing in shades live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_2.jpg" alt="Paul enjoying playing live">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_live_fibbers_3.jpg" alt="Paul in the swing of it live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_kit_4.jpg" alt="Paul smiling, wearing shades, during a break between songs">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_bw_jul_22_1.jpg" alt="A black and white image of Paul playing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/pauL_bw_jul_22_2.jpg" alt="A black and white image of Paul playing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_bw_jul_22_3.jpg" alt="A black and white image of Paul playing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_jul_22_1.jpg" alt="An image of Paul playing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_jul_22_2.jpg" alt="An image of Paul playing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/paul/paul_jul_22_3.jpg" alt="An image of Paul playing live on stage">
+                    </button>
+                </div>
             </div>
             <h3>
                 <a href="#gallery">Back to Top</a>
