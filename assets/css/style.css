@@ -18,8 +18,10 @@ body a {
     text-decoration: none;
 }
 
-body a:hover {
-    color: #8b817f;
+@media(hover: hover) and (pointer: fine) {
+    body a:hover {
+        color: #8b817f;
+    }
 }
 
 h1, h2, h3 {
@@ -91,9 +93,11 @@ ul {
     text-align: right;
 }
 
-#main-menu-dropdown summary:hover {
-    color: #8b817f;
-    cursor: pointer;
+@media(hover: hover) and (pointer: fine) {
+    #main-menu-dropdown summary:hover {
+        color: #8b817f;
+        cursor: pointer;
+    }
 }
 
 #main-menu-dropdown[open] summary {
@@ -330,11 +334,13 @@ summary {
 summary::marker {
     display: none;
     content: none;
-  }
+}
 
-summary:hover {
-    color: #8b817f;
-    cursor: pointer;
+@media(hover: hover) and (pointer: fine) {
+    summary:hover {
+        color: #8b817f;
+        cursor: pointer;
+    }
 }
 
 /* music page */
@@ -741,7 +747,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 @media(hover: hover) and (pointer: fine) {
     .gallery-thumb-btn:hover {
         background: #fff;
-        transform: translateY(-2px);
+        transform: translateY(-2.5px);
         box-shadow: 0 2.5px 2.5px -1px #fff;
     }
 }
@@ -887,9 +893,11 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     border-radius: 5px;
 }
 
-.text-input:hover {
-    background-color: rgba(139, 129, 127, 0.3);
-    transition: background-color 1s;
+@media(hover: hover) and (pointer: fine) {
+    .text-input:hover {
+        background-color: rgba(139, 129, 127, 0.3);
+        transition: background-color 1s;
+    }
 }
 
 #age-range p {
@@ -904,8 +912,10 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     margin-left: 50px;
 }
 
-.click-input:hover {
-    cursor: pointer;
+@media(hover: hover) and (pointer: fine) {
+    .click-input:hover {
+        cursor: pointer;
+    }
 }
 
 #signup-button-box {
@@ -925,13 +935,15 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 
 /* The basic code for the following hover effect on the form's submit button came from Colt Steele's Udemy course, 'The Web Developer Bootcamp' */
 
-.signup-button:hover {
-    color: #fff;
-    background: transparent;
-    transform: translateY(-1px);
-    box-shadow: 0 2.5px 2.5px -1px;
-    cursor: pointer;
-    transition: all 0.25s ;
+@media(hover: hover) and (pointer: fine) {
+    .signup-button:hover {
+        color: #fff;
+        background: transparent;
+        transform: translateY(-1px);
+        box-shadow: 0 2.5px 2.5px -1px;
+        cursor: pointer;
+        transition: all 0.25s ;
+    }
 }
 
 /* contact information */
@@ -1023,8 +1035,10 @@ footer {
     color: #fff;
 }
 
-.social-networks i:hover {
-    color: #8b817f;
+@media(hover: hover) and (pointer: fine) {
+    .social-networks i:hover {
+        color: #8b817f;
+    }
 }
 
 #copyright-statement {
@@ -1045,7 +1059,7 @@ footer {
     .picture-box img {
         height: 150px;
     }
-
+            
 }
 
 /* for larger screens, wider than 800 pixels */
