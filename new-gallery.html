@@ -506,20 +506,72 @@
         <!-- backstage pics section containing 12 images, each one a link to the full-size image in a new tab -->
         <section class="gallery-box">
             <h3>Behind the Music</h3>
-            <p>Click on an image to view it full size: (Opens in a new tab)</p>
-            <div class="picture-box">
-                <a href="assets/images/gallery/backstage/fossils_l_e_demos.jpg" target="_blank"><img src="assets/images/gallery/backstage/fossils_l_e_demos.jpg" alt="Fossils album, limited edition demo CDs"></a>
-                <a href="assets/images/gallery/backstage/piez_4_da_boyz.jpg" target="_blank"><img src="assets/images/gallery/backstage/piez_4_da_boyz.jpg" alt="The band on a break having tea, beer and mince pies"></a>
-                <a href="assets/images/gallery/backstage/u_decal_bass.jpg" target="_blank"><img src="assets/images/gallery/backstage/u_decal_bass.jpg" alt="A close up of the Ritual Effect 'U' symbol decal on Christopher's bass guitar"></a>
-                <a href="assets/images/gallery/backstage/moe_studio_2.jpg" target="_blank"><img src="assets/images/gallery/backstage/moe_studio_2.jpg" alt="Moe recording vocals in the studio"></a>
-                <a href="assets/images/gallery/backstage/moe_paul_studio.jpg" target="_blank"><img src="assets/images/gallery/backstage/moe_paul_studio.jpg" alt="Moe and Paul on a break in the recording studio"></a>
-                <a href="assets/images/gallery/backstage/moe_studio_3.jpg" target="_blank"><img src="assets/images/gallery/backstage/moe_studio_3.jpg" alt="Moe recording guitar tracks in the studio"></a>
-                <a href="assets/images/gallery/backstage/paul_r_room_1.jpg" target="_blank"><img src="assets/images/gallery/backstage/paul_r_room_1.jpg" alt="Paul messing around with a face covering and a drink in the rehearsal room"></a>
-                <a href="assets/images/gallery/backstage/rush_twins.jpg" target="_blank"><img src="assets/images/gallery/backstage/rush_twins.jpg" alt="A close up of Paul and Christopher's Rush t-shirts"></a>
-                <a href="assets/images/gallery/backstage/band_r_room_2.jpg" target="_blank"><img src="assets/images/gallery/backstage/band_r_room_2.jpg" alt="Ritual Effect messing around in the rehearsal room"></a>
-                <a href="assets/images/gallery/backstage/band_on_site.jpg" target="_blank"><img src="assets/images/gallery/backstage/band_on_site.jpg" alt="Ritual Effect on a construction site"></a>
-                <a href="assets/images/gallery/backstage/paul_r_room_3.jpg" target="_blank"><img src="assets/images/gallery/backstage/paul_r_room_3.jpg" alt="Paul having a laugh and a beer in the rehearsal room"></a>
-                <a href="assets/images/gallery/backstage/band_r_room_1.jpg" target="_blank"><img src="assets/images/gallery/backstage/band_r_room_1.jpg" alt="Ritual Effect after a hard day in the rehearsal room"></a>
+            <p>
+                <strong>
+                    (<span class="studio-pics-count"></span> Images)
+                </strong>
+            </p>
+            <div class="gallery-carousel">
+                <div class="gallery-active-section">
+                    <div class="gallery-active-img-wrap">
+                        <a class="gallery-active-img-link" href="assets/images/u_symbol_dark_grey.png" target="_blank" aria-label="View this image full size in a new tab">
+                            <img class="gallery-active-img" src="assets/images/u_symbol_dark_grey.png" alt="Placeholder image">
+                        </a>
+                    </div>
+                    <div class="img-counter">
+                        <p>
+                            Image <span class="studio-pics-index"></span> of <span class="studio-pics-count"></span>
+                        </p>
+                    </div>
+                    <div class="prev-btn-container">
+                        <button class="prev-btn" aria-label="Display the previous image">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="next-btn-container">
+                        <button class="next-btn" aria-label="Display the next image">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="studio-pics" class="gallery-thumbnails">
+                    <button class="active-thumb gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/fossils_l_e_demos.jpg" alt="Fossils album, limited edition demo CDs">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/piez_4_da_boyz.jpg" alt="The band on a break having tea, beer and mince pies">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/u_decal_bass.jpg" alt="A close up of the Ritual Effect 'U' symbol decal on Christopher's bass guitar">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/moe_studio_2.jpg" alt="Moe recording vocals in the studio">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/moe_paul_studio.jpg" alt="Moe and Paul on a break in the recording studio">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/moe_studio_3.jpg" alt="Moe recording guitar tracks in the studio">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/paul_r_room_1.jpg" alt="Paul messing around with a face covering and a drink in the rehearsal room">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/rush_twins.jpg" alt="A close up of Paul and Christopher's Rush t-shirts">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/band_r_room_2.jpg" alt="Ritual Effect messing around in the rehearsal room">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/band_on_site.jpg" alt="Ritual Effect on a construction site">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/paul_r_room_3.jpg" alt="Paul having a laugh and a beer in the rehearsal room">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/backstage/band_r_room_1.jpg" alt="Ritual Effect after a hard day in the rehearsal room">
+                    </button>
+                </div>
             </div>
             <h3>
                 <a href="#gallery">Back to Top</a>
