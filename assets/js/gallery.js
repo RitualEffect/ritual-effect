@@ -50,6 +50,23 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     /* Add touch event listeners to image carousels for swiping between images. */
+
+    const imageViews = document.querySelectorAll('.gallery-active-section');
+
+    imageViews.forEach(view => {
+        let startX = null;
+
+        view.addEventListener('touchstart', e => {
+            startX = e.changedTouches[0].clientX;
+        });
+
+        view.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].clientX;
+            
+            handleSwipe(view, endX, startX);
+        });
+    });
+    
 });
 
 // Event handler functions
@@ -309,4 +326,31 @@ function previousImage(targetButton) {
     setTimeout(function() {
         mainImage.classList.remove('img-slide-right');
     }, 1050);
+}
+
+/**
+ * Get target carousel's next and previous buttons
+ * by querying main image viewport element.
+ * 
+ * Compare touchend and touchstart coordinates to
+ * determine whether user swiped right or left.
+ * 
+ * If left, pass next button to nextImage function.
+ * 
+ * If right, pass previous button to previousImage
+ * function.
+ * 
+ * @param {HTMLElement} view - Target carousel main image viewport
+ * @param {number} endX - X-axis coordinate passed in by touchend event listener
+ * @param {number} startX - X-axis coordinate passed in by touchstart event listener
+ */
+function handleSwipe(view, endX, startX) {
+    let nextButton = view.querySelector('.next-btn');
+    let prevButton = view.querySelector('.prev-btn');
+
+    if (endX < startX) {
+        nextImage(nextButton);
+    } else if (endX > startX) {
+        previousImage(prevButton);
+    }
 }
