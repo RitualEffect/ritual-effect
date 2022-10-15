@@ -240,25 +240,87 @@
         <section class="gallery-box">
             <!-- Moe section containing 17 images, each one a link to the full-size image in a new tab -->
             <h3>Moe</h3>
-            <p>Click on an image to view it full size: (Opens in a new tab)</p>
-            <div id="moe-pics" class="picture-box">
-                <a href="assets/images/gallery/moe/moes_strat_live_bw.jpg" target="_blank"><img src="assets/images/gallery/moe/moes_strat_live_bw.jpg" alt="A black and white, misty image of Moe's stratocaster guitar being played live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_sil_blue.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_sil_blue.jpg" alt="A blue-tinted silhouette of Moe live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_crowd_bw_2.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_crowd_bw_2.jpg" alt="A black and white image of Moe among his adoring crowd"></a>
-                <a href="assets/images/gallery/moe/moe_fronting_fibbers_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_fronting_fibbers_1.jpg" alt="Moe playing to the camera live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_fronting_bw_4.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_fronting_bw_4.jpg" alt="A black and white image of Moe conducting the crowd"></a>
-                <a href="assets/images/gallery/moe/moe_live_fibbers_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_live_fibbers_1.jpg" alt="Moe live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_singing_bw_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_singing_bw_1.jpg" alt="A black and white image of Moe singing live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_singing_fibbers_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_singing_fibbers_1.jpg" alt="Moe singing live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_fronting_bw_2.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_fronting_bw_2.jpg" alt="A closeup, black and white shot of Moe playing intensely"></a>
-                <a href="assets/images/gallery/moe/moe_fronting_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_fronting_1.jpg" alt="Moe once again playing to the camera live on stage"></a>
-                <a href="assets/images/gallery/moe/moe_live_bw_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_live_bw_1.jpg" alt="A black and white image of Moe playing intensely"></a>
-                <a href="assets/images/gallery/moe/moe_live_fibbers_bw_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_live_fibbers_bw_1.jpg" alt="A black and white shot of Moe playing furiously"></a>
-                <a href="assets/images/gallery/moe/moe_bw_jul_22_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_bw_jul_22_1.jpg" alt="A black and white shot of Moe playing a guitar solo"></a>
-                <a href="assets/images/gallery/moe/moe_bw_jul_22_2.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_bw_jul_22_2.jpg" alt="A black and white shot of Moe playing a guitar solo while roaming through the venue"></a>
-                <a href="assets/images/gallery/moe/moe_jul_22_1.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_jul_22_1.jpg" alt="An image of Moe singing"></a>
-                <a href="assets/images/gallery/moe/moe_jul_22_2.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_jul_22_2.jpg" alt="An image of Moe playing a guitar riff"></a>
-                <a href="assets/images/gallery/moe/moe_jul_22_3.jpg" target="_blank"><img src="assets/images/gallery/moe/moe_jul_22_3.jpg" alt="An image of Moe playing a guitar solo"></a>
+            <p>
+                <strong>
+                    (<span class="moe-pics-count"></span> Images)
+                </strong>
+            </p>
+            <div class="gallery-carousel">
+                <div class="gallery-active-section">
+                    <div class="gallery-active-img-wrap">
+                        <a class="gallery-active-img-link" href="assets/images/u_symbol_dark_grey.png" target="_blank" aria-label="View this image full size in a new tab">
+                            <img class="gallery-active-img" src="assets/images/u_symbol_dark_grey.png" alt="Placeholder image">
+                        </a>
+                    </div>
+                    <div class="img-counter">
+                        <p>
+                            Image <span class="moe-pics-index"></span> of <span class="moe-pics-count"></span>
+                        </p>
+                    </div>
+                    <div class="prev-btn-container">
+                        <button class="prev-btn" aria-label="Display the previous image">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="next-btn-container">
+                        <button class="next-btn" aria-label="Display the next image">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="moe-pics" class="gallery-thumbnails">
+                    <button class="active-thumb gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moes_strat_live_bw.jpg" alt="A black and white, misty image of Moe's stratocaster guitar being played live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_sil_blue.jpg" alt="A blue-tinted silhouette of Moe live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_crowd_bw_2.jpg" alt="A black and white image of Moe among his adoring crowd">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_fronting_fibbers_1.jpg" alt="Moe playing to the camera live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_fronting_bw_4.jpg" alt="A black and white image of Moe conducting the crowd">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_live_fibbers_1.jpg" alt="Moe live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_singing_bw_1.jpg" alt="A black and white image of Moe singing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_singing_fibbers_1.jpg" alt="Moe singing live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_fronting_bw_2.jpg" alt="A closeup, black and white shot of Moe playing intensely">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_fronting_1.jpg" alt="Moe once again playing to the camera live on stage">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_live_bw_1.jpg" alt="A black and white image of Moe playing intensely">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_live_fibbers_bw_1.jpg" alt="A black and white shot of Moe playing furiously">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_bw_jul_22_1.jpg" alt="A black and white shot of Moe playing a guitar solo">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_bw_jul_22_2.jpg" alt="A black and white shot of Moe playing a guitar solo while roaming through the venue">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_jul_22_1.jpg" alt="An image of Moe singing">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_jul_22_2.jpg" alt="An image of Moe playing a guitar riff">
+                    </button>
+                    <button class="gallery-thumb-btn" aria-label="Display this image">
+                        <img class="gallery-thumb-img" src="assets/images/gallery/moe/moe_jul_22_3.jpg" alt="An image of Moe playing a guitar solo">
+                    </button>
+                </div>
             </div>
             <!-- Christopher section containing 17 images, each one a link to the full-size image in a new tab -->
             <h3>Christopher</h3>
@@ -305,25 +367,6 @@
                 <a href="assets/images/gallery/paul/paul_jul_22_2.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_jul_22_2.jpg" alt="An image of Paul playing live on stage"></a>
                 <a href="assets/images/gallery/paul/paul_jul_22_3.jpg" target="_blank"><img src="assets/images/gallery/paul/paul_jul_22_3.jpg" alt="An image of Paul playing live on stage"></a>
             </div>
-            <!-- Gimp Boi section containing 12 images, each one a link to the full-size image in a new tab -->
-            <!-- 
-            <h3>GIMP BOI!</h3>
-            <p>Click on an image to view it full size: (Opens in a new tab)</p>
-            <div id="gimp-boi-pics" class="picture-box">
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_roaming.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_roaming.jpg" alt="Gimp Boi playing guitar in the street"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_sil_doorway.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_sil_doorway.jpg" alt="A black and white silhouette of Gimp Boi playing at the door of Sin E"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_bar_harass.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_bar_harass.jpg" alt="A black and white image of Gimp Boi freaking out an older gentleman at the bar"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_band_live_2.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_band_live_2.jpg" alt="A black and white image of Gimp Boi welcoming himself to the stage"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_doorway.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_doorway.jpg" alt="Gimp Boi playing guitar in a doorway"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_crowd_bw_2.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_crowd_bw_2.jpg" alt="A black and white image of Gimp Boi making friends at the bar"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_band_live_4.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_band_live_4.jpg" alt="A black and white image of Gimp Boi playing a solo live on stage with the band"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_crowd_bw_1.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_crowd_bw_1.jpg" alt="A black and white image of Gimp Boi among his adoring crowd"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_band_live_1.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_band_live_1.jpg" alt="Gimp Boi frontstage, playing live with the band"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_roaming_2.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_roaming_2.jpg" alt="A black and white image of Gimp Boi playing guitar in the street"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_band_live_3.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_band_live_3.jpg" alt="A black and white image of Gimp Boi playing live on stage with the band"></a>
-                <a href="assets/images/gallery/gimp-boi/gimp_boi_arms_up.jpg" target="_blank"><img src="assets/images/gallery/gimp-boi/gimp_boi_arms_up.jpg" alt="A black and white image of Gimp Boi celebrating being on stage with the band"></a>
-            </div> 
-            -->
             <h3>
                 <a href="#gallery">Back to Top</a>
             </h3>
