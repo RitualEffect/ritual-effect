@@ -123,3 +123,30 @@ function setImageIndex(parent, imageList) {
     }
     indexSpan.innerHTML = activeImageIndex + 1;
 }
+
+/**
+ * Iterate over thumbnail buttons to remove active
+ * class.
+ * 
+ * Assign active class to target thumbnail.
+ * 
+ * Pass updated elements to setActiveImage and
+ * setImageIndex functions. 
+ * 
+ * @param {HTMLElement} targetButton - Target thumbnail button passed in from event handler function
+ * * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel 
+ */
+function updateActiveImage(targetButton, imageList) {
+    let buttons = imageList.querySelectorAll('.gallery-thumb-btn');
+    
+    buttons.forEach(button => {
+        button.classList.remove('active-thumb');
+    });
+    targetButton.classList.add('active-thumb');
+    
+    let carousel = imageList.parentElement;
+    let parent = carousel.parentElement;
+
+    setActiveImage(carousel);
+    setImageIndex(parent, imageList);
+}
