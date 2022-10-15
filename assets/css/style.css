@@ -798,6 +798,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 
 @keyframes slide-right {
     0% {right: 0; width: 100%;}
+    15% {right: 0; width: 100%;}
     25% {right: 0; width: 0;}
     75% {left: 0;  width: 0;}
     100% {left: 0; width: 100%;}
