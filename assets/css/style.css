@@ -793,18 +793,19 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-slide-left {
+    left: 0;
     animation: slide-left 1s forwards;
 }
 
 @keyframes slide-right {
     0% {right: 0; width: 100%;}
-    15% {right: 0; width: 100%;}
     25% {right: 0; width: 0;}
     75% {left: 0;  width: 0;}
     100% {left: 0; width: 100%;}
 }
 
 .img-slide-right {
+    right: 0;
     animation: slide-right 1s forwards;
 }
 
