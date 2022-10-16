@@ -647,6 +647,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     position: relative;
     border: 1px solid #8b817f;
     background-color: #000;
+    overflow: hidden;
 
     display: flex;
     align-self: center;
@@ -786,26 +787,28 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 @keyframes slide-left {
-    0% {left: 0; width: 100%;}
-    25% {left: 0; width: 0;}
-    50% {right: 0;  width: 0;}
-    100% {right: 0; width: 100%;}
+    0% {transform: translateX(0); opacity: 1;}
+    40% {transform: translateX(-100%); opacity: 1;}
+    45% {transform: translateX(-100%); opacity: 0;}
+    55% {transform: translateX(200%); opacity: 0;}
+    60% {transform: translateX(200%); opacity: 1;}
+    100% {transform: translateX(0); opacity: 1;}
 }
 
 .img-slide-left {
-    left: 0;
     animation: slide-left 1s forwards;
 }
 
 @keyframes slide-right {
-    0% {right: 0; width: 100%;}
-    25% {right: 0; width: 0;}
-    75% {left: 0;  width: 0;}
-    100% {left: 0; width: 100%;}
+    0% {transform: translateX(0); opacity: 1;}
+    40% {transform: translateX(100%); opacity: 1;}
+    45% {transform: translateX(100%); opacity: 0;}
+    55% {transform: translateX(-200%); opacity: 0;}
+    60% {transform: translateX(-200%); opacity: 1;}
+    100% {transform: translateX(0); opacity: 1;}
 }
 
 .img-slide-right {
-    right: 0;
     animation: slide-right 1s forwards;
 }
 
