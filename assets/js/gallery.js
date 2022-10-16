@@ -2,51 +2,31 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Set initial active image and image counters
+    /* Get all the image carousels from the DOM and iterate
+       over them */
 
     const carousels = document.querySelectorAll('.gallery-carousel');
 
     carousels.forEach(carousel => {
+        
+        /* Set each carousel's initial active image,
+           image counts and image index number */
+
         setActiveImage(carousel);
         setImageCount(carousel);
         setImageIndex(carousel);
-    });
 
-    // Add event listeners to thumbnail buttons
+        // Add click event listeners to each carousel's buttons
 
-    const thumbButtons = document.querySelectorAll('.gallery-thumb-btn');
+        const buttons = carousel.querySelectorAll('button');
 
-    thumbButtons.forEach(button => {
-        button.addEventListener('click', e => {
-            let targetButton = e.target.closest('button');
-            if (!targetButton) return;
-            
-            setImageFromThumb(targetButton);
-        });
-    });
-
-    // Add event listeners to 'next' buttons
-
-    const nextButtons = document.querySelectorAll('.next-btn');
-
-    nextButtons.forEach(button => {
-        button.addEventListener('click', e => {
-            let targetButton = e.target.closest('button');
-            if (!targetButton) return;
-
-            nextImage(targetButton);
-        });
-    });
-
-    // Add event listeners to 'previous' buttons
-
-    const prevButtons = document.querySelectorAll('.prev-btn');
-
-    prevButtons.forEach(button => {
-        button.addEventListener('click', e => {
-            let targetButton = e.target.closest('button');
-
-            previousImage(targetButton);
+        buttons.forEach(button => {
+            button.addEventListener('click', e => {
+                let targetButton = e.target.closest('button');
+                if (targetButton) {
+                    handleButtons(targetButton);
+                } else return;
+            });
         });
     });
 
@@ -151,6 +131,23 @@ function setActiveImage(carousel) {
         }
     }
     indexSpan.innerHTML = activeImageIndex + 1;
+}
+
+/**
+ * Check type of button by class attribute and pass to
+ * appropriate function.
+ * 
+ * @param {HTMLElement} targetButton - Target button passed in by click event.
+ * @returns {} - Nothing. Exits function if conditions not met.
+ */
+function handleButtons(targetButton) {
+    if (targetButton.classList.contains('gallery-thumb-btn')) {
+        setImageFromThumb(targetButton);
+    } else if (targetButton.classList.contains('next-btn')) {
+        nextImage(targetButton);
+    } else if (targetButton.classList.contains('prev-btn')) {
+        previousImage(targetButton);
+    } else return;
 }
 
 /**
