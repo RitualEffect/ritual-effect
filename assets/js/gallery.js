@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     carousels.forEach(carousel => {
         setActiveImage(carousel);
-        setCounters(carousel);
+        setImageCount(carousel);
+        setImageIndex(carousel);
     });
 
     // Add event listeners to thumbnail buttons
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
  * active thumbnail image src (creates link to open
  * main image in new tab).
  * 
- * @param {HTMLElement} carousel - Target image carousel div element 
+ * @param {HTMLElement} carousel - Target image carousel div element. 
  */
 function setActiveImage(carousel) {
     let activeImage = carousel.querySelector('.gallery-active-img');
@@ -93,25 +94,6 @@ function setActiveImage(carousel) {
     activeImage.src = activeThumb.src;
     activeImage.alt = activeThumb.alt;
     activeImageLink.href = activeThumb.src;
-}
-
-/**
- * Get parent element of passed-in, targeted
- * carousel div.
- * 
- * Get thumnail buttons from carousel div.
- * 
- * Pass both to setImageCount and setImageIndex
- * functions.
- * 
- * @param {HTMLElement} carousel - Target image carousel div element
- */
-function setCounters(carousel) {
-    let parent = carousel.parentElement;
-    let imageList = carousel.querySelector('.gallery-thumbnails');
-    
-    setImageCount(parent, imageList);
-    setImageIndex(parent, imageList);
 }
 
 /**
@@ -127,16 +109,17 @@ function setCounters(carousel) {
  * Set thumbnail array length as displayed image
  * total in each span.
  * 
- * @param {HTMLElement} parent - Parent element of target image carousel
- * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel
+ * @param {HTMLElement} carousel - Target image carousel div element.
  */
-function setImageCount(parent, imageList) {
-    let imageListId = imageList.id;
-    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
-    
-    let counts = parent.querySelectorAll(`.${imageListId}-count`);
-    counts.forEach(count => {
-        count.innerHTML = imageArray.length;
+ function setImageCount(carousel) {
+    let parent = carousel.parentElement;
+    let imageContainer = carousel.querySelector('.gallery-thumbnails');
+
+    let countSpans = parent.querySelectorAll(`.${imageContainer.id}-count`);
+    let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
+
+    countSpans.forEach(countSpan => {
+        countSpan.innerHTML = imageArray.length;
     });
 }
 
@@ -151,18 +134,18 @@ function setImageCount(parent, imageList) {
  * which current image number to be displayed.
  * 
  * Iterate over thumbnail array to find current active
- * image and return that image's index number.
+ * image and get that image's index number.
  * 
- * Set returned index as displayed current image
- * number in each span.
+ * Use index number to display current image number.
  * 
- * @param {HTMLElement} parent - Parent element of target image carousel
- * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel 
+ * @param {HTMLElement} carousel - Target image carousel div element.
  */
-function setImageIndex(parent, imageList) {
-    let imageListId = imageList.id;
-    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
-    let indexSpan = parent.querySelector(`.${imageListId}-index`);
+ function setImageIndex(carousel) {
+    let parent = carousel.parentElement;
+    let imageContainer = carousel.querySelector('.gallery-thumbnails');
+
+    let indexSpan = parent.querySelector(`.${imageContainer.id}-index`);
+    let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
     let activeImageIndex;
 
     for (let image of imageArray) {
