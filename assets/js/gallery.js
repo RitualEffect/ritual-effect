@@ -114,7 +114,6 @@ function setActiveImage(carousel) {
  function setImageCount(carousel) {
     let parent = carousel.parentElement;
     let imageContainer = carousel.querySelector('.gallery-thumbnails');
-
     let countSpans = parent.querySelectorAll(`.${imageContainer.id}-count`);
     let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
 
@@ -141,10 +140,8 @@ function setActiveImage(carousel) {
  * @param {HTMLElement} carousel - Target image carousel div element.
  */
  function setImageIndex(carousel) {
-    let parent = carousel.parentElement;
     let imageContainer = carousel.querySelector('.gallery-thumbnails');
-
-    let indexSpan = parent.querySelector(`.${imageContainer.id}-index`);
+    let indexSpan = carousel.querySelector(`.${imageContainer.id}-index`);
     let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
     let activeImageIndex;
 
@@ -162,7 +159,7 @@ function setActiveImage(carousel) {
  * 
  * Assign active class to target thumbnail.
  * 
- * Pass updated elements to setActiveImage and
+ * Pass updated carousel div to setActiveImage and
  * setImageIndex functions. 
  * 
  * @param {HTMLElement} targetButton - Target thumbnail button passed in from event handler function
@@ -177,10 +174,9 @@ function updateActiveImage(targetButton, imageList) {
     targetButton.classList.add('active-thumb');
     
     let carousel = imageList.parentElement;
-    let parent = carousel.parentElement;
 
     setActiveImage(carousel);
-    setImageIndex(parent, imageList);
+    setImageIndex(carousel);
 }
 
 /**
