@@ -93,9 +93,9 @@ function setActiveImage(carousel) {
  */
  function setImageCount(carousel) {
     let parent = carousel.parentElement;
-    let imageContainer = carousel.querySelector('.gallery-thumbnails');
-    let countSpans = parent.querySelectorAll(`.${imageContainer.id}-count`);
-    let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
+    let imagesContainer = carousel.querySelector('.gallery-thumbnails');
+    let countSpans = parent.querySelectorAll(`.${imagesContainer.id}-count`);
+    let imageArray = Array.from(imagesContainer.querySelectorAll('.gallery-thumb-btn'));
 
     countSpans.forEach(countSpan => {
         countSpan.innerHTML = imageArray.length;
@@ -120,9 +120,9 @@ function setActiveImage(carousel) {
  * @param {HTMLElement} carousel - Target image carousel div element.
  */
  function setImageIndex(carousel) {
-    let imageContainer = carousel.querySelector('.gallery-thumbnails');
-    let indexSpan = carousel.querySelector(`.${imageContainer.id}-index`);
-    let imageArray = Array.from(imageContainer.querySelectorAll('.gallery-thumb-btn'));
+    let imagesContainer = carousel.querySelector('.gallery-thumbnails');
+    let indexSpan = carousel.querySelector(`.${imagesContainer.id}-index`);
+    let imageArray = Array.from(imagesContainer.querySelectorAll('.gallery-thumb-btn'));
     let activeImageIndex;
 
     for (let image of imageArray) {
@@ -138,7 +138,7 @@ function setActiveImage(carousel) {
  * appropriate function.
  * 
  * @param {HTMLElement} targetButton - Target button passed in by click event.
- * @returns {} - Nothing. Exits function if conditions not met.
+ * @returns {} - Nothing. Exits function if target button not correct type.
  */
 function handleButtons(targetButton) {
     if (targetButton.classList.contains('gallery-thumb-btn')) {
@@ -159,28 +159,25 @@ function handleButtons(targetButton) {
  * Pass updated carousel div to setActiveImage and
  * setImageIndex functions. 
  * 
- * @param {HTMLElement} targetButton - Target thumbnail button passed in from event handler function
- * @param {HTMLElement} imageList - Thumbnail image buttons of target image carousel 
+ * @param {HTMLElement} activeImageButton - Target thumbnail button passed in from calling function.
  */
-function updateActiveImage(targetButton, imageList) {
-    let buttons = imageList.querySelectorAll('.gallery-thumb-btn');
+ function updateActiveImage(activeImageButton) {
+    let imagesContainer = activeImageButton.parentElement;
+    let buttons = imagesContainer.querySelectorAll('.gallery-thumb-btn');
     
     buttons.forEach(button => {
         button.classList.remove('active-thumb');
     });
-    targetButton.classList.add('active-thumb');
+    activeImageButton.classList.add('active-thumb');
     
-    let carousel = imageList.parentElement;
+    let carousel = imagesContainer.parentElement;
 
     setActiveImage(carousel);
     setImageIndex(carousel);
 }
 
 /**
- * Get element containing target thumbnail button's
- * siblings.
- * 
- * Get target carousel's main image container.
+ * Get target thumbnail button's main image container.
  * 
  * Apply CSS animation to container (1s duration).
  * 
@@ -189,18 +186,18 @@ function updateActiveImage(targetButton, imageList) {
  * 
  * Remove animation 50ms after completion.
  * 
- * @param {HTMLElement} targetButton - Target thumbnail button passed in from event listener 
+ * @param {HTMLElement} targetButton - Target thumbnail button passed in from event listener.
  */
 function setImageFromThumb(targetButton) {
-    let imageList = targetButton.parentElement;
-    let mainImage = imageList.parentElement.querySelector('.gallery-active-img-wrap');
+    let carousel = targetButton.closest('.gallery-carousel');
+    let mainImageContainer = carousel.querySelector('.gallery-active-img-wrap');
 
-    mainImage.classList.add('img-fade');
+    mainImageContainer.classList.add('img-fade');
     setTimeout(function() {
-        updateActiveImage(targetButton, imageList);
+        updateActiveImage(targetButton);
     }, 500);
     setTimeout(function() {
-        mainImage.classList.remove('img-fade');
+        mainImageContainer.classList.remove('img-fade');
     }, 1050);
 }
 
@@ -208,100 +205,114 @@ function setImageFromThumb(targetButton) {
  * Get target arrow button's icon and target
  * carousel's main image container.
  * 
- * Get element containing target thumbnail button's
- * siblings and construct iterable array from it.  
+ * Pass target button to setImageFromArrow function to
+ * update active thumbnail button.
+ * 
+ * Apply CSS animation to main image container (1s duration)
+ * and CSS transition to arrow button (0.5s duration).
+ * 
+ * Pass active thumbnail button to updateActiveImage
+ * function after 500ms and remove transition from arrow
+ * button.
+ * 
+ * Remove animation from container 50ms after
+ * completion.
+ * 
+ * @param {HTMLElement} targetButton - Target right arrow button passed in from event listener. 
+ */
+function nextImage(targetButton) {
+    let carousel = targetButton.closest('.gallery-carousel');
+    let buttonIcon = targetButton.querySelector('i');
+    let mainImageContainer = carousel.querySelector('.gallery-active-img-wrap');
+
+    let activeImageButton = setImageFromArrow(targetButton);
+
+    buttonIcon.classList.add('highlight-right');
+    mainImageContainer.classList.add('img-slide-left');
+    setTimeout(function() {
+        updateActiveImage(activeImageButton);
+        buttonIcon.classList.remove('highlight-right');
+    }, 500);
+    setTimeout(function() {
+        mainImageContainer.classList.remove('img-slide-left');
+    }, 1050);
+}
+
+/**
+ * Get target arrow button's icon and target
+ * carousel's main image container.
+ * 
+ * Pass target button to setImageFromArrow function to
+ * update active thumbnail button.
+ * 
+ * Apply CSS animation to main image container (1s duration)
+ * and CSS transition to arrow button (0.5s duration).
+ * 
+ * Pass active thumbnail button to updateActiveImage
+ * function after 500ms and remove transition from arrow
+ * button.
+ * 
+ * Remove animation from container 50ms after
+ * completion.
+ * 
+ * @param {HTMLElement} targetButton - Target left arrow button passed in from event listener. 
+ */
+function previousImage(targetButton) {
+    let carousel = targetButton.closest('.gallery-carousel');
+    let buttonIcon = targetButton.querySelector('i');
+    let mainImageContainer = carousel.querySelector('.gallery-active-img-wrap');
+
+    let activeImageButton = setImageFromArrow(targetButton);
+
+    buttonIcon.classList.add('highlight-left');
+    mainImageContainer.classList.add('img-slide-right');
+    setTimeout(function() {
+        updateActiveImage(activeImageButton);
+        buttonIcon.classList.remove('highlight-left');
+    }, 500);
+    setTimeout(function() {
+        mainImageContainer.classList.remove('img-slide-right');
+    }, 1050);
+}
+
+/**
+ * Construct iterable array of thumbnail buttons.
  * 
  * Get current active thumbnail button.
  * 
- * Set active thumbnail to next thumbnail in list or,
+ * If target button is 'next image' button,
+ * set active thumbnail to next thumbnail in list or,
  * if current active thumbnail is last in array, set
  * active thumbnail to first in array.
  * 
- * Apply CSS animations to main image container 
- * (1s duration) and CSS transition to arrow button
- * (0.5s duration).
- * 
- * Pass new active button to updateActiveImage function
- * after 500ms and remove transition from arrow button.
- * 
- * Remove animation from container 50ms after
- * completion.
- * 
- * @param {HTMLElement} targetButton - Target right arrow button passed in from event listener 
- */
-function nextImage(targetButton) {
-    let rightButton = targetButton.querySelector('i');
-    let mainImage = targetButton.parentElement.parentElement.querySelector('.gallery-active-img-wrap');
-    let imageList = targetButton.parentElement.parentElement.nextElementSibling;
-    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
-    let activeImageButton = imageList.querySelector('.active-thumb');
-    let newActiveImageButton;
-
-    if (activeImageButton === imageArray[imageArray.length - 1]) {
-        newActiveImageButton = imageArray[0];
-    } else {
-        newActiveImageButton = activeImageButton.nextElementSibling;
-    }
-
-    rightButton.classList.add('highlight-right');
-    mainImage.classList.add('img-slide-left');
-    setTimeout(function() {
-        updateActiveImage(newActiveImageButton, imageList);
-        rightButton.classList.remove('highlight-right');
-    }, 500);
-    setTimeout(function() {
-        mainImage.classList.remove('img-slide-left');
-    }, 1050);
-}
-
-/**
- * Get target arrow button's icon and target
- * carousel's main image container.
- * 
- * Get element containing target thumbnail button's
- * siblings and construct iterable array from it.  
- * 
- * Get current active thumbnail button.
- * 
- * Set active thumbnail to previous thumbnail in list
+ * If target button is 'previous image' button,
+ * set active thumbnail to previous thumbnail in list
  * or, if current active thumbnail is first in array,
  * set active thumbnail to last in array.
  * 
- * Apply CSS animations to main image container 
- * (1s duration) and CSS transition to arrow button
- * (0.5s duration).
- * 
- * Pass new active button to updateActiveImage function
- * after 500ms and remove transition from arrow button.
- * 
- * Remove animation from container 50ms after
- * completion.
- * 
- * @param {HTMLElement} targetButton - Target left arrow button passed in from event listener 
+ * @param {HTMLElement} targetButton - Target arrow button passed in from calling function.
+ * @returns {HTMLElement} newActiveImageButton - New active thumbnail button.
  */
-function previousImage(targetButton) {
-    let leftButton = targetButton.querySelector('i');
-    let mainImage = targetButton.parentElement.parentElement.querySelector('.gallery-active-img-wrap');
-    let imageList = targetButton.parentElement.parentElement.nextElementSibling;
-    let imageArray = Array.from(imageList.querySelectorAll('.gallery-thumb-btn'));
-    let activeImageButton = imageList.querySelector('.active-thumb');
+function setImageFromArrow(targetButton) {
+    let carousel = targetButton.closest('.gallery-carousel');
+    let imageArray = Array.from(carousel.querySelectorAll('.gallery-thumb-btn'));
+    let activeImageButton = carousel.querySelector('.active-thumb');
     let newActiveImageButton;
 
-    if (activeImageButton === imageArray[0]) {
-        newActiveImageButton = imageArray[imageArray.length - 1];
-    } else {
-        newActiveImageButton = activeImageButton.previousElementSibling;
+    if (targetButton.classList.contains('next-btn')) {
+        if (activeImageButton === imageArray[imageArray.length - 1]) {
+            newActiveImageButton = imageArray[0];
+        } else {
+            newActiveImageButton = activeImageButton.nextElementSibling;
+        }
+    } else if (targetButton.classList.contains('prev-btn')) {
+        if (activeImageButton === imageArray[0]) {
+            newActiveImageButton = imageArray[imageArray.length - 1];
+        } else {
+            newActiveImageButton = activeImageButton.previousElementSibling;
+        }
     }
-
-    leftButton.classList.add('highlight-left');
-    mainImage.classList.add('img-slide-right');
-    setTimeout(function() {
-        updateActiveImage(newActiveImageButton, imageList);
-        leftButton.classList.remove('highlight-left');
-    }, 500);
-    setTimeout(function() {
-        mainImage.classList.remove('img-slide-right');
-    }, 1050);
+    return newActiveImageButton;
 }
 
 /**
