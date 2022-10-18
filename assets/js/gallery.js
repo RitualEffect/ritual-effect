@@ -1,6 +1,6 @@
 // Wait for the DOM to finish loading before running
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
 
     /* Get all the image carousels from the DOM and iterate
        over them */
@@ -28,26 +28,80 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else return;
             });
         });
+
     });
 
-    /* Add touch event listeners to image carousels for swiping between images. */
+    /* Add touch event listeners to image carousels for swiping between images.
+       **Only perform actions when swiping horizontally!**  */
 
     const imageViews = document.querySelectorAll('.gallery-active-section');
 
     imageViews.forEach(view => {
         let startX = null;
+        let startY = null;
+        let swipingX = false;
+        let startTime;
 
         view.addEventListener('touchstart', e => {
+            // Record x and y coordinates of first touch
             startX = e.changedTouches[0].clientX;
+            startY = e.changedTouches[0].clientY;
+            // Record time of first touch
+            startTime = new Date().getTime();
+        });
+
+        view.addEventListener('touchmove', e => {
+            // To prevent error when maths operations applied:
+            if (startX === null || startY === null) return;
+            
+            // Track distance of touch across screen
+            let currentX = e.changedTouches[0].clientX;
+            let currentY = e.changedTouches[0].clientY;
+            let currentDistX = startX - currentX;
+            let currentDistY = startY - currentY;
+            // Maximum y-axis distance allowed for horizontal swipe
+            let tolerance = 100;
+
+            if (Math.abs(currentDistX) > Math.abs(currentDistY) && Math.abs(currentDistY) <= tolerance && e.cancelable) {
+                swipingX = true; // Horizontal swipe
+                // Prevent scrolling when inside image viewport
+                e.preventDefault();
+            }
         });
 
         view.addEventListener('touchend', e => {
+            // To prevent error when maths operations applied:
+            if (startX === null || startY === null) return;
+
+            // Record x coordinate of touch leaving screen
             let endX = e.changedTouches[0].clientX;
-            
-            handleSwipe(view, endX, startX);
+            // Get distance moved horizontally
+            let distX = startX - endX;
+            // Minimum distance in pixels required for valid swipe
+            let threshold = 150;
+            // Get time since first touch
+            let elapsedTime = new Date().getTime() - startTime;
+            // Minimum touch duration in ms required for valid swipe
+            let allowedTime = 300;
+            let swipeDirection;
+
+            if (swipingX && e.cancelable) {
+                if (Math.abs(distX) >= threshold && elapsedTime <= allowedTime) {
+                    // Ternary if statement. Set direction of swipe if dist moved + or -
+                    swipeDirection = (distX < 0) ? 'left' : 'right';
+                }
+                handleSwipe(view, swipeDirection);
+                // Reset x and y coordinates
+                startX = null;
+                startY = null;
+                // Prevent click events inside image viewport
+                e.preventDefault();
+                // Reset swiping state to restore defaults after each swipe
+                swipingX = false;
+            }
         });
     });
-    
+
 });
 
 // Event handler functions
@@ -64,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
  * active thumbnail image src (creates link to open
  * main image in new tab).
  * 
- * @param {HTMLElement} carousel - Target image carousel div element. 
+ * @param {HTMLElement} carousel - Target image carousel div element.
  */
 function setActiveImage(carousel) {
     let activeImage = carousel.querySelector('.gallery-active-img');
@@ -91,7 +145,7 @@ function setActiveImage(carousel) {
  * 
  * @param {HTMLElement} carousel - Target image carousel div element.
  */
- function setImageCount(carousel) {
+function setImageCount(carousel) {
     let parent = carousel.parentElement;
     let imagesContainer = carousel.querySelector('.gallery-thumbnails');
     let countSpans = parent.querySelectorAll(`.${imagesContainer.id}-count`);
@@ -119,7 +173,7 @@ function setActiveImage(carousel) {
  * 
  * @param {HTMLElement} carousel - Target image carousel div element.
  */
- function setImageIndex(carousel) {
+function setImageIndex(carousel) {
     let imagesContainer = carousel.querySelector('.gallery-thumbnails');
     let indexSpan = carousel.querySelector(`.${imagesContainer.id}-index`);
     let imageArray = Array.from(imagesContainer.querySelectorAll('.gallery-thumb-btn'));
@@ -161,7 +215,7 @@ function handleButtons(targetButton) {
  * 
  * @param {HTMLElement} activeImageButton - Target thumbnail button passed in from calling function.
  */
- function updateActiveImage(activeImageButton) {
+function updateActiveImage(activeImageButton) {
     let imagesContainer = activeImageButton.parentElement;
     let buttons = imagesContainer.querySelectorAll('.gallery-thumb-btn');
     
@@ -331,13 +385,13 @@ function setImageFromArrow(targetButton) {
  * @param {number} endX - X-axis coordinate passed in by touchend event listener
  * @param {number} startX - X-axis coordinate passed in by touchstart event listener
  */
-function handleSwipe(view, endX, startX) {
+function handleSwipe(view, swipeDirection) {
     let nextButton = view.querySelector('.next-btn');
     let prevButton = view.querySelector('.prev-btn');
 
-    if (endX < startX) {
+    if (swipeDirection === 'left') {
         nextImage(nextButton);
-    } else if (endX > startX) {
+    } else if (swipeDirection === 'right') {
         previousImage(prevButton);
-    }
+    } else return;
 }
