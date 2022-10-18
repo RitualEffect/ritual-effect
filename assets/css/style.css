@@ -783,7 +783,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-fade {
-    animation: fade-out-in 1s forwards;
+    animation: fade-out-in 0.5s forwards;
 }
 
 @keyframes slide-left {
@@ -796,7 +796,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-slide-left {
-    animation: slide-left 1s forwards;
+    animation: slide-left 0.5s forwards;
 }
 
 @keyframes slide-right {
@@ -809,7 +809,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-slide-right {
-    animation: slide-right 1s forwards;
+    animation: slide-right 0.5s forwards;
 }
 
 .highlight-right {
@@ -901,7 +901,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 @media(hover: hover) and (pointer: fine) {
     .text-input:hover {
         background-color: rgba(139, 129, 127, 0.3);
-        transition: background-color 1s;
+        transition: background-color 0.5s;
     }
 }
 
