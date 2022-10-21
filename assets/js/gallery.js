@@ -16,120 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setImageCount(carousel);
         setImageIndex(carousel);
 
-        // Add click event listeners to each carousel's buttons
+        // Add click event listeners to each carousel
 
-        const buttons = carousel.querySelectorAll('button');
+        handleClicks(carousel);
 
-        buttons.forEach(button => {
-            // Throttling variable to limit click events
-            let enableClick = true;
+        // Add touch event listeners to each carousel
 
-            button.addEventListener('click', e => {
-                // Only run if throttling allows
-                if (!enableClick) return;
-                enableClick = false;
+        handleTouches(carousel);
 
-                // Only target button elements
-                let targetButton = e.target.closest('button');
-                if (targetButton) {
-                    handleButtons(targetButton);
-                } else return;
-
-                /* Only register click events every 500ms
-                   (i.e. limit user to max 2 clicks/second) */
-                setTimeout(function() {
-                    enableClick = true;
-                }, 500);
-            });
-        });
-
-    });
-
-    /* Add touch event listeners to image carousels for swiping
-       between images.
-       **Only perform actions when swiping horizontally!**  */
-
-    const imageViews = document.querySelectorAll('.gallery-active-section');
-
-    imageViews.forEach(view => {
-        // Throttling variable to limit click events
-        let enableSwipe = true;
-        // Starting X and Y coordinates
-        let startX = null;
-        let startY = null;
-        // Swiping horizontally?
-        let swipingX = false;
-        // Time of first touch
-        let startTime;
-
-        view.addEventListener('touchstart', e => {
-            // Record x and y coordinates of first touch
-            startX = e.changedTouches[0].clientX;
-            startY = e.changedTouches[0].clientY;
-            // Record time of first touch
-            startTime = new Date().getTime();
-        });
-
-        view.addEventListener('touchmove', e => {
-            // To prevent error when maths operations applied:
-            if (startX === null || startY === null) return;
-            
-            // Track distance of touch across screen
-            let currentX = e.changedTouches[0].clientX;
-            let currentY = e.changedTouches[0].clientY;
-            let currentDistX = startX - currentX;
-            let currentDistY = startY - currentY;
-            // Maximum y-axis distance allowed for horizontal swipe
-            let tolerance = 100;
-
-            if (Math.abs(currentDistX) > Math.abs(currentDistY) && Math.abs(currentDistY) <= tolerance && e.cancelable) {
-                swipingX = true; // Horizontal swipe
-                // Prevent scrolling when inside image viewport
-                e.preventDefault();
-            }
-        });
-
-        view.addEventListener('touchend', e => {
-            // Only run if throttling allows
-            if (!enableSwipe) return;
-            enableSwipe = false;
-            // To prevent error when maths operations applied:
-            if (startX === null || startY === null) return;
-
-            // Record x coordinate of touch leaving screen
-            let endX = e.changedTouches[0].clientX;
-            // Get distance moved horizontally
-            let distX = startX - endX;
-            // Minimum distance in pixels required for valid swipe
-            let threshold = 100;
-            // Get time since first touch
-            let elapsedTime = new Date().getTime() - startTime;
-            // Minimum touch duration in ms required for valid swipe
-            let allowedTime = 300;
-            let swipeDirection;
-
-            if (swipingX && e.cancelable) {
-                if (Math.abs(distX) >= threshold && elapsedTime <= allowedTime) {
-                    /* Ternary if statement. Set direction of swipe
-                       if dist moved + or - */
-                    swipeDirection = (distX > 0) ? 'left' : 'right';
-                }
-                handleSwipeDirection(view, swipeDirection);
-                // Reset x and y coordinates
-                startX = null;
-                startY = null;
-                // Prevent click events inside image viewport
-                e.preventDefault();
-                // Reset swiping state to restore defaults after each swipe
-                swipingX = false;
-            }
-
-            /* Only register touchend events every 500ms
-               (i.e. limit user to max 2 swipes/second) */
-            setTimeout(function() {
-                enableSwipe = true;
-            }, 500);
-        });
     });
 
 });
@@ -218,13 +112,52 @@ function setImageIndex(carousel) {
 }
 
 /**
+ * Get all carousel's button elements and iterate over them.
+ * 
+ * Add 'click' event listener to each button, only if HTML
+ * button element.
+ * 
+ * Limit click events to max 2 per second.
+ * 
+ * Pass targeted button element to handleCarouselButtons function.
+ * 
+ * @param {HTMLElement} carousel - Target image carousel div element. 
+ */
+function handleClicks(carousel) {
+    const buttons = carousel.querySelectorAll('button');
+
+        buttons.forEach(button => {
+            // Throttling variable to limit click events
+            let enableClick = true;
+
+            button.addEventListener('click', e => {
+                // Only run if throttling allows
+                if (!enableClick) return;
+                enableClick = false;
+
+                // Only target button elements
+                let targetButton = e.target.closest('button');
+                if (targetButton) {
+                    handleCarouselButtons(targetButton);
+                } else return;
+
+                /* Only register click events every 600ms
+                   (i.e. limit user to max 2 clicks/second) */
+                setTimeout(function() {
+                    enableClick = true;
+                }, 600);
+            });
+        });
+}
+
+/**
  * Check type of button by class attribute and pass to
  * appropriate function.
  * 
  * @param {HTMLElement} targetButton - Target button passed in by click event.
- * @returns {} - Nothing. Exits function if target button not correct type.
+ * @returns {} Nothing. Exits function if target button not correct type.
  */
-function handleButtons(targetButton) {
+function handleCarouselButtons(targetButton) {
     if (targetButton.classList.contains('gallery-thumb-btn')) {
         setImageFromThumb(targetButton);
     } else if (targetButton.classList.contains('next-btn')) {
@@ -398,13 +331,133 @@ function setImageFromArrow(targetButton) {
 }
 
 /**
+ * Get target carousel's main image viewport & add touch event
+ * listeners to it:
+ * 
+ * 'touchstart' - Record x & y coordinates and time of first touch;
+ * 
+ * 'touchmove' - Determine if swiping horizontally or vertically.
+ * If condition met for valid horizontal swipe, return true and
+ * prevent page scrolling for duration of touch.
+ * 
+ * 'touchend' - Limit touch events to max 2 per second. Record x
+ * coordinate at end of touch. If horizontal swipe, prevent click
+ * events in viewport, pass start & end x coordinates and time of
+ * first touch to handleSwipe function, get returned swipe
+ * direction and pass to handleSwipeDirection function.
+ * 
+ * @param {HTMLElement} carousel - Target image carousel div element. 
+ */
+function handleTouches(carousel) {
+    // Target carousel's main image viewport
+    const view = carousel.querySelector('.gallery-active-section');
+    // Throttling variable to limit click events
+    let enableSwipe = true;
+    // Starting X and Y coordinates
+    let startX = null;
+    let startY = null;
+    // Swiping horizontally?
+    let swipingX = false;
+    // Time of first touch
+    let startTime;
+
+    view.addEventListener('touchstart', e => {
+        // Record x and y coordinates of first touch
+        startX = e.changedTouches[0].clientX;
+        startY = e.changedTouches[0].clientY;
+        // Record time of first touch
+        startTime = new Date().getTime();
+    });
+
+    view.addEventListener('touchmove', e => {
+        // To prevent error when maths operations applied:
+        if (startX === null || startY === null) return;
+        
+        // Track distance of touch across screen
+        let currentX = e.changedTouches[0].clientX;
+        let currentY = e.changedTouches[0].clientY;
+        let currentDistX = startX - currentX;
+        let currentDistY = startY - currentY;
+        // Maximum y-axis distance allowed for horizontal swipe
+        let tolerance = 100;
+
+        // Only run if swiping horizontally within tolerance
+        if (Math.abs(currentDistX) > Math.abs(currentDistY) && Math.abs(currentDistY) <= tolerance && e.cancelable) {
+            swipingX = true; // Horizontal swipe
+            // Prevent scrolling when inside image viewport
+            e.preventDefault();
+        }
+    });
+
+    view.addEventListener('touchend', e => {
+        // Only run if throttling allows
+        if (!enableSwipe) return;
+        enableSwipe = false;
+        // To prevent error when maths operations applied:
+        if (startX === null || startY === null) return;
+
+        // Record x coordinate of touch leaving screen
+        let endX = e.changedTouches[0].clientX;
+
+        // Only run if swiping horizontally
+        if (swipingX && e.cancelable) {
+            // Direction of swipe returned by handleSwipe function
+            let swipeDirection = handleSwipe(startX, startTime, endX);
+
+            handleSwipeDirection(view, swipeDirection);
+            // Reset x and y coordinates
+            startX = null;
+            startY = null;
+            // Prevent click events inside image viewport
+            e.preventDefault();
+            // Reset swiping state to restore defaults after each swipe
+            swipingX = false;
+        }
+
+        /* Only register touchend events every 600ms
+           (i.e. limit user to max 2 swipes/second) */
+        setTimeout(function() {
+            enableSwipe = true;
+        }, 600);
+    });
+}
+
+/**
+ * If conditions met for valid horizontal swipe, return swipe
+ * direction.
+ * 
+ * @param {number} startX - X coordinate passed in by touchstart event listener.
+ * @param {number} startTime - Time recorded by touchstart event listener.
+ * @param {number} endX - X coordinate passed in by touchend event listener.
+ * @returns {string} swipeDirection - Direction ('left' or 'right') determined by difference between startX and endX.
+ */
+function handleSwipe(startX, startTime, endX) {
+    // Get distance moved horizontally
+    let distX = startX - endX;
+    // Minimum distance in pixels required for valid swipe
+    let threshold = 100;
+    // Get time since first touch
+    let elapsedTime = new Date().getTime() - startTime;
+    // Minimum touch duration in ms required for valid swipe
+    let allowedTime = 300;
+    // Direction of swipe
+    let swipeDirection;
+
+    // Only run if conditions met for valid horizontal swipe
+    if (Math.abs(distX) >= threshold && elapsedTime <= allowedTime) {
+        /* Ternary if statement. Set direction of swipe
+           if dist moved + or - */
+        swipeDirection = (distX > 0) ? 'left' : 'right';
+    }
+    return swipeDirection;
+}
+
+/**
  * Get target carousel's next and previous buttons
  * by querying main image viewport element.
  * 
- * Compare touchend and touchstart coordinates to
- * determine whether user swiped right or left.
- * 
- * If left, pass next button to nextImage function.
+ * If passed in swipe direction is left, pass next
+ * button to nextImage function.
  * 
  * If right, pass previous button to previousImage
  * function.
@@ -420,5 +473,5 @@ function handleSwipeDirection(view, swipeDirection) {
         nextImage(nextButton);
     } else if (swipeDirection === 'right') {
         previousImage(prevButton);
-    } else return;
+    } else return; // exit function if direction undefined/falsy
 }
