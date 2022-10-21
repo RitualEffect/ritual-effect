@@ -21,25 +21,45 @@ document.addEventListener('DOMContentLoaded', function() {
         const buttons = carousel.querySelectorAll('button');
 
         buttons.forEach(button => {
+            // Throttling variable to limit click events
+            let enableClick = true;
+
             button.addEventListener('click', e => {
+                // Only run if throttling allows
+                if (!enableClick) return;
+                enableClick = false;
+
+                // Only target button elements
                 let targetButton = e.target.closest('button');
                 if (targetButton) {
                     handleButtons(targetButton);
                 } else return;
+
+                /* Only register click events every 500ms
+                   (i.e. limit user to max 2 clicks/second) */
+                setTimeout(function() {
+                    enableClick = true;
+                }, 500);
             });
         });
 
     });
 
-    /* Add touch event listeners to image carousels for swiping between images.
+    /* Add touch event listeners to image carousels for swiping
+       between images.
        **Only perform actions when swiping horizontally!**  */
 
     const imageViews = document.querySelectorAll('.gallery-active-section');
 
     imageViews.forEach(view => {
+        // Throttling variable to limit click events
+        let enableSwipe = true;
+        // Starting X and Y coordinates
         let startX = null;
         let startY = null;
+        // Swiping horizontally?
         let swipingX = false;
+        // Time of first touch
         let startTime;
 
         view.addEventListener('touchstart', e => {
@@ -70,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         view.addEventListener('touchend', e => {
+            // Only run if throttling allows
+            if (!enableSwipe) return;
+            enableSwipe = false;
             // To prevent error when maths operations applied:
             if (startX === null || startY === null) return;
 
@@ -87,10 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (swipingX && e.cancelable) {
                 if (Math.abs(distX) >= threshold && elapsedTime <= allowedTime) {
-                    // Ternary if statement. Set direction of swipe if dist moved + or -
+                    /* Ternary if statement. Set direction of swipe
+                       if dist moved + or - */
                     swipeDirection = (distX > 0) ? 'left' : 'right';
                 }
-                handleSwipe(view, swipeDirection);
+                handleSwipeDirection(view, swipeDirection);
                 // Reset x and y coordinates
                 startX = null;
                 startY = null;
@@ -99,6 +123,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Reset swiping state to restore defaults after each swipe
                 swipingX = false;
             }
+
+            /* Only register touchend events every 500ms
+               (i.e. limit user to max 2 swipes/second) */
+            setTimeout(function() {
+                enableSwipe = true;
+            }, 500);
         });
     });
 
@@ -233,10 +263,10 @@ function updateActiveImage(activeImageButton) {
 /**
  * Get target thumbnail button's main image container.
  * 
- * Apply CSS animation to container (300ms duration).
+ * Apply CSS animation to container (500ms duration).
  * 
  * Pass target button to updateActiveImage function
- * after 100ms.
+ * after 150ms.
  * 
  * Remove animation 50ms after completion.
  * 
@@ -249,10 +279,10 @@ function setImageFromThumb(targetButton) {
     mainImageContainer.classList.add('img-fade');
     setTimeout(function() {
         updateActiveImage(targetButton);
-    }, 100);
+    }, 150);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-fade');
-    }, 350);
+    }, 550);
 }
 
 /**
@@ -262,11 +292,11 @@ function setImageFromThumb(targetButton) {
  * Pass target button to setImageFromArrow function to
  * update active thumbnail button.
  * 
- * Apply CSS animation to main image container (300ms duration)
- * and CSS transition to arrow button (300ms duration).
+ * Apply CSS animation to main image container (500ms duration)
+ * and CSS transition to arrow button (500ms duration).
  * 
  * Pass active thumbnail button to updateActiveImage
- * function after 120ms (40% of animation's duration).
+ * function after 200ms (40% of animation's duration).
  * 
  * Remove animation from container and transition from arrow
  * button 50ms after completion.
@@ -284,11 +314,11 @@ function nextImage(targetButton) {
     mainImageContainer.classList.add('img-slide-left');
     setTimeout(function() {
         updateActiveImage(activeImageButton);
-    }, 120);
+    }, 200);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-slide-left');
         buttonIcon.classList.remove('highlight-right');
-    }, 350);
+    }, 550);
 }
 
 /**
@@ -298,11 +328,11 @@ function nextImage(targetButton) {
  * Pass target button to setImageFromArrow function to
  * update active thumbnail button.
  * 
- * Apply CSS animation to main image container (300ms duration)
- * and CSS transition to arrow button (300ms duration).
+ * Apply CSS animation to main image container (500ms duration)
+ * and CSS transition to arrow button (500ms duration).
  * 
  * Pass active thumbnail button to updateActiveImage
- * function after 120ms (40% of animation's duration).
+ * function after 200ms (40% of animation's duration).
  * 
  * Remove animation from container and transition from arrow
  * button 50ms after completion.
@@ -320,11 +350,11 @@ function previousImage(targetButton) {
     mainImageContainer.classList.add('img-slide-right');
     setTimeout(function() {
         updateActiveImage(activeImageButton);
-    }, 120);
+    }, 200);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-slide-right');
         buttonIcon.classList.remove('highlight-left');
-    }, 350);
+    }, 550);
 }
 
 /**
@@ -379,11 +409,10 @@ function setImageFromArrow(targetButton) {
  * If right, pass previous button to previousImage
  * function.
  * 
- * @param {HTMLElement} view - Target carousel main image viewport
- * @param {number} endX - X-axis coordinate passed in by touchend event listener
- * @param {number} startX - X-axis coordinate passed in by touchstart event listener
+ * @param {HTMLElement} view - Target carousel main image viewport.
+ * @param {string} swipeDirection - Direction ('left' or 'right') passed in by touchend event listener.
  */
-function handleSwipe(view, swipeDirection) {
+function handleSwipeDirection(view, swipeDirection) {
     let nextButton = view.querySelector('.next-btn');
     let prevButton = view.querySelector('.prev-btn');
 
