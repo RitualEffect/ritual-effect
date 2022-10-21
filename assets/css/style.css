@@ -783,7 +783,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-fade {
-    animation: fade-out-in 0.5s forwards;
+    animation: fade-out-in 300ms forwards;
 }
 
 @keyframes slide-left {
@@ -796,7 +796,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-slide-left {
-    animation: slide-left 0.5s forwards;
+    animation: slide-left 300ms forwards;
 }
 
 @keyframes slide-right {
@@ -809,19 +809,19 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .img-slide-right {
-    animation: slide-right 0.5s forwards;
+    animation: slide-right 300ms forwards;
 }
 
 .highlight-right {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 1);
     transform: translateX(5px);
-    transition: all 0.5s;
+    transition: all 300ms;
 }
 
 .highlight-left {
-    background: #fff;
+    background-color: rgba(255, 255, 255, 1);
     transform: translateX(-5px);
-    transition: all 0.5s;
+    transition: all 300ms;
 }
 
 /* gallery social links */

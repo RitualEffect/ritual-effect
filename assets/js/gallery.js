@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get distance moved horizontally
             let distX = startX - endX;
             // Minimum distance in pixels required for valid swipe
-            let threshold = 150;
+            let threshold = 100;
             // Get time since first touch
             let elapsedTime = new Date().getTime() - startTime;
             // Minimum touch duration in ms required for valid swipe
@@ -233,10 +233,10 @@ function updateActiveImage(activeImageButton) {
 /**
  * Get target thumbnail button's main image container.
  * 
- * Apply CSS animation to container (500ms duration).
+ * Apply CSS animation to container (300ms duration).
  * 
  * Pass target button to updateActiveImage function
- * after 250ms.
+ * after 100ms.
  * 
  * Remove animation 50ms after completion.
  * 
@@ -249,10 +249,10 @@ function setImageFromThumb(targetButton) {
     mainImageContainer.classList.add('img-fade');
     setTimeout(function() {
         updateActiveImage(targetButton);
-    }, 250);
+    }, 100);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-fade');
-    }, 550);
+    }, 350);
 }
 
 /**
@@ -262,15 +262,14 @@ function setImageFromThumb(targetButton) {
  * Pass target button to setImageFromArrow function to
  * update active thumbnail button.
  * 
- * Apply CSS animation to main image container (500ms duration)
- * and CSS transition to arrow button (500ms duration).
+ * Apply CSS animation to main image container (300ms duration)
+ * and CSS transition to arrow button (300ms duration).
  * 
  * Pass active thumbnail button to updateActiveImage
- * function after 250ms and remove transition from arrow
- * button.
+ * function after 120ms (40% of animation's duration).
  * 
- * Remove animation from container 50ms after
- * completion.
+ * Remove animation from container and transition from arrow
+ * button 50ms after completion.
  * 
  * @param {HTMLElement} targetButton - Target right arrow button passed in from event listener. 
  */
@@ -285,11 +284,11 @@ function nextImage(targetButton) {
     mainImageContainer.classList.add('img-slide-left');
     setTimeout(function() {
         updateActiveImage(activeImageButton);
-        buttonIcon.classList.remove('highlight-right');
-    }, 250);
+    }, 120);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-slide-left');
-    }, 550);
+        buttonIcon.classList.remove('highlight-right');
+    }, 350);
 }
 
 /**
@@ -299,15 +298,14 @@ function nextImage(targetButton) {
  * Pass target button to setImageFromArrow function to
  * update active thumbnail button.
  * 
- * Apply CSS animation to main image container (500ms duration)
- * and CSS transition to arrow button (500ms duration).
+ * Apply CSS animation to main image container (300ms duration)
+ * and CSS transition to arrow button (300ms duration).
  * 
  * Pass active thumbnail button to updateActiveImage
- * function after 250ms and remove transition from arrow
- * button.
+ * function after 120ms (40% of animation's duration).
  * 
- * Remove animation from container 50ms after
- * completion.
+ * Remove animation from container and transition from arrow
+ * button 50ms after completion.
  * 
  * @param {HTMLElement} targetButton - Target left arrow button passed in from event listener. 
  */
@@ -322,11 +320,11 @@ function previousImage(targetButton) {
     mainImageContainer.classList.add('img-slide-right');
     setTimeout(function() {
         updateActiveImage(activeImageButton);
-        buttonIcon.classList.remove('highlight-left');
-    }, 250);
+    }, 120);
     setTimeout(function() {
         mainImageContainer.classList.remove('img-slide-right');
-    }, 550);
+        buttonIcon.classList.remove('highlight-left');
+    }, 350);
 }
 
 /**
