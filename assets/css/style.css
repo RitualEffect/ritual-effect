@@ -43,10 +43,42 @@ ul {
     list-style-type: none;
 }
 
+/* dropdown menu toggle buttons */
+
+.menu-toggle-button {
+    font-family: 'Skranji', sans-serif;
+    padding: 10px 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon {
+    margin-right: 10px;
+    padding: 4px 0;
+}
+
+.menu-icon span {
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: #fff;
+    display: block;
+}
+
+.menu-icon span:nth-of-type(2) {
+    margin: 5px 0;
+}
+
 /* main header */
 
 #main-header {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100px;
     width: 100%;
     position: fixed;
     z-index: 1;
@@ -66,14 +98,44 @@ ul {
     height: 100px;
 }
 
-/* header navigation links */
+/* header navigation */
 
 #main-menu {
     font-family: 'Skranji', sans-serif;
     font-size: 1.125rem;
     margin-right: 20px;
-    padding-top: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+#main-menu-button.menu-toggle-button {
+    width: 110px;
+}
+
+#main-menu-button .menu-icon {
+    width: 30px;
+}
+
+#main-menu-button .menu-button-text {
+    font-size: 1.25rem;
+}
+
+#main-menu-items li {
+    display: inline;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* active header navigation links */
+
+.active-link {
+    text-transform: uppercase;
+    border-bottom: double #fff;
+}
+
+/* old header navigation links */
 
 #main-menu-inline li {
     display: inline;
@@ -81,11 +143,12 @@ ul {
     padding: 0 10px;
 }
 
-/* drop-down navigation menu for smaller screen widths */
+/* old drop-down navigation menu for smaller screen widths */
 
 #main-menu-dropdown {
     position: absolute;
     right: 20px;
+    top: 40px;
 }
 
 #main-menu-dropdown summary {
@@ -113,13 +176,6 @@ ul {
 #main-menu-dropdown li {
     padding-top: 5px;
     text-align: center;
-}
-
-/* active links */
-
-.active-link {
-    text-transform: uppercase;
-    border-bottom: double #fff;
 }
 
 /* homepage */
@@ -1073,6 +1129,11 @@ footer {
 @media screen and (min-width: 801px) {
 
     /* header navigation menu */
+    #main-menu-button {
+        display: none;
+    }
+
+    /* old header navigation menu */
     #main-menu-dropdown {
         display: none;
     }
@@ -1089,6 +1150,29 @@ footer {
 @media screen and (max-width: 800px) {
 
     /* header navigation menu */
+    
+    .main-menu-responsive {
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 150px;
+        height: 0;
+        padding-bottom: 5px;
+        border-radius: 0 0 5px 5px;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow: hidden;
+    }
+
+    #main-menu-items li {
+        display: block;
+        padding: 10px;
+    }
+
+    .responsive-menu-open {
+        height: auto;
+    }
+
+    /* old header navigation menu */
     #main-menu-inline {
         display: none;
     }
