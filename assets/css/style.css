@@ -45,7 +45,7 @@ ul {
 
 /* dropdown menu toggle buttons */
 
-.menu-toggle-button {
+.menu-toggle-btn {
     font-family: 'Skranji', sans-serif;
     padding: 10px 0;
     background: transparent;
@@ -57,7 +57,7 @@ ul {
     justify-content: center;
 }
 
-.menu-toggle-button span {
+.menu-toggle-btn span {
     transition: all 0.25s;
 }
 
@@ -78,19 +78,19 @@ ul {
     margin: 5px 0;
 }
 
-.menu-toggle-button-open .menu-icon span:nth-of-type(2) {
+.menu-toggle-btn-active .menu-icon span:nth-of-type(2) {
     display: none;
 }
 
-.menu-toggle-button-open .menu-icon span:nth-of-type(1) {
+.menu-toggle-btn-active .menu-icon span:nth-of-type(1) {
     transform: translateY(2px) rotate(45deg);
 }
 
-.menu-toggle-button-open .menu-icon span:nth-of-type(3) {
+.menu-toggle-btn-active .menu-icon span:nth-of-type(3) {
     transform: translateY(-2px) rotate(-45deg);
 }
 
-.menu-toggle-button-open .menu-button-text {
+.menu-toggle-btn-active .menu-btn-text {
     text-transform: uppercase;
 }
 
@@ -130,15 +130,15 @@ ul {
     justify-content: space-between;
 }
 
-#main-menu-button.menu-toggle-button {
+#main-menu-btn.menu-toggle-btn {
     width: 110px;
 }
 
-#main-menu-button .menu-icon {
+#main-menu-btn .menu-icon {
     width: 30px;
 }
 
-#main-menu-button .menu-button-text {
+#main-menu-btn .menu-btn-text {
     font-size: 1.25rem;
 }
 
@@ -1149,7 +1149,7 @@ footer {
 @media screen and (min-width: 801px) {
 
     /* header navigation menu */
-    #main-menu-button {
+    #main-menu-btn {
         display: none;
     }
 

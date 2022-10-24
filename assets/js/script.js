@@ -34,12 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {HTMLElement} menu - Main header navigation menu nav element.
  */
 function handleMainMenuAria (menu) {
-    const button = menu.querySelector('#main-menu-button')
+    const button = menu.querySelector('#main-menu-btn')
     const dropdown = menu.querySelector('#main-menu-items');
+    const menuOpenClass = 'responsive-menu-open';
     const links = dropdown.querySelectorAll('a');
 
     if (window.innerWidth <= 800) {
-        handleDropdownMenuAria(button, dropdown, 'responsive-menu-open');
+        handlePopupAria(button, dropdown, menuOpenClass);
     }
        
     window.addEventListener('resize', () => {
@@ -50,7 +51,7 @@ function handleMainMenuAria (menu) {
                 link.removeAttribute('tabindex');
             }
         } else {
-            handleDropdownMenuAria(button, dropdown, 'responsive-menu-open');
+            handlePopupAria(button, dropdown, menuOpenClass);
         }
     });
 }
@@ -63,14 +64,20 @@ function handleMainMenuAria (menu) {
  * 
  * On click, toggle responsive-menu-open class on dropdown menu,
  * pass toggle button, dropdown menu and class name to
- * handleDropdownMenuAria function and toggle
- * menu-toggle-button-open class on toggle button.
+ * handlePopupAria function and toggle menu-toggle-btn-active class
+ * on toggle button.
+ * 
+ * Pass dropdown menu and responsive-menu-open &
+ * menu-toggle-btn-active class names to handlePopupExternalEvent
+ * function.
  * 
  * @param {HTMLElement} menu - Main header navigation menu nav element. 
  */
 function handleMainMenuClicks(menu) {
-    const button = menu.querySelector('#main-menu-button');
+    const button = menu.querySelector('#main-menu-btn');
     const dropdown = menu.querySelector('#main-menu-items');
+    const menuOpenClass = 'responsive-menu-open';
+    const buttonActiveClass = 'menu-toggle-btn-active';
     // Throttling variable to limit click events
     let enableClick = true;
 
@@ -82,9 +89,9 @@ function handleMainMenuClicks(menu) {
         // Only target entire button element
         let targetButton = e.target.closest('button');
         if (targetButton) {
-            dropdown.classList.toggle('responsive-menu-open');
-            handleDropdownMenuAria(button, dropdown, 'responsive-menu-open');
-            button.classList.toggle('menu-toggle-button-open');
+            dropdown.classList.toggle(menuOpenClass);
+            handlePopupAria(button, dropdown, menuOpenClass);
+            button.classList.toggle(buttonActiveClass);
         } else return;
 
         /* Only register click events every 300ms
@@ -92,12 +99,16 @@ function handleMainMenuClicks(menu) {
         setTimeout(function() {
             enableClick = true;
         }, 300);
+
+        handlePopupExternalEvent(dropdown, menuOpenClass, buttonActiveClass);
     });
 }
 
-// ----------------- General aria properties
+// ------------------- Main menu functions end
 
-// Dropdown menus
+// -------------------- Popup/dropdown menus
+
+// Aria properties
 
 /**
  * Get passed-in container element's focusable child elements.
@@ -115,24 +126,66 @@ function handleMainMenuClicks(menu) {
  * attribute to false and remove each focusable elements' tabindex
  * attributes so that they become focusable again.
  * 
- * @param {HTMLElement} toggler - Element controlling hidden/visible state of container element.
- * @param {HTMLElement} menu - Container element of items to be operated on.
- * @param {string} menuOpenClass - Class name to be checked for on menu element.
+ * @param {HTMLElement} toggleButton - Element toggling hidden/visible state of container element.
+ * @param {HTMLElement} popup - Container element of items to be operated on.
+ * @param {string} popupOpenClass - Class name to be checked for on container element.
  */
-function handleDropdownMenuAria (toggler, menu, menuOpenClass) {
-    let elements = menu.querySelectorAll('a', 'audio', 'iframe');
+function handlePopupAria (toggleButton, popup, popupOpenClass) {
+    const elements = popup.querySelectorAll('a', 'audio', 'iframe');
     
-    if (!menu.classList.contains(`${menuOpenClass}`)) {
-        toggler.setAttribute('aria-expanded', false);
-        menu.setAttribute('aria-hidden', true);
+    if (!popup.classList.contains(popupOpenClass)) {
+        toggleButton.setAttribute('aria-expanded', false);
+        popup.setAttribute('aria-hidden', true);
         for (let el of elements) {
             el.setAttribute('tabindex', '-1');
         }
     } else {
-        toggler.setAttribute('aria-expanded', true);
-        menu.setAttribute('aria-hidden', false);
+        toggleButton.setAttribute('aria-expanded', true);
+        popup.setAttribute('aria-hidden', false);
         for (let el of elements) {
             el.removeAttribute('tabindex');
         }
     }
 }
+
+// External events
+
+/**
+ * Get element containing both popup element and toggle button.
+ * 
+ * Get toggle button from container.
+ * 
+ * If popup visible, add event listeners to window object for click
+ * and focus events outside popup/button container. If detected:
+ * hide popup; pass toggle button, popup and 'popup open' class
+ * name to handlePopupAria function; remove 'active' class from
+ * toggle button.
+ * 
+ * Remove event listeners from window.
+ * 
+ * @param {HTMLElement} popup - Popup element to be handled.
+ * @param {string} popupOpenClass - Class name denoting popup element visible.
+ * @param {string} togglerActiveClass - Class name denoting toggle button active (popup visible). 
+ */
+function handlePopupExternalEvent(popup, popupOpenClass, togglerActiveClass) {
+    const container = popup.closest('.popup-container');
+    const toggleButton = container.querySelector('.toggle-btn');
+    // Handler function for event listeners
+    const close = e => {
+        if (!container.contains(e.target)) {
+            popup.classList.remove(popupOpenClass);
+            handlePopupAria(toggleButton, popup, popupOpenClass);
+            toggleButton.classList.remove(togglerActiveClass);
+        } else return;
+        
+        window.removeEventListener('click', close);
+        window.removeEventListener('focusin', close);
+    }
+
+    if (popup.classList.contains(popupOpenClass)) {
+        window.addEventListener('click', close);
+        window.addEventListener('focusin', close);
+    }
+}
+
+// ----------- Popup/dropdown menu functions end
