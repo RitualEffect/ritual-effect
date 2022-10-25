@@ -152,7 +152,8 @@ ul {
 
 .active-link {
     text-transform: uppercase;
-    border-bottom: double #fff;
+    color: #8b817f;
+    pointer-events: none;
 }
 
 /* old header navigation links */
@@ -162,6 +163,13 @@ ul {
     text-align: center;
     padding: 0 10px;
 }
+
+/* old active header navigation links */
+
+/* .active-link {
+    text-transform: uppercase;
+    border-bottom: double #fff;
+} */
 
 /* old drop-down navigation menu for smaller screen widths */
 
@@ -1177,7 +1185,6 @@ footer {
         right: 0;
         width: 150px;
         height: 0;
-        padding-bottom: 5px;
         border-radius: 0 0 5px 5px;
         background-color: rgba(0, 0, 0, 0.9);
         overflow: hidden;
@@ -1279,11 +1286,6 @@ footer {
 /* for smaller screens, up to 600 pixels wide */
 
 @media screen and (max-width: 600px) {
-
-    /* header navigation menu */
-    #main-menu {
-        font-size: 1rem;
-    }
 
     /* band page */
 
