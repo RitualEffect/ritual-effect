@@ -33,10 +33,20 @@
             </a>
         </div>
 
-        <nav id="main-menu">
+        <nav id="main-menu" class="popup-container" role="navigation">
 
-            <!-- inline menu for larger screens -->
-            <div id="main-menu-inline">
+            <!-- dropdown menu button for smaller screens -->
+            <button id="main-menu-btn" class="menu-toggle-btn toggle-btn" aria-expanded="false" aria-controls="main-menu-items">
+                <span class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="menu-btn-text">Menu</span>
+            </button>
+
+            <!-- main menu links -->
+            <div id="main-menu-items" class="main-menu-responsive">
                 <ul>
                     <li>
                         <a href="index.html" class="active-link">Home</a>
@@ -61,34 +71,6 @@
                     </li>
                 </ul>
             </div>
-
-            <!-- drop-down menu for smaller screens -->
-            <details id="main-menu-dropdown">
-                <summary><i class="fas fa-bars"></i> Menu</summary>
-                    <ul>
-                        <li>
-                            <a href="index.html" class="active-link">Home</a>
-                        </li>
-                        <li>
-                            <a href="band.html">Band</a>
-                        </li>
-                        <li>
-                            <a href="music.html">Music</a>
-                        </li>
-                        <li>
-                            <a href="video.html">Videos</a>
-                        </li>
-                        <li>
-                            <a href="news.html">News/Events</a>
-                        </li>
-                        <li>
-                            <a href="gallery.html">Gallery</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact</a>
-                        </li>
-                    </ul>
-            </details>
 
         </nav>
         
@@ -144,13 +126,16 @@
         </ul>
         <!-- copyright statement -->
         <div id="copyright-statement">
-            &copy; 2020 Ritual Effect: all rights reserved
+            &copy; <span id="copyright-year"></span> Ritual Effect: all rights reserved
         </div>
 
     </footer>
 
     <!-- Font Awesome script -->
     <script src="https://kit.fontawesome.com/e5bba26aba.js" crossorigin="anonymous"></script>
+
+    <!-- custom scripts -->
+    <script src="assets/js/script.js"></script>
 
 </body>
 </html>
