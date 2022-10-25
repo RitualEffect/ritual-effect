@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     handleMainMenuClicks(menu);
 
+    // ---------------------- Footer
+
+    // Set current year in copyright statement
+
+    document.querySelector('#copyright-year').innerHTML = new Date().getFullYear();
+
 });
 
 // -------------------- Handler functions
