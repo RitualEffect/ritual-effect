@@ -161,13 +161,14 @@ function handlePopupAria (toggleButton, popup, popupOpenClass) {
  * 
  * Get toggle button from container.
  * 
- * If popup visible, add event listeners to window object for click
- * and focus events outside popup/button container. If detected:
- * hide popup; pass toggle button, popup and 'popup open' class
- * name to handlePopupAria function; remove 'active' class from
- * toggle button.
+ * If popup visible, add event listeners to window object for click,
+ * touch and focus events outside popup/button container. If 
+ * detected: hide popup; pass toggle button, popup and 'popup open'
+ * class name to handlePopupAria function; remove 'active' class
+ * from toggle button.
  * 
- * Remove event listeners from window.
+ * Remove event listeners from window. If appropriate, set focus to
+ * toggle button.
  * 
  * @param {HTMLElement} popup - Popup element to be handled.
  * @param {string} popupOpenClass - Class name denoting popup element visible.
@@ -185,11 +186,17 @@ function handlePopupExternalEvent(popup, popupOpenClass, togglerActiveClass) {
         } else return;
         
         window.removeEventListener('click', close);
+        window.removeEventListener('touchstart', close);
         window.removeEventListener('focusin', close);
+        toggleButton.focus();
     }
 
     if (popup.classList.contains(popupOpenClass)) {
         window.addEventListener('click', close);
+        /* Needed for iOS Safari as click events won't bubble up to
+           window object */
+        window.addEventListener('touchstart', close);
+        // Needed for keyboard navigation (tabbing out)
         window.addEventListener('focusin', close);
     }
 }
