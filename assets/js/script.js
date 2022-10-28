@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     handleMainMenuAria (menu);
 
-    // Add click event listeners
+    // Handle dropdown menu behaviour (event listeners)
 
-    handleMainMenuClicks(menu);
+    handleMainMenuDropdown(menu);
 
     // ---------------------- Footer
 
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleMainMenuAria (menu) {
     const button = menu.querySelector('#main-menu-btn')
     const dropdown = menu.querySelector('#main-menu-items');
-    const menuOpenClass = 'responsive-menu-open';
+    const menuOpenClass = 'main-menu-open';
     const links = dropdown.querySelectorAll('a');
 
     if (window.innerWidth <= 800) {
-        handlePopupAria(button, dropdown, menuOpenClass);
+        handlePopupAria(button, menuOpenClass);
     }
        
     window.addEventListener('resize', () => {
@@ -57,87 +57,57 @@ function handleMainMenuAria (menu) {
                 link.removeAttribute('tabindex');
             }
         } else {
-            handlePopupAria(button, dropdown, menuOpenClass);
+            handlePopupAria(button, menuOpenClass);
         }
     });
 }
 
 /**
- * Get main header navigation menu toggle button and dropdown menu.
+ * Get main header navigation menu toggle button. Set names of
+ * toggle button's 'active' class and dropdown menu's 'menu open'
+ * class.
  * 
- * Add 'click' event listener to toggle button, limiting click
- * events to max 3 per second.
- * 
- * On click, toggle responsive-menu-open class on dropdown menu,
- * pass toggle button, dropdown menu and class name to
- * handlePopupAria function and toggle menu-toggle-btn-active class
- * on toggle button.
- * 
- * Pass dropdown menu and responsive-menu-open &
- * menu-toggle-btn-active class names to handlePopupExternalEvent
- * function.
+ * Pass toggle button and both class names to handlePopup function.
  * 
  * @param {HTMLElement} menu - Main header navigation menu nav element. 
  */
-function handleMainMenuClicks(menu) {
+function handleMainMenuDropdown(menu) {
     const button = menu.querySelector('#main-menu-btn');
-    const dropdown = menu.querySelector('#main-menu-items');
-    const menuOpenClass = 'responsive-menu-open';
     const buttonActiveClass = 'menu-toggle-btn-active';
-    // Throttling variable to limit click events
-    let enableClick = true;
+    const menuOpenClass = 'main-menu-open';
 
-    button.addEventListener('click', e => {
-        // Only run if throttling allows
-        if (!enableClick) return;
-        enableClick = false;
-
-        // Only target entire button element
-        let targetButton = e.target.closest('button');
-        if (targetButton) {
-            dropdown.classList.toggle(menuOpenClass);
-            handlePopupAria(button, dropdown, menuOpenClass);
-            button.classList.toggle(buttonActiveClass);
-        } else return;
-
-        /* Only register click events every 300ms
-           (i.e. limit user to max 3 clicks/second) */
-        setTimeout(function() {
-            enableClick = true;
-        }, 300);
-
-        handlePopupExternalEvent(dropdown, menuOpenClass, buttonActiveClass);
-    });
+    handlePopup(button, buttonActiveClass, menuOpenClass);
 }
 
 // ------------------- Main menu functions end
 
-// -------------------- Popup/dropdown menus
+// --------------------- Popups & dropdowns
 
 // Aria properties
 
 /**
- * Get passed-in container element's focusable child elements.
+ * Get passed-in toggle button's associated popup element. Get
+ * popup's focusable child elements.
  * 
- * Check container element for passed-in class name indicating
- * whether or not container is visible.
+ * Check popup for passed-in class name to determine if visible.
  * 
- * If class name not present, (container hidden), set passed-in
- * toggle button's aria-expanded attribute to false, set container's
- * aria-hidden attribute to true and set each focusable element's
- * tabindex attribute to -1, thereby rendering them non-focusable.
+ * If popup hidden, set toggle button's aria-expanded attribute to
+ * false, set popup's aria-hidden attribute to true and set each
+ * focusable element's tabindex attribute to -1, thereby rendering 
+ * them non-focusable.
  * 
- * If class name present, (container visible), set toggle button's
- * aria-expanded attribute to true, set container's aria-hidden
- * attribute to false and remove each focusable elements' tabindex
- * attributes so that they become focusable again.
+ * If popup visible, set toggle button's aria-expanded attribute to
+ * true, set popup's aria-hidden attribute to false and remove each
+ * focusable elements' tabindex attributes so that they become
+ * focusable again.
  * 
- * @param {HTMLElement} toggleButton - Element toggling hidden/visible state of container element.
- * @param {HTMLElement} popup - Container element of items to be operated on.
- * @param {string} popupOpenClass - Class name to be checked for on container element.
+ * @param {HTMLElement} toggleButton - Button controlling popup element to be handled.
+ * @param {string} popupOpenClass - Class name denoting popup element visible.
  */
-function handlePopupAria (toggleButton, popup, popupOpenClass) {
-    const elements = popup.querySelectorAll('a', 'audio', 'iframe');
+function handlePopupAria (toggleButton, popupOpenClass) {
+    const popupId = toggleButton.getAttribute('aria-controls');
+    const popup = document.querySelector(`#${popupId}`);
+    const elements = popup.querySelectorAll('a', 'audio', 'button', 'iframe');
     
     if (!popup.classList.contains(popupOpenClass)) {
         toggleButton.setAttribute('aria-expanded', false);
@@ -154,34 +124,74 @@ function handlePopupAria (toggleButton, popup, popupOpenClass) {
     }
 }
 
+// Main functionality ('click' events)
+
+/**
+ * Get passed-in toggle button's associated popup element.
+ * 
+ * Add 'click' event listener to toggle button, passing event
+ * handler function as callback to throttleEvent function with
+ * 'interval' parameter of 300ms, thus limiting click events to
+ * max 3 per second.
+ * 
+ * On click: toggle passed-in 'popup open' class on popup; toggle
+ * passed-in 'active' class on toggle button; pass toggle button
+ * and 'popup open' class name to handlePopupAria function.
+ * 
+ * Pass toggle button and both class names to
+ * handlePopupExternalEvent function. 
+ * 
+ * @param {HTMLElement} toggleButton - Button controlling popup element to be handled.
+ * @param {string} togglerActiveClass - Class name denoting toggle button active (popup visible).
+ * @param {string} popupOpenClass - Class name denoting popup element visible.
+ */
+function handlePopup(toggleButton, togglerActiveClass, popupOpenClass) {
+    const popupId = toggleButton.getAttribute('aria-controls');
+    const popup = document.querySelector(`#${popupId}`);
+
+    toggleButton.addEventListener('click', throttleEvent(e => {
+        // Only target entire button element
+        let targetButton = e.target.closest('button');
+
+        if (targetButton) {
+            popup.classList.toggle(popupOpenClass);
+            toggleButton.classList.toggle(togglerActiveClass);
+            handlePopupAria(toggleButton, popupOpenClass);
+        } else return;
+
+        handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass);
+    // Pass 300ms time interval to throttleEvent function
+    }, 300));
+}
+
 // External events
 
 /**
- * Get element containing both popup element and toggle button.
+ * Get passed-in toggle button's associated popup element.
  * 
- * Get toggle button from container.
+ * Check popup for passed-in class name to determine if visible.
  * 
  * If popup visible, add event listeners to window object for click,
- * touch and focus events outside popup/button container. If 
- * detected: hide popup; pass toggle button, popup and 'popup open'
- * class name to handlePopupAria function; remove 'active' class
- * from toggle button.
+ * touch and focus events outside popup and toggle button. If
+ * detected: hide popup; pass toggle button and 'popup open' class
+ * name to handlePopupAria function; remove 'active' class from
+ * toggle button.
  * 
  * Remove event listeners from window. If appropriate, set focus to
  * toggle button.
  * 
- * @param {HTMLElement} popup - Popup element to be handled.
+ * @param {HTMLElement} toggleButton - Button controlling popup element to be handled.
+ * @param {string} togglerActiveClass - Class name denoting toggle button active (popup visible).
  * @param {string} popupOpenClass - Class name denoting popup element visible.
- * @param {string} togglerActiveClass - Class name denoting toggle button active (popup visible). 
  */
-function handlePopupExternalEvent(popup, popupOpenClass, togglerActiveClass) {
-    const container = popup.closest('.popup-container');
-    const toggleButton = container.querySelector('.toggle-btn');
+function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass) {
+    const popupId = toggleButton.getAttribute('aria-controls');
+    const popup = document.querySelector(`#${popupId}`);
     // Handler function for event listeners
     const close = e => {
-        if (!container.contains(e.target)) {
+        if (!popup.contains(e.target) && !toggleButton.contains(e.target)) {
             popup.classList.remove(popupOpenClass);
-            handlePopupAria(toggleButton, popup, popupOpenClass);
+            handlePopupAria(toggleButton, popupOpenClass);
             toggleButton.classList.remove(togglerActiveClass);
         } else return;
         
@@ -201,4 +211,43 @@ function handlePopupExternalEvent(popup, popupOpenClass, togglerActiveClass) {
     }
 }
 
-// ----------- Popup/dropdown menu functions end
+// --------------- Popups & dropdowns functions end
+
+// ------------------- Miscellaneous functions
+
+// Throttling
+
+/**
+ * When called on an event listener's handler function, returns a
+ * new event listener after a passed-in time interval, thus
+ * preventing further events from firing until interval has elapsed.
+ * 
+ * @param {function} handler - Event handler function to be throttled.
+ * @param {number} interval - Time allowed in ms between events firing. 
+ * @returns {function} throttledFunction - Handler function with throttling interval applied.
+ */
+ function throttleEvent(handler, interval) {
+    /* Boolean to control when time interval has passed.
+       Set to true so that handler can be called first time. */
+    let enableEvent = true;
+
+    /* Nested function to preserve throttleEvent function's 'this'
+       (execution) context and apply it to passed-in handler
+       (callback) function.
+       Uses rest parameter syntax (...) to pack handler's arguments
+       into an array which can be read by 'apply' method. */
+    return function throttledFunction(...args) {
+        /* If time interval not up, exit function without calling
+           handler */
+        if (!enableEvent) return;
+        // Prevent handler being called until interval has passed
+        enableEvent = false;
+        /* Apply throttling to handler and return throttled version
+           with any arguments */
+        handler.apply(this, args);
+        // Set control flag to true after passed-in interval
+        setTimeout(() => enableEvent = true, interval);
+    }
+}
+
+// ----------------- Miscellaneous functions end
