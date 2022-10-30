@@ -5,10 +5,12 @@
     padding: 0;
     border: none;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-    background: #000 url(../images/u_symbol_dark_grey.png) fixed no-repeat center center / contain;
+    background: #000;
+     /* url(../images/u_symbol_dark_grey.png) fixed no-repeat center center / contain; */
     font-family: 'Tillana', sans-serif;
     color: #fff;
 }
@@ -48,9 +50,6 @@ ul {
 .menu-toggle-btn {
     font-family: 'Skranji', sans-serif;
     padding: 10px 0;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
 
     display: flex;
     align-items: center;
@@ -94,14 +93,21 @@ ul {
     text-transform: uppercase;
 }
 
+.toggle-btn {
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
 /* main header */
 
 #main-header {
-    background-color: rgba(0, 0, 0, 0.9);
+    /* background-color: rgba(0, 0, 0, 0.9); */
+    background-color: #000;
     height: 100px;
     width: 100%;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
 
     display: flex;
     justify-content: space-between;
@@ -385,8 +391,8 @@ ul {
 }
 
 .page-divider-heading {
-    scroll-margin-top: 120px;
-    margin: 70px 0 10px;
+    scroll-margin-top: 100px;
+    padding: 20px 0;
     width: 100%;
     
     display: flex;
@@ -537,6 +543,10 @@ summary::marker {
 
 /* news & events page - general page styles */
 
+.news-page-main-header {
+    background-color: #000;
+}
+
 #news-events {
     align-items: center;
 }
@@ -547,7 +557,7 @@ summary::marker {
 
 #news-events > h3 {
     text-decoration: underline;
-    margin-bottom: 40px;
+    margin: 20px 0;
 }
 
 #news-header-image, #gigs-header-image {
@@ -557,29 +567,78 @@ summary::marker {
 }
 
 #news, #gigs {
-    margin: 10px 20px;
+    margin: 0 20px 10px;
     width: 100%;
     max-width: 950px;
     align-self: center;
 }
 
+#news-heading, #gigs-heading {
+    z-index: 3;
+    padding-top: 40px;
+    background-color: #000;
+}
+
 .news-item, .gig-listing {
-    margin: 20px 0;
+    padding: 10px 0 10px;
 }
 
 .news-item-heading, .gig-listing-heading {
+    position: sticky;
+    top: 100px;
+    z-index: 1;
+    padding-top: 10px;
+    background-color: #000;
+}
+
+.news-header-wrapper, .gig-header-wrapper {
     position: relative;
+    width: 100%;
     border-top: 1px solid #8b817f;
+    border-bottom: 1px solid #8b817f;
     padding-top: 5px;
+    background-color: #000;
 
     display: flex;
     align-items: flex-end;
 }
 
 .news-item-heading h3, .gig-listing-heading h3 {
-    margin: 10px 10px 0;
+    padding: 10px 0;
     text-align: center;
-    flex-grow: 1;
+    width: 100%;
+    background-color: #000;
+}
+
+.article-toggle-btn {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Skranji', sans-serif;
+    font-size: 1.175rem;
+    scroll-margin-top: 135px;
+}
+
+.dropdown-arrow-tab {
+    display: block;
+    height: 30px;
+    width: 60px;
+    border-radius: 0 0 30px 30px;
+    border-bottom: 1px solid #8b817f;
+    
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    background-color: #000;
+}
+
+.dropdown-arrow-tab i {
+    transition: all 0.25s;
+}
+
+.article-toggle-btn-active i {
+    transform: scaleY(-1);
 }
 
 /* This code for creating a fieldset-type effect came from the CSS Tricks website, posted by Chris Coyier on Jul 9, 2011 & updated on Apr 28, 2020.
@@ -594,16 +653,38 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     padding: 0 3px;
 }
 
+.article-body {
+    padding-top: 25px;
+    overflow: hidden;
+}
+
 .news-item-main, .gig-listing-main {
     width: 100%;
+    padding: 0 5px;
+    display: none;
 }
 
-.news-item-main summary, .gig-listing-main summary {
-    text-align: right;
-    text-decoration: underline;
+.article-open {
+    height: auto;
+    display: block;
+    animation: popuprolldown 0.25s forwards;
 }
 
-.news-item-main article, .gig-listing-main section, .gig-link {
+.article-closing {
+    animation: popuprollup 0.25s linear;
+}
+
+@keyframes popuprolldown {
+    from {transform: translateY(-100%); height: 0;}
+    to {transform: translateY(0); height: auto;}
+}
+
+@keyframes popuprollup {
+    from {transform: translateY(0); height: auto;}
+    to {transform: translateY(-100%); height: 0;}
+}
+
+.news-item-main section, .gig-listing-main section, .gig-link {
     font-size: 1.125rem;
 }
 
@@ -687,6 +768,13 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 .gig-listing-main img {
     width: 300px;
     margin: 10px;
+}
+
+/* Old news /events page styles */
+
+.news-item-main summary, .gig-listing-main summary {
+    text-align: right;
+    text-decoration: underline;
 }
 
 /* gallery page */
