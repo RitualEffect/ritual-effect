@@ -16,6 +16,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     handleMainMenuDropdown(menu);
 
+    // ---------------- News / Events page
+
+    /* Get all articles from the page and if found, pass each one
+       to handler function */
+
+    const articles = document.querySelectorAll('.news-item, .gig-listing');
+
+    if (articles.length > 0) {
+        for (let article of articles) {
+            handleArticleDropdown(article);
+        }
+    }
+
     // ---------------------- Footer
 
     // Set current year in copyright statement
@@ -134,12 +147,14 @@ function handlePopupAria (toggleButton, popupOpenClass) {
  * 'interval' parameter of 300ms, thus limiting click events to
  * max 3 per second.
  * 
- * On click: toggle passed-in 'popup open' class on popup; toggle
+ * On click: toggle passed-in 'popup open' class on popup or, based
+ * on popup type, add/remove appropriate class names and/or call
+ * appropriate handler function(s); if appropriate, toggle
  * passed-in 'active' class on toggle button; pass toggle button
  * and 'popup open' class name to handlePopupAria function.
  * 
- * Pass toggle button and both class names to
- * handlePopupExternalEvent function. 
+ * If appropriate, pass toggle button and both class names to
+ * handlePopupExternalEvent function.
  * 
  * @param {HTMLElement} toggleButton - Button controlling popup element to be handled.
  * @param {string} togglerActiveClass - Class name denoting toggle button active (popup visible).
@@ -154,12 +169,29 @@ function handlePopup(toggleButton, togglerActiveClass, popupOpenClass) {
         let targetButton = e.target.closest('button');
 
         if (targetButton) {
-            popup.classList.toggle(popupOpenClass);
-            toggleButton.classList.toggle(togglerActiveClass);
+            /* Specific handling of news & events page article
+               dropdowns */
+            if (popup.classList.contains('news-item-main') || popup.classList.contains('gig-listing-main')) {
+                if (popup.classList.contains(popupOpenClass)) {
+                    handleCollapseArticle(toggleButton, togglerActiveClass, popupOpenClass);
+                } else {
+                    popup.classList.add(popupOpenClass);
+                    toggleButton.classList.add(togglerActiveClass);
+                }
+            // Handling of generic popups
+            } else {
+                popup.classList.toggle(popupOpenClass);
+                toggleButton.classList.toggle(togglerActiveClass);
+            }
+            
             handlePopupAria(toggleButton, popupOpenClass);
         } else return;
 
-        handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass);
+        /* Exempt news & events page article dropdowns from closing
+           on outside events */
+        if (!toggleButton.classList.contains('article-toggle-btn')) {
+            handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass);
+        }
     // Pass 300ms time interval to throttleEvent function
     }, 300));
 }
@@ -187,6 +219,9 @@ function handlePopup(toggleButton, togglerActiveClass, popupOpenClass) {
 function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass) {
     const popupId = toggleButton.getAttribute('aria-controls');
     const popup = document.querySelector(`#${popupId}`);
+    // Boolean variable to indicate keyboard tab key navigation
+    let tabKeyNavigation = false;
+
     // Handler function for event listeners
     const close = e => {
         if (!popup.contains(e.target) && !toggleButton.contains(e.target)) {
@@ -198,20 +233,99 @@ function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenCla
         window.removeEventListener('click', close);
         window.removeEventListener('touchstart', close);
         window.removeEventListener('focusin', close);
-        toggleButton.focus();
+        window.removeEventListener('keydown', detectTabbing);
+
+        if (tabKeyNavigation) {
+            toggleButton.focus();
+        }
     }
 
+    // Event listeners
     if (popup.classList.contains(popupOpenClass)) {
         window.addEventListener('click', close);
         /* Needed for iOS Safari as click events won't bubble up to
            window object */
         window.addEventListener('touchstart', close);
-        // Needed for keyboard navigation (tabbing out)
+        // Needed for keyboard navigation (tabbing out of popup)
         window.addEventListener('focusin', close);
+        /* Listener to detect tab key navigation & set value of
+           boolean variable */
+        window.addEventListener('keydown', detectTabbing = e => {
+            if (e.key === 'Tab' || ((e.keyCode || e.which) === 9)) {
+                let tab = true;
+
+                if (tab || (e.shiftKey && tab)) {
+                    tabKeyNavigation = true;
+                }
+            } else {
+                tabKeyNavigation = false;
+            }
+        });
     }
 }
 
 // --------------- Popups & dropdowns functions end
+
+// ----------------- News / Events page functions
+
+/**
+ * Get article element's associated toggle button. Set names of
+ * toggle button's 'active' class and its dropdown's 'article open'
+ * class.
+ * 
+ * Pass toggle button and both class names to handlePopup function.
+ * 
+ * @param {HTMLElement} article - Individual news item or gig listng article element.
+ */
+function handleArticleDropdown(article) {
+    const button = article.querySelector('.article-toggle-btn');
+    const buttonActiveClass = 'article-toggle-btn-active';
+    const articleOpenClass = 'article-open';
+
+    if (button) {
+        handlePopup(button, buttonActiveClass, articleOpenClass);
+    }
+}
+
+/**
+ * Get article content container element using toggle button's
+ * 'aria-controls' attribute. Set toggle button to 'inactive' state.
+ * 
+ * Add 'closing' animation class name to content container and when
+ * CSS animation completed: close content dropdown; pass toggle
+ * button and 'article open' class name to handlePopupAria function;
+ * remove 'closing' animation class name from content container;
+ * ensure article heading remains within viewport after closing.
+ * 
+ * @param {HTMLElement} toggleButton - Button controlling article content to be handled.
+ * @param {string} togglerActiveClass - Class name denoting toggle button active (article content visible).
+ * @param {string} popupOpenClass - Class name denoting artice content visible. 
+ */
+function handleCollapseArticle(toggleButton, buttonActiveClass, articleOpenClass) {
+    const bodyId = toggleButton.getAttribute('aria-controls');
+    const body = document.querySelector(`#${bodyId}`);
+
+    toggleButton.classList.remove(buttonActiveClass);
+    body.classList.add('article-closing');
+
+    body.addEventListener('animationend', () => {
+        body.classList.remove(articleOpenClass);
+        handlePopupAria (toggleButton, articleOpenClass)
+        body.classList.remove('article-closing');
+
+        /* To account for sticky header jumping up out of viewport
+           when article closed, if it's scrolled past top of
+           viewport, scroll it back down (combined with CSS
+           scroll-margin-top on toggle button to set position
+           just below main header) */
+        if (toggleButton.getBoundingClientRect().top < 0) {
+            window.location.href = `#${toggleButton.id}`;
+        }       
+    }, {once: true});
+    
+}
+
+// --------------- News / Events page functions end
 
 // ------------------- Miscellaneous functions
 
