@@ -25,7 +25,7 @@
 </head>
 <body>
     
-    <header id="main-header">
+    <header id="main-header" class="news-page-main-header">
         
         <div id="header-logo">
             <a href="index.html">
@@ -87,7 +87,7 @@
         <!-- news section banner image -->
         <img id="news-header-image" src="assets/images/moe_at_mic_jul_22.jpg" alt="Moe at the mic">
         <!-- news section -->
-        <article id="news">
+        <section id="news">
             <!-- news section heading -->
             <header id="news-heading" class="page-divider-heading">
                 <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
@@ -95,14 +95,22 @@
                 <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
             </header>
             <!-- news article 1 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">27/01/22</span>
-                    <h3>Musika reviews Too Late to Turn Back</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">27/01/22</span>
+                        <h3>
+                            <button id="news-item-btn-27-01-22" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-27-01-22">
+                                Musika reviews Too Late to Turn Back
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-27-01-22" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>Thanks to Musika for the review of our forthcoming EP 'Too Late To Turn Back':</p>
@@ -115,25 +123,33 @@
                             <img src="assets/images/musika_logo.jpg" alt="Musika logo">
                             </a>
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>Read the full article (in Dutch <i class="fas fa-grin-tongue-wink"></i>) at 
-                                <!-- external link to full musika.be review -->
+                            <!-- external link to full musika.be review -->
                                 <a href="https://www.musika.be/2022/01/27/ritual-effect-too-late-to-turn-back-ep/?fbclid=IwAR1tUsI8weK5hqly5xdAqUr99pz8rxjOvjx2giIbyvp-21XGhahrJO4G6hg" target="_blank" rel="noopener" aria-label="Link opens in a new tab">
                                 Musika.be</a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
             <!-- news article 2 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">27/11/21</span>
-                    <h3>Interview with Metalheads Forever</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">27/11/21</span>
+                        <h3>
+                            <button id="news-item-btn-27-11-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-27-11-21">
+                                Interview with Metalheads Forever
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-27-11-21" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>We had a great chat recently with Keith from Metalheads Forever. Really enjoyed it!</p>
@@ -146,25 +162,33 @@
                             <img src="assets/images/mhf_logo.png" alt="Metalheads Forever Magazine logo">
                             </a>
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>Read the full article at 
                                 <!-- external link to full Metalheads Forever article -->
                                 <a href="https://mhf-mag.com/interviews/interview-with-irish-metal-band-ritual-effect/?fbclid=IwAR3nXliAwqC-foJKrk2kuX4v5_Pes7eRDzLYf9GnqDP6KnGeCcqX_FpLQ00" target="_blank" rel="noopener" aria-label="Link opens in a new tab">
                                 Metalheads Forever Magazine</a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
             <!-- news article 3 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">21/11/21</span>
-                    <h3>Teaser Trailer for Too Late to Turn Back</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">21/11/21</span>
+                        <h3>
+                            <button id="news-item-btn-21-11-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-21-11-21">
+                                Teaser Trailer for Too Late to Turn Back
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-21-11-21" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>So now that we're back from hibernation we think it's about time to unleash some new tunes.</p>
@@ -174,24 +198,33 @@
                             <!-- embedded YouTube video - 'Too Late to Turn Back' trailer -->
                             <iframe src="https://www.youtube.com/embed/_f9u5Xuvn8c" title="YouTube video player - Too Late to Turn Back teaser trailer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </section>
-                        <div class="news-item-link">
-                            <p>Watch it in its full glory on 
+                        <section class="news-item-link">
+                            <p>
+                                Watch it in its full glory on 
                                 <!-- external link to trailer video on YouTube -->
                                 <a href="https://www.youtube.com/watch?v=_f9u5Xuvn8c" target="_blank" rel="noopener" aria-label="Link opens in a new tab">YouTube <i class="fab fa-youtube"></i></a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
             <!-- news article 4 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">20/08/21</span>
-                    <h3>First Details of our Upcoming EP 'Too Late to Turn Back'</h3>
-                </div>
-                <details id="too-late-news" class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">20/08/21</span>
+                        <h3>
+                            <button id="news-item-btn-20-08-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="too-late-news">
+                                First Details of our Upcoming EP 'Too Late to Turn Back'
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="too-late-news" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>This is the “difficult second album” but not in the traditional sense. The difficulty we faced with this one was the crazy amount of lockdowns and lack of in-person contact we had thoughout the whole process.</p>
@@ -213,26 +246,34 @@
                             <figcaption>Cover Art by Siobhan Feeney and Eadaoin Curtin</figcaption>
                             </figure>
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>For updates, keep an eye on 
                                 <!-- external link to band's facebook page -->
                                 <a href="https://www.facebook.com/ritualeffect/" target="_blank" rel="noopener" aria-label="Ritual Effect facebook page (opens in a new tab)">
                                 facebook <i class="fab fa-facebook"></i>
                                 </a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
-            <!-- news article 5 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">21/04/21</span>
-                    <h3>New deal with Split Screen Management</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+            <!-- news article 5 -->            
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">21/04/21</span>
+                        <h3>
+                            <button id="news-item-btn-21-04-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-21-04-21">
+                                New deal with Split Screen Management
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-21-04-21" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>Split Screen Management is pleased to announce the signing of RITUAL EFFECT into its roster family! The band is finishing their new EP, so stay tuned for more information to be announced soon.</p>
@@ -242,26 +283,34 @@
                             <!-- Split Screen Manangement logo -->
                             <img src="assets/images/ssm_trans_cropped.png" alt="Split Screen Management logo">
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>Check out Split Screen Management on 
                                 <!-- external link to Split Screen manangement facebook page -->
                                 <a href="https://facebook.com/SplitScreenManagement/" target="_blank" rel="noopener" aria-label="Link opens in a new tab">
                                 facebook <i class="fab fa-facebook"></i>
                                 </a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
-            <!-- news article 6 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">17/09/20</span>
-                    <h3>Ritual Effect to join P.O.D. in Riga and Tallinn in June 2021</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+            <!-- news article 6 -->            
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">17/09/20</span>
+                        <h3>
+                            <button id="news-item-btn-17-09-20" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-17-09-20">
+                                Ritual Effect to join P.O.D. in Riga and Tallinn in June 2021
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-17-09-20" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>ALPHA OMEGA Management are pleased to announce that Dublin based alternative rockers RITUAL EFFECT will be joining the US alternative metal heroes P.O.D., as special guests, next June in Riga and Tallinn, as follows:</p>
@@ -273,26 +322,34 @@
                             <!-- image of POD poster -->
                             <img src="assets/images/posters/pod_poster_godvil.jpg" alt="POD poster for Godvil Concert Hall, Riga, June 21st, 2021">
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>For updates, keep an eye on 
                                 <!-- external link to band's facebook events page -->
                                 <a href="https://www.facebook.com/ritualeffect/events/?ref=page_internal" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
                                 facebook <i class="fab fa-facebook"></i>
                                 </a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
-            <!-- news article 7 -->
-            <section class="news-item">
-                <div class="news-item-heading">
-                    <span class="date-fieldset">01/02/20</span>
-                    <h3>Signing with Alpha Omega Management; New Material & Merch</h3>
-                </div>
-                <details class="news-item-main">
-                    <summary>Expand</summary>
-                    <article>
+                        </section>
+                    </section>
+                </section>
+            </article>
+            <!-- news article 7 -->            
+            <article class="news-item">
+                <header class="news-item-heading">
+                    <span class="news-header-wrapper">
+                        <span class="date-fieldset">01/02/20</span>
+                        <h3>
+                            <button id="news-item-btn-01-02-20" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="news-item-01-02-20">
+                                Signing with Alpha Omega Management; New Material & Merch
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="news-item-01-02-20" class="news-item-main" aria-hidden="true">
                         <section>                        
                             <div>
                                 <p>We are so excited to announce signing with Alpha Omega Management and are focused on making the most of this amazing opportunity. We cannot wait to finally share our music with a wider audience and take our shows to a new level!</p>
@@ -303,19 +360,19 @@
                             <!-- Alpha Omega Management logo -->
                             <img src="assets/images/a_o_management.jpg" alt="Alpha Omega Management logo">
                         </section>
-                        <div class="news-item-link">
+                        <section class="news-item-link">
                             <p>For updates, keep an eye on 
                                 <!-- external link to band's facebook page -->
                                 <a href="https://www.facebook.com/ritualeffect/" target="_blank" rel="noopener" aria-label="Ritual Effect facebook page (opens in a new tab)">
                                 facebook <i class="fab fa-facebook"></i>
                                 </a>
                             </p>
-                        </div>
-                    </article>
-                </details>
-            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
         <!-- end of news section -->
-        </article>
+        </section>
 
         <h3>
             <a href="#news-events">Back to Top</a>
@@ -324,7 +381,7 @@
         <!-- gigs section banner image -->
         <img id="gigs-header-image" src="assets/images/moe_horns_fibbers_cropped.jpg" alt="Moe throws the horns up to the crowd in Fibber Magees">
         <!-- gigs section -->
-        <article id="gigs">
+        <section id="gigs">
             <!-- gigs section heading -->
             <header id="gigs-heading" class="page-divider-heading">
                 <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
@@ -332,212 +389,272 @@
                 <img src="assets/images/u_symbol_trans.png" alt="Ritual Effect 'U' symbol">
             </header>
             <!-- gig listing 1 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">18/11/21</span>
-                    <h3>RAGE#1: Ritual Effect/Unmaker/Organ Blender/Minus Ten Thousand Hours/32 Carat Rock</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>THURSDAY, 18 NOVEMBER 2021</p>
-                            <p>FROM 19:00-23:30</p>
-                            <p>The first edition of rage metal night, featuring some of the best upcoming metal bands from around the country.</p>
-                            <p>Bands on the night include:</p>
-                            <ul>
-                                <li>RITUAL EFFECT</li>
-                                <li><a href="https://www.facebook.com/Unmakermetal" target="_blank" rel="noopener" aria-label="Unmaker facebook page (opens in a new tab)">Unmaker</a></li>
-                                <li><a href="https://www.facebook.com/Organ-Blender-1680843132006305" target="_blank" rel="noopener" aria-label="Organ Blender facebook page (opens in a new tab)">Organ Blender</a></li>
-                                <li><a href="https://www.facebook.com/MinusTenThousandHours/" target="_blank" rel="noopener" aria-label="Minus Ten Thousand Hours facebook page (opens in a new tab)">Minus Ten Thousand Hours</a></li>
-                                <li><a href="https://www.facebook.com/32caratrock" target="_blank" rel="noopener" aria-label="32 Carat Rock facebook page (opens in a new tab)">32 Carat Rock</a></li>
-                            </ul>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Downstairs)</p>
-                            <p>Pay what you want admission!</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/rage_1_gig_poster.jpg" alt="Rage #1 gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">18/11/21</span>
+                        <h3>
+                            <button id="gig-listing-btn-18-11-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-18-11-21">
+                                RAGE#1: Ritual Effect/Unmaker/Organ Blender/Minus Ten Thousand Hours/32 Carat Rock
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-18-11-21" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>THURSDAY, 18 NOVEMBER 2021</p>
+                                <p>FROM 19:00-23:30</p>
+                                <p>The first edition of rage metal night, featuring some of the best upcoming metal bands from around the country.</p>
+                                <p>Bands on the night include:</p>
+                                <ul>
+                                    <li>RITUAL EFFECT</li>
+                                    <li><a href="https://www.facebook.com/Unmakermetal" target="_blank" rel="noopener" aria-label="Unmaker facebook page (opens in a new tab)">Unmaker</a></li>
+                                    <li><a href="https://www.facebook.com/Organ-Blender-1680843132006305" target="_blank" rel="noopener" aria-label="Organ Blender facebook page (opens in a new tab)">Organ Blender</a></li>
+                                    <li><a href="https://www.facebook.com/MinusTenThousandHours/" target="_blank" rel="noopener" aria-label="Minus Ten Thousand Hours facebook page (opens in a new tab)">Minus Ten Thousand Hours</a></li>
+                                    <li><a href="https://www.facebook.com/32caratrock" target="_blank" rel="noopener" aria-label="32 Carat Rock facebook page (opens in a new tab)">32 Carat Rock</a></li>
+                                </ul>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Downstairs)</p>
+                                <p>Pay what you want admission!</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/rage_1_gig_poster.jpg" alt="Rage #1 gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/170354628631479/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/170354628631479/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
             <!-- gig listing 2 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">23/10/21</span>
-                    <h3>With: Sound of Sabbath (Dio and Ozzy Era Tribute) - Free Admission!</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>SATURDAY, 23 OCTOBER 2021</p>
-                            <p>FROM 20:00-02:30</p>
-                            <p>Deep Cover & Fibber Magees present:</p>
-                            <p><a href="https://www.facebook.com/SOSABBATH" target="_blank" rel="noopener" aria-label="Sound of Sabbath facebook page (opens in a new tab)">Sound Of Sabbath</a> - Tribute to the Dio and Ozzy Eras of Black Sabbath</p>
-                            <p>Plus support from:</p>
-                            <p><a href="https://www.facebook.com/SkypilotOfficial/" target="_blank" rel="noopener" aria-label="Skypilot facebook page (opens in a new tab)">Skypilot</a></p>
-                            <p>RITUAL EFFECT</p>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
-                            <p>Free admission!</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/sound_of_sabbath_gig_poster.jpg" alt="Sound of Sabbath gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">23/10/21</span>
+                        <h3>
+                            <button id="gig-listing-btn-23-02-21" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-23-02-21">
+                                With: Sound of Sabbath (Dio and Ozzy Era Tribute) - Free Admission!
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-23-02-21" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>SATURDAY, 23 OCTOBER 2021</p>
+                                <p>FROM 20:00-02:30</p>
+                                <p>Deep Cover & Fibber Magees present:</p>
+                                <p><a href="https://www.facebook.com/SOSABBATH" target="_blank" rel="noopener" aria-label="Sound of Sabbath facebook page (opens in a new tab)">Sound Of Sabbath</a> - Tribute to the Dio and Ozzy Eras of Black Sabbath</p>
+                                <p>Plus support from:</p>
+                                <p><a href="https://www.facebook.com/SkypilotOfficial/" target="_blank" rel="noopener" aria-label="Skypilot facebook page (opens in a new tab)">Skypilot</a></p>
+                                <p>RITUAL EFFECT</p>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
+                                <p>Free admission!</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/sound_of_sabbath_gig_poster.jpg" alt="Sound of Sabbath gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/130076679300194/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/130076679300194/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
             <!-- gig listing 3 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">31/01/20</span>
-                    <h3>With: Whiplash (Ireland's No.1 Metallica Tribute)</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>FRIDAY, 31 JANUARY 2020</p>
-                            <p>FROM 20:00-02:00</p>
-                            <p>Deep Cover & OD Promotions Present:</p>
-                            <p><a href="https://www.facebook.com/whiplash.ie/" target="_blank" rel="noopener" aria-label="Whiplash facebook page (opens in a new tab)">Whiplash (Ireland's No.1 Metallica Tribute)</a></p>
-                            <p>Plus support from:</p>
-                            <p>RITUAL EFFECT</p>
-                            <p><a href="https://www.facebook.com/newagemessiah17/" target="_blank" rel="noopener" aria-label="New Age Messiah facebook page (opens in a new tab)">New Age Messiah</a></p>
-                            <p><a href="https://www.facebook.com/HumanityCheck1/" target="_blank" rel="noopener" aria-label="Humanity Check facebook page (opens in a new tab)">Humanity Check</a></p>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Downstairs)</p>
-                            <p>Admission: &euro;10</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/whiplash_gig_poster.jpg" alt="Whiplash gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">31/01/20</span>
+                        <h3>
+                            <button id="gig-listing-btn-31-01-20" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-31-01-20">
+                                With: Whiplash (Ireland's No.1 Metallica Tribute)
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-31-01-20" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>FRIDAY, 31 JANUARY 2020</p>
+                                <p>FROM 20:00-02:00</p>
+                                <p>Deep Cover & OD Promotions Present:</p>
+                                <p><a href="https://www.facebook.com/whiplash.ie/" target="_blank" rel="noopener" aria-label="Whiplash facebook page (opens in a new tab)">Whiplash (Ireland's No.1 Metallica Tribute)</a></p>
+                                <p>Plus support from:</p>
+                                <p>RITUAL EFFECT</p>
+                                <p><a href="https://www.facebook.com/newagemessiah17/" target="_blank" rel="noopener" aria-label="New Age Messiah facebook page (opens in a new tab)">New Age Messiah</a></p>
+                                <p><a href="https://www.facebook.com/HumanityCheck1/" target="_blank" rel="noopener" aria-label="Humanity Check facebook page (opens in a new tab)">Humanity Check</a></p>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Downstairs)</p>
+                                <p>Admission: &euro;10</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/whiplash_gig_poster.jpg" alt="Whiplash gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/816381468812326?active_tab=about" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/816381468812326?active_tab=about" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
             <!-- gig listing 4 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">27/10/19</span>
-                    <h3>With: Angry Chair - A Tribute To Alice In Chains</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>SUNDAY, 27 OCTOBER 2019</p>
-                            <p>FROM 22:00-02:30</p>
-                            <p><a href="https://www.facebook.com/AngryChairIreland" target="_blank" rel="noopener" aria-label="Angry Chair facebook page (opens in a new tab)">Angry Chair</a>, Ireland's greatest Alice in Chains tribute act, return to Fibbers on Halloween Sunday with some Layne Staley era classics.</p>
-                            <p>Support from:</p>
-                            <p>RITUAL EFFECT</p>
-                            <p><a href="https://www.facebook.com/sixtoolate/" target="_blank" rel="noopener" aria-label="SixTooLate facebook page (opens in a new tab)">SixTooLate</a></p>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
-                            <p>Free admission!</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/angry_chair_oct_19_gig_poster.jpg" alt="Angry Chair gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">27/10/19</span>
+                        <h3>
+                            <button id="gig-listing-btn-27-10-19" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-27-10-19">
+                                With: Angry Chair - A Tribute To Alice In Chains
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-27-10-19" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>SUNDAY, 27 OCTOBER 2019</p>
+                                <p>FROM 22:00-02:30</p>
+                                <p><a href="https://www.facebook.com/AngryChairIreland" target="_blank" rel="noopener" aria-label="Angry Chair facebook page (opens in a new tab)">Angry Chair</a>, Ireland's greatest Alice in Chains tribute act, return to Fibbers on Halloween Sunday with some Layne Staley era classics.</p>
+                                <p>Support from:</p>
+                                <p>RITUAL EFFECT</p>
+                                <p><a href="https://www.facebook.com/sixtoolate/" target="_blank" rel="noopener" aria-label="SixTooLate facebook page (opens in a new tab)">SixTooLate</a></p>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
+                                <p>Free admission!</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/angry_chair_oct_19_gig_poster.jpg" alt="Angry Chair gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/1347759538716931/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/1347759538716931/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
             <!-- gig listing 5 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">18/10/19</span>
-                    <h3>With: Stone Temple Pirates (STP Tribute) - Free Admission!</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>FRIDAY, 18 OCTOBER 2019</p>
-                            <p>FROM 20:00-02:00</p>
-                            <p>Deep Cover & Fibber Magees present:</p>
-                            <p><a href="https://www.facebook.com/StoneTemplePiratesUK/" target="_blank" rel="noopener" aria-label="Stone Temple Pirates facebook page (opens in a new tab)">Stone Temple Pirates</a> (Stone Temple Pilots Tribute)</p>
-                            <p>Plus support from:</p>
-                            <p><a href="https://www.facebook.com/ForeignNationalsBluesBand/" target="_blank" rel="noopener" aria-label="The Foreign Nationals Blues Band facebook page (opens in a new tab)">The Foreign Nationals Blues Band</a></p>
-                            <p>RITUAL EFFECT</p>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
-                            <p>Free admission!</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/stone_temple_pirates_gig_poster.jpg" alt="Stone Temple Pirates gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">18/10/19</span>
+                        <h3>
+                            <button id="gig-listing-btn-18-10-19" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-18-10-19">
+                                With: Stone Temple Pirates (STP Tribute) - Free Admission!
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-18-10-19" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>FRIDAY, 18 OCTOBER 2019</p>
+                                <p>FROM 20:00-02:00</p>
+                                <p>Deep Cover & Fibber Magees present:</p>
+                                <p><a href="https://www.facebook.com/StoneTemplePiratesUK/" target="_blank" rel="noopener" aria-label="Stone Temple Pirates facebook page (opens in a new tab)">Stone Temple Pirates</a> (Stone Temple Pilots Tribute)</p>
+                                <p>Plus support from:</p>
+                                <p><a href="https://www.facebook.com/ForeignNationalsBluesBand/" target="_blank" rel="noopener" aria-label="The Foreign Nationals Blues Band facebook page (opens in a new tab)">The Foreign Nationals Blues Band</a></p>
+                                <p>RITUAL EFFECT</p>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
+                                <p>Free admission!</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/stone_temple_pirates_gig_poster.jpg" alt="Stone Temple Pirates gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/410578686213872/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/410578686213872/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
             <!-- gig listing 6 -->
-            <section class="gig-listing">
-                <div class="gig-listing-heading">
-                    <span class="date-fieldset">02/05/19</span>
-                    <h3>FMTS#6: Madra/Vulture Casino/Ritual Effect/Civic Party</h3>
-                </div>
-                <details class="gig-listing-main">
-                    <summary>Expand</summary>
-                    <section>
-                        <div>
-                            <p>THURSDAY, 2 MAY 2019</p>
-                            <p>FROM 20:00-02:30</p>
-                            <p>Fibber Magees Thursday Sessions #6</p>
-                            <p>Featuring:</p>
-                            <ul>
-                                <li><a href="https://www.facebook.com/madramusic/" target="_blank" rel="noopener" aria-label="Madra facebook page (opens in a new tab)">Madra</a></li>
-                                <li><a href="https://www.facebook.com/VultureCasino/" target="_blank" rel="noopener" aria-label="Vulture Casino facebook page (opens in a new tab)">Vulture Casino</a></li>
-                                <li>RITUAL EFFECT</li>
-                                <li><a href="https://www.facebook.com/CivicPartyBand/" target="_blank" rel="noopener" aria-label="Civic Party facebook page (opens in a new tab)">Civic Party</a></li>
-                            </ul>
-                            <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
-                            <p>Pay what you want admission!</p>
-                        </div>
-                        <!-- gig poster -->
-                        <img src="assets/images/posters/fmts_6_gig_poster.jpg" alt="Fibber Magees Thursday Sessions No.6 gig poster">
+            <article class="gig-listing">
+                <header class="gig-listing-heading">
+                    <span class="gig-header-wrapper">
+                        <span class="date-fieldset">02/05/19</span>
+                        <h3>
+                            <button id="gig-listing-btn-02-05-19" class="article-toggle-btn toggle-btn" aria-expanded="false" aria-controls="gig-listing-02-05-19">
+                                FMTS#6: Madra/Vulture Casino/Ritual Effect/Civic Party
+                                <span class="dropdown-arrow-tab">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </span>
+                            </button>
+                        </h3>
+                    </span>
+                </header>
+                <section class="article-body">
+                    <section id="gig-listing-02-05-19" class="gig-listing-main" aria-hidden="true">
+                        <section>                        
+                            <div>
+                                <p>THURSDAY, 2 MAY 2019</p>
+                                <p>FROM 20:00-02:30</p>
+                                <p>Fibber Magees Thursday Sessions #6</p>
+                                <p>Featuring:</p>
+                                <ul>
+                                    <li><a href="https://www.facebook.com/madramusic/" target="_blank" rel="noopener" aria-label="Madra facebook page (opens in a new tab)">Madra</a></li>
+                                    <li><a href="https://www.facebook.com/VultureCasino/" target="_blank" rel="noopener" aria-label="Vulture Casino facebook page (opens in a new tab)">Vulture Casino</a></li>
+                                    <li>RITUAL EFFECT</li>
+                                    <li><a href="https://www.facebook.com/CivicPartyBand/" target="_blank" rel="noopener" aria-label="Civic Party facebook page (opens in a new tab)">Civic Party</a></li>
+                                </ul>
+                                <p><a href="https://www.facebook.com/fibbermagees.ie/" target="_blank" rel="noopener" aria-label="Fibber Magees facebook page (opens in a new tab)">FIBBER MAGEES</a> (Upstairs)</p>
+                                <p>Pay what you want admission!</p>
+                            </div>
+                            <!-- gig poster -->
+                            <img src="assets/images/posters/fmts_6_gig_poster.jpg" alt="Fibber Magees Thursday Sessions No.6 gig poster">
+                        </section>
+                        <section class="gig-link">
+                            <p>For more info, the event is listed on 
+                                <!-- external link to facebook event -->
+                                <a href="https://www.facebook.com/events/375871086521523/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
+                                facebook <i class="fab fa-facebook"></i>
+                                </a>
+                            </p>
+                        </section>
                     </section>
-                    <div class="gig-link">
-                        <p>For more info, the event is listed on 
-                            <!-- external link to facebook event -->
-                            <a href="https://www.facebook.com/events/375871086521523/?acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22page%22%7D]%7D" target="_blank" rel="noopener" aria-label="facebook events page (opens in a new tab)">
-                            facebook <i class="fab fa-facebook"></i>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            </section>
+                </section>
+            </article>
         <!-- end of gigs section -->
-        </article>
+        </section>
 
         <h3>
             <a href="#news-events">Back to Top</a>
