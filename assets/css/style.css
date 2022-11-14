@@ -1169,37 +1169,45 @@ input[type="range"].player-slider{
 /* audio visualiser */
 
 .player-visualiser {
-    width: 275px;
-    height: 100px;
+    width: 270px;
+    height: 90px;
     position: absolute;
     top: 6px;
-    left: 6px;
+    left: 8px;
     z-index: 2;
-    /* background: rgba(255, 255, 255, 0.1); */
+    overflow: hidden;
 }
 
 .visualiser-top, .visualiser-bottom {
-    width: 100%;
+    /* width: 275px; */
     height: 50%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.visualiser-tl, .visualiser-tr, .visualiser-bl, .visualiser-br {
+    display: flex;
+    align-items: flex-end;
 }
 
 .visualiser-tl {
-    width: 50%;
     transform: scale(-1, 1);
 }
 
-.visualiser-tr {
-    width: 50%;
-}
-
 .visualiser-bl {
-    width: 50%;
     transform: scale(-1);
 }
 
 .visualiser-br {
-    width: 50%;
     transform: scale(1, -1);
+}
+
+.visbar {
+    width: 1.5px;
+    margin: 0 0.25px;
+    background-image: linear-gradient(135deg, #fff, #000);
+    opacity: 0.2;
 }
 
 /* album cover mockup */
