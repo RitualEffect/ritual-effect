@@ -681,8 +681,13 @@ function handleSlider(slider) {
  */
 function handleSeek(seekValue, audio) {
     let trackLength = audio.duration;
-    let seekTime = (seekValue / 100) * trackLength;
-    audio.currentTime = seekTime;
+    /* Check that audio.duration is set to avoid non-finite number
+       (NaN) being set as audio.currentTime, thus preventing
+       'failed to set...' error being thrown */
+    if (trackLength > 0) {
+        let seekTime = (seekValue / 100) * trackLength;
+        audio.currentTime = seekTime;
+    }
 }
 
 /**
