@@ -1,4 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&family=Tillana:wght@400;700&display=swap');
+            /************************************/
+            /*                                  */
+            /* -------- Sitewide styles ------- */
+            /*                                  */
+            /************************************/
+
+/* ---------- general styles ------------ */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&family=Tillana:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Nunito+Sans:wght@400;700&display=swap');
 
 * {
     margin: 0;
@@ -11,7 +20,8 @@
 body {
     background: #000;
      /* url(../images/u_symbol_dark_grey.png) fixed no-repeat center center / contain; */
-    font-family: 'Tillana', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
+    /* font-family: 'Tillana', sans-serif; */
     color: #fff;
 }
 
@@ -27,8 +37,11 @@ body a {
 }
 
 h1, h2, h3 {
-    font-family: 'Skranji', sans-serif;
-    font-weight: 400;
+    /* font-family: 'Skranji', sans-serif; */
+    font-family: 'Josefin Sans', sans-serif;
+    /* font-weight: 400; */
+    font-weight: 700;
+    padding-top: 5px;
 }
 
 h1 {
@@ -45,10 +58,97 @@ ul {
     list-style-type: none;
 }
 
+/* -------- range input sliders -------- */
+
+input[type="range"] {
+    -webkit-appearance: none !important;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    background: #040404;
+    background-image: linear-gradient(135deg, #8b817f 0%, #000 80%);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 1px solid #0a0a0a;
+    background: url(../images/graphics/range-thumb.png) center center / cover, linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset 3px 3px 6px #404348,
+                inset -3px -3px 6px #111214;
+    cursor: -webkit-grab;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset -3px -3px 6px #404348,
+                inset 3px 3px 6px #111214;
+    cursor: -webkit-grabbing;
+}
+
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none !important;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 1px solid #0a0a0a;
+    background: url(../images/graphics/range-thumb.png) center center / cover, linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset 3px 3px 6px #404348,
+                inset -3px -3px 6px #111214;
+    cursor: grab;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset -3px -3px 6px #404348,
+                inset 3px 3px 6px #111214;
+    cursor: grabbing;
+}
+
+input[type="range"]::-ms-thumb {
+    -webkit-appearance: none !important;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 1px solid #0a0a0a;
+    background: url(../images/graphics/range-thumb.png) center center / cover, linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset 3px 3px 6px #404348,
+                inset -3px -3px 6px #111214;
+    cursor: grab;
+}
+
+input[type="range"]:active::-ms-thumb {
+    box-shadow: 2px 2px 4px #111214,
+                -2px -2px 4px #36383c,
+                inset -3px -3px 6px #404348,
+                inset 3px 3px 6px #111214;
+    cursor: grabbing;
+}
+
 /* dropdown menu toggle buttons */
 
 .menu-toggle-btn {
-    font-family: 'Skranji', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
     padding: 10px 0;
 
     display: flex;
@@ -56,11 +156,18 @@ ul {
     justify-content: center;
 }
 
+@media(hover: hover) and (pointer: fine) {
+    .menu-toggle-btn:hover {
+        color: #8b817f;
+    }
+}
+
 .menu-toggle-btn span {
     transition: all 0.25s;
 }
 
 .menu-icon {
+    width: 30px;
     margin-right: 10px;
     padding: 4px 0;
 }
@@ -75,6 +182,11 @@ ul {
 
 .menu-icon span:nth-of-type(2) {
     margin: 5px 0;
+}
+
+.menu-btn-text {
+    font-size: 1.25rem;
+    padding-top: 5px;
 }
 
 .menu-toggle-btn-active .menu-icon span:nth-of-type(2) {
@@ -99,7 +211,7 @@ ul {
     cursor: pointer;
 }
 
-/* main header */
+/* ------------ main header ----------- */
 
 #main-header {
     /* background-color: rgba(0, 0, 0, 0.9); */
@@ -127,7 +239,9 @@ ul {
 /* header navigation */
 
 #main-menu {
-    font-family: 'Skranji', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
     font-size: 1.125rem;
     margin-right: 20px;
 
@@ -138,14 +252,6 @@ ul {
 
 #main-menu-btn.menu-toggle-btn {
     width: 110px;
-}
-
-#main-menu-btn .menu-icon {
-    width: 30px;
-}
-
-#main-menu-btn .menu-btn-text {
-    font-size: 1.25rem;
 }
 
 #main-menu-items li {
@@ -211,12 +317,56 @@ ul {
     text-align: center;
 }
 
-/* homepage */
+/* ------------ footer ------------ */
+
+footer {
+    background-color: #000;
+    height: 100px;
+}
+
+.social-networks {
+    line-height: 3rem;
+    font-size: 0.875rem;
+    list-style-type: none;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.social-networks i {
+    color: #fff;
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .social-networks i:hover {
+        color: #8b817f;
+    }
+}
+
+#copyright-statement {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
+    color: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+
+            /************************************/
+            /*                                  */
+            /* --------- Landing page --------- */
+            /*                                  */
+            /************************************/
+
+/* general styles */
 
 #homepage-main-content {
     height: 100vh;
     overflow: hidden;
 }
+
+/* hero image */
 
 #homepage-hero-image {
     background: url(../images/band_outside_sin_e.jpg) fixed no-repeat center center / cover;
@@ -226,7 +376,7 @@ ul {
     justify-content: center;
 }
 
-/* homepage call to action insert */
+/* call to action */
 
 #call-to-action {
     background-color: rgba(0, 0, 0, 0.7);
@@ -271,7 +421,13 @@ ul {
     padding: 0 9px;
 }
 
-/* band bio page */
+            /************************************/
+            /*                                  */
+            /* --------- Band bio page -------- */
+            /*                                  */
+            /************************************/
+
+/* general styles */
 
 #band-bio {
     display: flex;
@@ -308,7 +464,7 @@ ul {
     max-width: 1280px;
 }
 
-/* general band page styling */
+/* general band page body styling */
 
 .band-bio-body {
     margin: 10px 20px;
@@ -366,6 +522,12 @@ ul {
     justify-content: space-evenly;
 }
 
+            /************************************/
+            /*                                  */
+            /* ------ Generic page styles ----- */
+            /*                                  */
+            /************************************/
+
 /* general styles for following pages - applies to music, video, news, gallery and contact pages */
 
 .general-main-body {
@@ -411,6 +573,8 @@ iframe {
     border-radius: 5px;
 }
 
+/* old styles */
+
 details[open] summary {
     color: #8b817f;
 }
@@ -433,7 +597,13 @@ summary::marker {
     }
 }
 
-/* music page */
+            /************************************/
+            /*                                  */
+            /* ----------- Music page --------- */
+            /*                                  */
+            /************************************/
+
+/* headings */
 
 #music h1, #music h2, #music h3 {
     font-weight: 400;
@@ -460,9 +630,70 @@ summary::marker {
     width: 260px;
 }
 
-#fossils img, #fossils audio, #too-late img {
+.album-art {
+    height: 260px;
     width: 260px;
 }
+
+.album-art img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* mini-player popups */
+
+#fossils-listen {
+    position: relative;
+}
+
+.mini-player {
+    height: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 50px;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.25s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mini-player-open {
+    height: 260px;
+}
+
+.mini-player-btn.menu-toggle-btn {
+    width: 100%;
+    height: 50px;
+}
+
+.mini-player-btn .menu-icon {
+    position: relative;
+}
+
+.mini-player-btn .menu-icon i {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    font-size: 18px;
+    text-shadow: -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+}
+
+.mini-player-btn.menu-toggle-btn-active .menu-icon i {
+    font-size: 14px;
+}
+
+/* streaming links / embeds */
 
 #fossils ul {
     text-align: center;
@@ -470,14 +701,852 @@ summary::marker {
 
 #fossils-stream li {
     font-weight: 700;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
 }
 
-#fossils-listen, #too-late p {
+#too-late p {
     margin-top: 20px;
     text-align: center;
     text-transform: uppercase;
+}
+
+            /************************************/
+            /*                                  */
+            /* --------- Music players -------- */
+            /*                                  */
+            /************************************/
+
+/* -------- general styles -------- */
+
+/* tracklist buttons */
+
+.tracklist-btn {
+    position: relative;
+    width: 100%;
+    padding: 0 5px;
+    background: transparent;
+    font-family: 'Nunito Sans', sans-serif;
+    /* font-family: 'Tillana', sans-serif; */
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: left;
+    text-shadow: 5px 5px #090909;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+}
+
+.num-span {
+    margin-right: 2.5px;
+    transform: translateY(1px);
+}
+
+.track-name {
+    font-size: 1.075rem;
+}
+
+.track-name.active-name {
+    text-transform: uppercase;
+    font-size: 1.05rem;
+}
+
+.track-times {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-52.5%);
+    font-size: 0.8rem;
+}
+
+/* control buttons */
+
+.player-btn {
+    color: #fff;
+    font-size: 1rem;
+    border: 1px solid #0a0a0a;
+    background: linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: 5px 5px 10px #111214,
+                -3px -3px 6px #36383c,
+                inset 4px 4px 8px #404348,
+                inset -4px -4px 8px #111214;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-btn:active {
+    box-shadow: 5px 5px 10px #111214,
+                -3px -3px 6px #36383c,
+                inset -4px -4px 8px #404348,
+                inset 4px 4px 8px #111214;
+    font-size: 0.95rem;
+}
+
+.prev-track-btn, .next-track-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.play-pause-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.play-pause-btn:active {
+    font-size: 1.2rem;
+}
+
+.stop-btn, .loop-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.stop-btn:active, .loop-btn:active {
+    font-size: 0.95rem;
+}
+
+.mute-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+.mute-btn:active {
+    font-size: 0.825rem;
+}
+
+/* slider controls */
+
+input[type="range"].player-slider{
+    height: 7.5px;
+    box-shadow: inset 2px 2px 3px -2px rgba(167, 169, 171, 0.3),
+                inset 0 -1px 1px 0 #4a4c4e;
+}
+
+.seek-control, .volume-control {
+    width: 100%;
+    padding: 5px;
+}
+
+.seek-control .track-time, .seek-control .track-length {
+    padding: 0 5px;
+    font-size: 0.875rem;
+}
+
+.seek-slider.player-slider {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.volume-slider.player-slider {
+    width: 60%;
+    margin: 0 7.5px;
+}
+
+.volume-control .volume-output {
+    width: 25px;
+    font-size: 0.875rem;
+    text-shadow: 5px 5px #090909;
+}
+
+/* ---------- mini player ---------- */
+
+/* tracklist */
+
+.mini-player-tracklist {
+    width: 100%;
+    /* height: 87.5px; */
+    height: 33.3%;
+    padding-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+.mini-player-tracklist .tracklist-btn {
+    /* margin: 2.5px 0; */
+    height: 33.3%;
+}
+
+/* control buttons container */
+
+.mini-player-ctrls {
+    width: 100%;
+    padding: 5px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* volume control */
+
+.mini-player-vol {
+    /* width: 220px; */
+    width: 80%;
+}
+
+.volume-slider.mini-player-slider {
+    width: 70%;
+}
+
+/* full player launch button */
+
+/* .launch-btn-container {
+    width: 100%;
+    margin: 15px 20px;
+
+    display: flex;
+    justify-content: center;
+} */
+
+.player-launch-btn {
+    width: 235px;
+    height: 40px;
+    margin: 5px 20px 0;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
+    /* font-family: 'Tillana', sans-serif; */
+    font-size: 1.05rem;
+}
+
+.player-launch-btn:active {
+    font-size: 1rem;
+}
+
+/* ------ full featured player ------ */
+
+/* main page */
+
+#re-player-main {
+    margin: 0 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* full player page header */
+
+#re-player-head {
+    background-color: #000;
+    height: 100px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* player general styles */
+
+#re-player {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#re-player-1st, #re-player-2nd {
+    width: 300px;
+    height: 340px;
+    background: #1d2023;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#re-player-1st {
+    border-radius: 5px 0 0 5px;
+    box-shadow: inset 4px 4px 8px #404348,
+                inset 0 -4px 8px #111214;
+}
+
+#re-player-2nd {
+    border-radius: 0 5px 5px 0;
+    box-shadow: inset 0 4px 8px #404348,
+                inset -4px -4px 8px #111214;
+    position: relative;    
+}
+
+/* visuals container */
+
+#re-player-visuals {
+    height: 290px;
+    width: 290px;
+    position: relative;
+    top: 5px;
+    background: #141313;
+    box-shadow: inset 3px 3px 6px #0a0a0a,
+                inset -3px -3px 6px #404348;
+}
+
+/* vinyl record mockup */
+
+.player-vinyl {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    border: 3px solid #000;
+    background: url('../images/graphics/vinyl-prototype-1.png') center center /cover;
+    position: absolute;
+    top: 8.5px;
+    left: 8.5px;
+    overflow: hidden;
+    animation: vinylspin 1.8s linear infinite;
+    animation-play-state: paused;
+}
+
+.player-vinyl.playing {
+    animation-play-state: running;
+}
+
+@keyframes vinylspin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
+}
+
+.player-vinyl.stopped {
+    animation: none;
+}
+
+.player-vinyl-ring {
+    border: 1px solid #0f0f0f;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+.ring1 {
+    width: 135px;
+    height: 135px;
+}
+
+.ring2 {
+    width: 170px;
+    height: 170px;
+}
+
+.ring3 {
+    width: 200px;
+    height: 200px;
+}
+
+.ring4 {
+    width: 230px;
+    height: 230px;
+}
+
+.ring5 {
+    width: 264px;
+    height: 264px;
+    border: 3px solid #070707;
+}
+
+.player-vinyl img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.vinyl-hole {
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    position: absolute;
+    top: 135px;
+    left: 135px;
+    transform: translate(50%, 50%);
+    z-index: 2;
+}
+
+.vinyl-overlay {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    position: absolute;
+    top: 8.5px;
+    left: 8.5px;
+    z-index: 1;
+    box-shadow: 4px 4px 4px #070707;
+
+    background: linear-gradient(35deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.0005) 20%,
+        rgba(255, 255, 255, 0.001) 40%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(255, 255, 255, 0.001) 60%,
+        rgba(255, 255, 255, 0.0005) 80%,
+        transparent 90%,
+        transparent 100%),
+
+        linear-gradient(40deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.0005) 20%,
+        rgba(255, 255, 255, 0.001) 40%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(255, 255, 255, 0.001) 60%,
+        rgba(255, 255, 255, 0.0005) 80%,
+        transparent 90%,
+        transparent 100%),
+
+        linear-gradient(45deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.0005) 20%,
+        rgba(255, 255, 255, 0.001) 40%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(255, 255, 255, 0.001) 60%,
+        rgba(255, 255, 255, 0.0005) 80%,
+        transparent 90%,
+        transparent 100%),
+
+        linear-gradient(50deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.0005) 20%,
+        rgba(255, 255, 255, 0.001) 40%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(255, 255, 255, 0.001) 60%,
+        rgba(255, 255, 255, 0.0005) 80%,
+        transparent 90%,
+        transparent 100%),
+
+        linear-gradient(55deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.0005) 20%,
+        rgba(255, 255, 255, 0.001) 40%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 55%,
+        rgba(255, 255, 255, 0.001) 60%,
+        rgba(255, 255, 255, 0.0005) 80%,
+        transparent 90%,
+        transparent 100%),
+        
+        linear-gradient(140deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(64, 64, 136, 0.01) 45%,
+        rgba(64, 64, 136, 0.1) 50%,
+        rgba(64, 64, 136, 0.01) 55%,
+        transparent 60%,
+        transparent 100%);
+}
+
+/* audio visualiser */
+
+.player-visualiser {
+    width: 275px;
+    height: 100px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 2;
+    /* background: rgba(255, 255, 255, 0.1); */
+}
+
+.visualiser-top, .visualiser-bottom {
+    width: 100%;
+    height: 50%;
+}
+
+.visualiser-tl {
+    width: 50%;
+    transform: scale(-1, 1);
+}
+
+.visualiser-tr {
+    width: 50%;
+}
+
+.visualiser-bl {
+    width: 50%;
+    transform: scale(-1);
+}
+
+.visualiser-br {
+    width: 50%;
+    transform: scale(1, -1);
+}
+
+/* album cover mockup */
+
+.player-album-art {
+    width: 275px;
+    height: 275px;
+    position: absolute;
+    top: 7.5px;
+    left: 7.5px;
+    z-index: 3;
+    transition: all 1s;
+}
+
+.player-album-art.playing {
+    animation: sleeveoff 0.5s forwards ease-in;
+}
+
+@keyframes sleeveoff {
+    from {transform: translateX(0);}
+    to {transform: translateX(-100vw);}
+}
+
+.player-album-art.hidden {
+    display: none;
+}
+
+.player-album-art.stopped {
+    animation: sleeveon 0.5s forwards ease-out;
+}
+
+@keyframes sleeveon {
+    from {transform: translateX(-150vw);}
+    to {transform: translateX(0);}
+}
+
+.player-album-art img {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.album-cover-overlay {
+    width: 100%;
+    height: 100%;
+    background: url(../images/graphics/—Pngtree—transparent\ smooth\ polyethylene\ plastic\ warp_6851311.png) center center / cover;
+    position: absolute;
+    z-index: 4;
+    opacity: 0.5;
+}
+
+/* full player seek slider */
+
+#re-player-seek {
+    width: 100%;
+    padding: 12.5px 5px 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* full player controls containers */
+
+#re-player-ctrls-1, #re-player-ctrls-2 {
+    width: 100%;
+}
+
+.player-controls {
+    width: 100%;
+    padding: 15px 10px 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.secondary-ctrls {
+    /* justify-content: space-between; */
+    padding: 5px 10px;
+}
+
+/* track information section */
+
+#re-player-info {
+    width: 290px;
+    height: 115px;
+    background: url(../images/u_symbol_dark_grey.png) center center / contain;
+    box-shadow: inset 3px 3px 6px #0a0a0a,
+                inset -3px -3px 6px #404348;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.curr-track-name {
+    padding: 15px 0 5px;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
+    font-size: 1.5rem;
+}
+
+.curr-track-artist {
+    padding-bottom: 5px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
+    font-size: 1.125rem;
+}
+
+.curr-track-album {
+    padding-bottom: 5px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    /* font-size: 0.875rem; */
+    text-transform: uppercase;
+}
+
+/* full player volume controls */
+
+#re-player-vol {
+    width: 180px;
+    padding: 0;
+}
+
+.secondary-ctrls .mute-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+}
+
+.secondary-ctrls .mute-btn:active {
+    font-size: 0.95rem;
+}
+
+#re-player-vol .volume-output {
+    text-shadow: none;
+}
+
+/* track status information windows */
+
+.track-status {
+    width: 100%;
+    padding: 0 10px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.tracklist-info, .loop-info {
+    width: 49%;
+    height: 30px;
+    padding: 2.5px 0;
+    background: #000;
+    box-shadow: inset 2px 2px 4px #0a0a0a,
+                inset -2px -2px 4px #404348;
+    text-align: center;
+}
+
+/* tracklist popup container */
+
+.tracklist-menu {
+    width: 100%;
+    padding: 0 5px;
+    position: absolute;
+    bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* tracklist popup menu */
+
+#re-player-tracklist {
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    padding: 0px 6px 0 3px;
+    background: url(../images/u_symbol_dark_grey.png) no-repeat center center / contain, #000;
+    box-shadow: inset 3px 3px 6px #0a0a0a,
+                inset -3px -3px 6px #404348;
+    transition: all 0.25s;
+
+    display: flex;
+    align-items: center;
+}
+
+#re-player-tracklist.re-player-open {
+    height: 195px;
+}
+
+/* tracklist buttons container */
+
+.re-list-btns {
+    width: 100%;
+    height: 185px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    scrollbar-color: rgba(255, 255, 255, 0.2) #111214;
+    scrollbar-width: thin;
+}
+
+/* tracklist buttons */
+
+.re-list-btns .tracklist-btn {
+    padding: 3px 5px;
+
+    display: flex;
+    align-items: center;
+}
+
+.re-list-btns .num-span {
+    width: 12.5px;
+}
+
+.re-list-btns img {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+}
+
+.re-list-btns .track-length {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-52.5%);
+    font-size: 0.8rem;
+}
+
+/* tracklist scrollbar */
+
+.re-list-btns::-webkit-scrollbar {
+    width: 10px;
+}
+
+.re-list-btns::-webkit-scrollbar-track {
+    background: #111214;
+    border-radius: 100vw;
+}
+
+.re-list-btns::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 0.5px solid #000;
+    border-radius: 100vw;
+}
+
+.re-list-btns::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* tracklist popup toggle button */
+
+.tracklist-menu-btn {
+    width: 160px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.tracklist-menu-btn:hover {
+    color: #fff;
+}
+
+.tracklist-menu-btn:active .menu-btn-text {
+    font-size: 1.2rem;
+}
+
+.tracklist-menu-btn:active .menu-icon {
+    width: 25px;
+}
+
+.tracklist-menu-btn:active .menu-icon span {
+    height: 3px;
+}
+
+.tracklist-menu-btn:active .menu-icon span:nth-of-type(2) {
+    margin: 4px 0;
+}
+
+/* external link buttons */
+
+.re-spotify-link, .re-youtube-link {
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.re-spotify-link {
+    left: 15px;
+}
+
+.re-youtube-link {
+    right: 15px;
+}
+
+.re-spotify-link a, .re-youtube-link a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #0a0a0a;
+    background: linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: 5px 5px 10px #111214,
+                -3px -3px 6px #36383c,
+                inset 4px 4px 8px #404348,
+                inset -4px -4px 8px #111214;
+    
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.re-spotify-link a:hover, .re-youtube-link a:hover {
+    color: #fff;
+}
+
+.re-spotify-link a:active, .re-youtube-link a:active {
+    box-shadow: 5px 5px 10px #111214,
+                -3px -3px 6px #36383c,
+                inset -4px -4px 8px #404348,
+                inset 4px 4px 8px #111214;
+    font-size: 1.2rem;
+}
+
+/* full player page footer */
+
+#re-player-foot {
+    display: flex;
+    justify-content: center;
+}
+
+.re-foot-content {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* -------- old music page styles -------- */
+
+#fossils img, #too-late img, #fossils-listen audio {
+    width: 260px;
 }
 
 #fossils-listen audio {
@@ -485,7 +1554,11 @@ summary::marker {
     height: 20px;
 }
 
-/* video page */
+            /************************************/
+            /*                                  */
+            /* ----------- Video page --------- */
+            /*                                  */
+            /************************************/
 
 #video h2 {
     text-transform: uppercase;
@@ -541,7 +1614,13 @@ summary::marker {
     height: 100%;
 }
 
-/* news & events page - general page styles */
+            /************************************/
+            /*                                  */
+            /* ------ News & Events page ------ */
+            /*                                  */
+            /************************************/
+
+/* --------- general page styles ---------- */
 
 .news-page-main-header {
     background-color: #000;
@@ -614,9 +1693,17 @@ summary::marker {
     position: relative;
     width: 100%;
     padding: 10px 0;
-    font-family: 'Skranji', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
     font-size: 1.175rem;
     scroll-margin-top: 135px;
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .article-toggle-btn:hover {
+        color: #8b817f;
+    }
 }
 
 .dropdown-arrow-tab {
@@ -688,7 +1775,11 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     font-size: 1.125rem;
 }
 
-/* news items only */
+.news-item-main a, .gig-listing-main a {
+    font-weight: 700;
+}
+
+/* --------- news items ----------- */
 
 .news-item-main section {
     display: flex;
@@ -698,8 +1789,10 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .news-item-main span {
-    font-family: 'Skranji', sans-serif;
-    font-weight: 400;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
+    /* font-weight: 400; */
 }
 
 .news-item-main img {
@@ -748,7 +1841,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     margin-top: 0;
 }
 
-/* gig listings only */
+/* --------- gig listings ---------- */
 
 .gig-listing-main section {
     display: flex;
@@ -777,7 +1870,13 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     text-decoration: underline;
 }
 
-/* gallery page */
+            /************************************/
+            /*                                  */
+            /* --------- Gallery page --------- */
+            /*                                  */
+            /************************************/
+
+/* --------- general styles ---------- */
 
 #gallery {
     text-align: center;
@@ -802,7 +1901,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     text-decoration: underline;
 }
 
-/* image carousel */
+/* --------- image carousels ---------- */
 
 .gallery-carousel {
     margin-top: 10px;
@@ -810,6 +1909,8 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     display: flex;
     flex-direction: column;
 }
+
+/* main carousel window */
 
 .gallery-active-section {
     height: 400px;
@@ -824,6 +1925,8 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     display: flex;
     align-self: center;
 }
+
+/* main image container */
 
 .gallery-active-img-wrap {
     position: absolute;
@@ -854,6 +1957,8 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* previous/next button comtainers */
+
 .prev-btn-container, .next-btn-container {
     position: absolute;
     height: 100%;
@@ -865,6 +1970,10 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 .next-btn-container {
     right: 0;
 }
+
+/* ---------- buttons ----------- */
+
+/* prev/next buttons */
 
 .prev-btn, .next-btn {
     margin: 15px;
@@ -1022,7 +2131,13 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     padding: 5px;
 }
 
-/* contact page */
+            /************************************/
+            /*                                  */
+            /* --------- Contact page --------- */
+            /*                                  */
+            /************************************/
+
+/* ---------- general styles ----------- */
 
 #contact-box {
     margin: 20px 0 40px;
@@ -1031,7 +2146,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     justify-content: space-evenly;
 }
 
-/* signup form */
+/* ------------ signup form ------------ */
 
 #signup {
     background: url(../images/moe_sil_bg_1.jpg) no-repeat center center / cover;
@@ -1057,7 +2172,9 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .signup-form legend span {
-    font-family: 'Skranji', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
 }
 
 .text-input {
@@ -1123,7 +2240,7 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     }
 }
 
-/* contact information */
+/* ---------- contact information ----------- */
 
 #management, #contact-info {
     width: 400px;
@@ -1147,14 +2264,16 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 }
 
 .email-link span {
-    font-family: 'Skranji', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    /* font-family: 'Skranji', sans-serif; */
 }
 
 #contact-info img {
     width: 100px;
 }
 
-/* dummy page for signup form */
+/* --------- dummy page for signup form ----------- */
 
 #dummy {
     margin: 0 20px;
@@ -1192,41 +2311,13 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
     text-decoration: underline;
 }
 
-/* footer */
+            /************************************/
+            /*                                  */
+            /* --------- Media queries -------- */
+            /*                                  */
+            /************************************/
 
-footer {
-    background-color: #000;
-    height: 100px;
-}
-
-.social-networks {
-    line-height: 3rem;
-    font-size: 0.875rem;
-    list-style-type: none;
-
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.social-networks i {
-    color: #fff;
-}
-
-@media(hover: hover) and (pointer: fine) {
-    .social-networks i:hover {
-        color: #8b817f;
-    }
-}
-
-#copyright-statement {
-    font-family: 'Skranji', sans-serif;
-    color: inherit;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    text-align: center;
-}
-
-/* media queries for responsive design on various screen sizes */
+/* ---------- for responsive design ----------- */
 
 /* for medium-large screens, up to 962 pixels wide */
 
@@ -1239,9 +2330,9 @@ footer {
             
 }
 
-/* for larger screens, wider than 800 pixels */
+/* for larger screens, wider than 820 pixels */
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 821px) {
 
     /* header navigation menu */
     #main-menu-btn {
@@ -1252,17 +2343,11 @@ footer {
     #main-menu-dropdown {
         display: none;
     }
-
-    /* music page */
-    #albums hr {
-        display: none;
-    }
-    
 }
 
-/* for medium-sized screens, up to 800 pixels wide */
+/* for medium-sized screens, up to 820 pixels wide */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 820px) {
 
     /* header navigation menu */
     
@@ -1291,6 +2376,22 @@ footer {
     #main-menu-inline {
         display: none;
     }
+}
+
+/* for larger screens, wider than 800 pixels */
+
+@media screen and (min-width: 801px) {
+
+    /* music page */
+    #albums hr {
+        display: none;
+    }
+    
+}
+
+/* for medium-sized screens, up to 800 pixels wide */
+
+@media screen and (max-width: 800px) {
 
     /* band page */
 
@@ -1353,6 +2454,27 @@ footer {
 
 }
 
+/* for medium to smaller screens, up to 620 pixels wide (music
+   player breakpoint) */
+
+@media screen and (max-width: 620px) {
+
+    /* music player */
+
+    #re-player-1st {
+        border-radius: 5px 5px 0 0;
+        box-shadow: inset 4px 4px 8px #404348,
+                    inset -4px 0 8px #111214;
+    }
+    
+    #re-player-2nd {
+        border-radius: 0 0 5px 5px;
+        box-shadow: inset 4px 0 8px #404348,
+                    inset -4px -4px 8px #111214;
+        position: relative;    
+    }
+}
+
 /* for medium to smaller screens, wider than 600 pixels */
 
 @media screen and (min-width: 601px) {
@@ -1373,6 +2495,11 @@ footer {
 /* for smaller screens, up to 600 pixels wide */
 
 @media screen and (max-width: 600px) {
+
+    /* header navigation menu */
+    /* #main-menu {
+        font-size: 1rem;
+    } */
 
     /* band page */
 
