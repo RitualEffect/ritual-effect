@@ -4,17 +4,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // -------------------- Main menu
 
-    // Get main menu from the DOM and pass to handler functions
+    /* Get main menu from the DOM and pass to handler functions if
+       found */
 
     const menu = document.querySelector('#main-menu');
 
-    // Set initial aria properties based on screen size
+    if (menu) {
+        // Set initial aria properties based on screen size
+        handleMainMenuAria (menu);
 
-    handleMainMenuAria (menu);
+        // Handle dropdown menu behaviour (event listeners)
+        handleMainMenuDropdown(menu);
+    }
 
-    // Handle dropdown menu behaviour (event listeners)
+    // ---------------------Music page
 
-    handleMainMenuDropdown(menu);
+    /* Get all popup music players (sample tracks) from the page
+       and if found, pass each one to handler function */
+
+    const players = document.querySelectorAll('.music-container');
+
+    if (players.length > 0) {
+        for (let player of players) {
+            handleMusicPlayerPopup(player);
+        }
+    }
 
     // ---------------- News / Events page
 
@@ -31,9 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ---------------------- Footer
 
-    // Set current year in copyright statement
+    // Set current year in copyright statement if found
 
-    document.querySelector('#copyright-year').innerHTML = new Date().getFullYear();
+    const copYear = document.querySelector('#copyright-year');
+    
+    if (copYear) {
+        copYear.innerHTML = new Date().getFullYear();
+    }
 
 });
 
@@ -112,7 +130,8 @@ function handleMainMenuDropdown(menu) {
  * If popup visible, set toggle button's aria-expanded attribute to
  * true, set popup's aria-hidden attribute to false and remove each
  * focusable elements' tabindex attributes so that they become
- * focusable again.
+ * focusable again. Add one-time, 'focusout' event listener to
+ * toggle button to set focus to specified element in popup, if any.
  * 
  * @param {HTMLElement} toggleButton - Button controlling popup element to be handled.
  * @param {string} popupOpenClass - Class name denoting popup element visible.
@@ -120,7 +139,8 @@ function handleMainMenuDropdown(menu) {
 function handlePopupAria (toggleButton, popupOpenClass) {
     const popupId = toggleButton.getAttribute('aria-controls');
     const popup = document.querySelector(`#${popupId}`);
-    const elements = popup.querySelectorAll('a', 'audio', 'button', 'iframe');
+    const elements = popup.querySelectorAll('a, audio, button, iframe, input');
+    const focusElement = popup.querySelector('.first-focus');
     
     if (!popup.classList.contains(popupOpenClass)) {
         toggleButton.setAttribute('aria-expanded', false);
@@ -134,6 +154,12 @@ function handlePopupAria (toggleButton, popupOpenClass) {
         for (let el of elements) {
             el.removeAttribute('tabindex');
         }
+
+        toggleButton.addEventListener('focusout', () => {
+            if (focusElement) {
+                focusElement.focus();
+            }
+        }, {once: true});
     }
 }
 
@@ -167,29 +193,28 @@ function handlePopup(toggleButton, togglerActiveClass, popupOpenClass) {
     toggleButton.addEventListener('click', throttleEvent(e => {
         // Only target entire button element
         let targetButton = e.target.closest('button');
+        if (!targetButton) return;
 
-        if (targetButton) {
-            /* Specific handling of news & events page article
-               dropdowns */
-            if (popup.classList.contains('news-item-main') || popup.classList.contains('gig-listing-main')) {
-                if (popup.classList.contains(popupOpenClass)) {
-                    handleCollapseArticle(toggleButton, togglerActiveClass, popupOpenClass);
-                } else {
-                    popup.classList.add(popupOpenClass);
-                    toggleButton.classList.add(togglerActiveClass);
-                }
-            // Handling of generic popups
+        /* Specific handling of news & events page article
+           dropdowns */
+        if (popup.classList.contains('news-item-main') || popup.classList.contains('gig-listing-main')) {
+            if (popup.classList.contains(popupOpenClass)) {
+                handleCollapseArticle(toggleButton, togglerActiveClass, popupOpenClass);
             } else {
-                popup.classList.toggle(popupOpenClass);
-                toggleButton.classList.toggle(togglerActiveClass);
+                popup.classList.add(popupOpenClass);
+                toggleButton.classList.add(togglerActiveClass);
             }
+        // Handling of generic popups
+        } else {
+            popup.classList.toggle(popupOpenClass);
+            toggleButton.classList.toggle(togglerActiveClass);
+        }
             
-            handlePopupAria(toggleButton, popupOpenClass);
-        } else return;
+        handlePopupAria(toggleButton, popupOpenClass);
 
-        /* Exempt news & events page article dropdowns from closing
-           on outside events */
-        if (!toggleButton.classList.contains('article-toggle-btn')) {
+        /* Exempt news & events page article dropdowns and music
+           page mini player popups from closing on outside events */
+        if (!(toggleButton.classList.contains('article-toggle-btn') || toggleButton.classList.contains('mini-player-btn'))) {
             handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenClass);
         }
     // Pass 300ms time interval to throttleEvent function
@@ -265,6 +290,34 @@ function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenCla
 }
 
 // --------------- Popups & dropdowns functions end
+
+// --------------------- Music page functions
+
+/**
+ * Get passed-in popup's toggle button and set it's 'active' class
+ * name based on music player it pertains to.
+ * 
+ * Pass toggle button and class name(s) to handlePopup and
+ * handlePopupAria functions.
+ * 
+ * @param {HTMLElement} player - Element containing or consisting of music player popup to be handled.
+ */
+function handleMusicPlayerPopup(player) {
+    const playerToggleButton = player.querySelector('.menu-toggle-btn');
+    const buttonActiveClass = 'menu-toggle-btn-active';
+    let playerOpenClass;
+    if (player.classList.contains('mini-player-container')) {
+        playerOpenClass = 'mini-player-open';
+    }
+    if (player.id === 're-player') {
+        playerOpenClass = 're-player-open';
+    }
+
+    handlePopupAria(playerToggleButton, playerOpenClass);
+    handlePopup(playerToggleButton, buttonActiveClass, playerOpenClass);
+}
+
+// ------------------- Music page functions end
 
 // ----------------- News / Events page functions
 
