@@ -317,9 +317,18 @@ function handleMusicPlayer(player) {
                 if (trackIndex != 0) {
                     startTracks = false;
                 }
+                // Reset vinyl mockup if appropriate
+                if (record) {
+                    record.classList.add('stopped');
+                }
                 // Continue playback if appropriate
                 if (isPlaying) {
-                    audio.play();
+                    setTimeout(() => {
+                        if (record) {
+                            record.classList.remove('stopped');
+                        }
+                        audio.play();
+                    }, 500);
                 }
             }
         }
