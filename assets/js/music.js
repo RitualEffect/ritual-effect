@@ -429,6 +429,8 @@ function handleMusicPlayer(player) {
     // ... while seeking ...
     audio.addEventListener('seeking', () => {
         seek = true;
+        // Stop visualiser
+        visualiser.cancel();
         if (record) {
             handleRecordSeek(audio, record, seek);
         }
@@ -436,6 +438,8 @@ function handleMusicPlayer(player) {
     // ... when finished seeking ...
     audio.addEventListener('seeked', () => {
         seek = false;
+        // Start visualiser
+        visualiser.start();
         if (record && isPlaying) {
             handleRecordSeek(audio, record, seek);
         }
