@@ -141,8 +141,6 @@ function handleMusicPlayer(player) {
     const record = player.querySelector('.player-vinyl');
     // Get album sleeve mockup div
     const sleeve = player.querySelector('.player-album-art');
-    // Get audio visualiser display spans
-    const visualiserDivs = player.querySelectorAll('.player-visualiser div div');
     // Get volume setting display span
     const volumeDisplay = player.querySelector('.volume-output');
     // Get loop info window display span
@@ -164,53 +162,10 @@ function handleMusicPlayer(player) {
     if (loopStatusWindow) {
         loopStatusWindow.innerHTML = "Looping Off";
     }
-    /* Set up audio context, source, analyser and data array for
-       visualiser */
-    // Create new audio context
-    const audioCntxt = new AudioContext();
-    // Create audio source node from passed-in audio element
-    const audioSrc = audioCntxt.createMediaElementSource(audio);
-    // Create analyser node
-    const analyser = audioCntxt.createAnalyser();
-    // Connect nodes to destination node (e.g. speaker)
-    audioSrc.connect(analyser);
-    analyser.connect(audioCntxt.destination);
-    /* Set analyser fft size...
-       Analyser node captures audio data using a Fast Fourier
-       Transform (fft) in a certain frequency domain, depending on
-       specified AnalyserNode.fftSize property value (i.e. total
-       number of data points per specified interval: must be power
-       of 2 btw 2^5 & 2^15 - if no value specified, default is 2^11
-       = 2048). Higher value results in more details in frequency
-       domain but fewer in time domain. As we're concerned with
-       frequency plotted in bar graphs, let's opt for 128 to limit
-       restrictions on bar size vs container width.
-    */
-    analyser.fftSize = 128;
-    /* Construct frequency data array...
-       To get byte-size frequency data, we'll be using
-       AnalyserNode.getByteFrequencyData() method which produces
-       8-bit unsigned integers, so standard array won't do - we need
-       Uint8Array typed array which restricts each item to size of
-       8 bits (1 byte) and requires length argument. Our method
-       returns an actual number of data points represented by
-       AnalyserNode.frequencyBinCount value, which is half fftSize,
-       so we call Uint8Array() with frequencyBinCount as its length
-       argument - this is how many data points we will be
-       collecting for our fft size (i.e. 256) and how many bars will
-       be in each visualiser span.
-    */
-    const bufferLength = analyser.frequencyBinCount;
-    const frequencyDataArray = new Uint8Array(bufferLength);
-    /* Initialise visualiser function so that methods can be called
-       by play/pause and stop buttons */
-    let visualiser = createVisuals(analyser, frequencyDataArray, visualiserDivs);
-
+    
     // Initialise player...
     // Call function to dynamically add player's tracklist buttons
     addTracklistButtons(tracklist, tracklistContainer);
-    // Call function to dynamically add bars to visualiser spans
-    addVisualiserBars(frequencyDataArray, visualiserDivs);
     // Load first track
     loadTrack(player, audio, tracklist, trackIndex);
     // Set initial volume
@@ -237,20 +192,13 @@ function handleMusicPlayer(player) {
                 // Play
                 if (!isPlaying) {
                     isPlaying = true;
-                    /* Resume audio context (suspended by browser
-                       default (autoplay policy) until user gesture
-                       ('click') is received) */
-                    audioCntxt.resume().then(() => {
-                        // Mini player - basic functionality
-                        if (player.classList.contains('mini-player')) {
-                            playPause(audio, buttonIcon, isPlaying);
-                        // Full featured player - vinyl mockup, etc.
-                        } else {
-                            handlePlay(audio, buttonIcon, sleeve, record);
-                            // Create visualiser display
-                            visualiser.start();
-                        }
-                    });
+                    // Mini player - basic functionality
+                    if (player.classList.contains('mini-player')) {
+                        playPause(audio, buttonIcon, isPlaying);
+                    // Full featured player - vinyl mockup, etc.
+                    } else {
+                        handlePlay(audio, buttonIcon, sleeve, record);
+                    }
                 // Pause
                 } else {
                     isPlaying = false;
@@ -259,11 +207,6 @@ function handleMusicPlayer(player) {
                     if (record) {
                         record.classList.remove('playing');
                     }
-                    // Stop visualiser display
-                    visualiser.cancel();
-                    // if (visualiserDivs) {
-                    //     cancelAnimationFrame(runVisualiser);
-                    // }
                 }
             } else if (targetButton.classList.contains('stop-btn')) {
                 // Stop button handler...
@@ -273,12 +216,7 @@ function handleMusicPlayer(player) {
                 playPause(audio, buttonIcon, isPlaying);
                 // Reset relevant displays
                 handleStop(audio, sleeve, record, seekSlider, activeTimeDisplay);
-                // Stop visualiser display
-                visualiser.cancel();
-                // cancelAnimationFrame(runVisualiser);
             } else if (targetButton.classList.contains('prev-track-btn') || targetButton.classList.contains('next-track-btn')) {
-                // Stop visualiser display (restarts on 'canplay')
-                visualiser.cancel();
                 // Previous / next buttons handler...
                 // Signal no longer at start of tracklist
                 startTracks = false;
@@ -296,7 +234,7 @@ function handleMusicPlayer(player) {
                             record.classList.remove('stopped');
                         }
                         audio.play();
-                    }, 1000);
+                    }, 500);
                 }
             } else if (targetButton.classList.contains('mute-btn')) {
                 // Mute button handler
@@ -388,11 +326,8 @@ function handleMusicPlayer(player) {
     });
 
     /* Audio 'canplay' listener for events that rely on audio track
-       being loaded, particularly: update of tracklist buttons;
-       analyser collection of frequency data for visualiser (eventually) */
+       being loaded, particularly: update of tracklist buttons; */
     audio.addEventListener('canplay', () => {
-        // Create visualiser display
-        visualiser.start();
         // Get tracklist buttons
         const listButtons = tracklistContainer.querySelectorAll('.tracklist-btn');
         // Check if created yet
@@ -415,7 +350,7 @@ function handleMusicPlayer(player) {
         }
         /* Reset time display and seek position for newly loaded
            track (in case track changed while playback paused) */
-            handleTrackTimeUpdate(audio, seekSlider, activeTimeDisplay);
+        handleTrackTimeUpdate(audio, seekSlider, activeTimeDisplay);
     });
     // Time update listener for audio track
     audio.addEventListener('timeupdate', () => {
@@ -429,8 +364,6 @@ function handleMusicPlayer(player) {
     // ... while seeking ...
     audio.addEventListener('seeking', () => {
         seek = true;
-        // Stop visualiser
-        visualiser.cancel();
         if (record) {
             handleRecordSeek(audio, record, seek);
         }
@@ -438,8 +371,6 @@ function handleMusicPlayer(player) {
     // ... when finished seeking ...
     audio.addEventListener('seeked', () => {
         seek = false;
-        // Start visualiser
-        visualiser.start();
         if (record && isPlaying) {
             handleRecordSeek(audio, record, seek);
         }
@@ -553,16 +484,6 @@ function addTracklistButtons(tracklist, tracklistContainer) {
     }
 }
 
-function addVisualiserBars(frequencyDataArray, visualiserDivs) {
-    for (let div of visualiserDivs) {
-        for (let i = 0; i < frequencyDataArray.length; i++) {
-            const bar = document.createElement('div');
-            bar.classList.add(`bar${i}`, 'visbar');
-            div.appendChild(bar);
-        }
-    }
-}
-
 /**
  * Load audio source and update player's display/visual elements.
  * 
@@ -617,7 +538,7 @@ function loadTrack(player, audio, tracklist, trackIndex) {
 /**
  * Play or pause current audio track and switch button icon.
  * 
- *  @param {HTMLAudioElement} audio - Audio element for handling mp3 files. 
+ * @param {HTMLAudioElement} audio - Audio element for handling mp3 files. 
  * @param {HTMLElement} buttonIcon - Play/pause button icon.
  * @param {boolean} isPlaying - Boolean variable indicating audio play state.
  */
@@ -635,7 +556,7 @@ function playPause(audio, buttonIcon, isPlaying) {
  * Handle timing of current audio track playback and animation of
  * vinyl record & album cover mockups.
  * 
- *  @param {HTMLAudioElement} audio - Audio element for handling mp3 files. 
+ * @param {HTMLAudioElement} audio - Audio element for handling mp3 files. 
  * @param {HTMLElement} buttonIcon - Play/pause button icon.
  * @param {HTMLElement} sleeve - Div element containing album cover mockup.
  * @param {HTMLElement} record - Div element containing vinyl record mockup.
@@ -908,34 +829,6 @@ function handleTracklist(button, buttonIndex, trackIndex, trackLength) {
         }
         if (trackInfo) {
             trackInfo.innerHTML = trackLength;
-        }
-    }
-}
-
-function createVisuals(analyser, frequencyDataArray, visualiserDivs) {
-    let runVisualiser;
-    const create = () => {
-        analyser.getByteFrequencyData(frequencyDataArray);
-        for (let div of visualiserDivs) {
-            const divHeight = Math.floor(div.getBoundingClientRect().height);
-            const heightRatio = divHeight / 255;
-            for (let i = 0; i < frequencyDataArray.length; i++) {
-                const frequency = frequencyDataArray[i] || 0;
-                const barHeight = (frequency * heightRatio) / 1.1;
-                let bar = div.querySelector(`.bar${i}`);
-                bar.style.height = `${barHeight}px`;
-            }
-        }
-
-        runVisualiser = requestAnimationFrame(create);
-    }
-
-    return {
-        start: () => {
-            runVisualiser = requestAnimationFrame(create);
-        },
-        cancel: () => {
-            cancelAnimationFrame(runVisualiser);
         }
     }
 }
