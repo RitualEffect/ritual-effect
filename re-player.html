@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ritual Effect, alternative rock band based in Dublin, Ireland">
+    <meta name="keywords" content="Ritual Effect, band, music, rock, alternative, alternative rock, hard rock, grunge, metal, ireland, dublin">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="194x194" href="assets/images/icons/favicon-194x194.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="assets/images/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- favicons end -->
+    <title>Ritual Effect</title>
+</head>
+<body>
+    
+    <header id="re-player-head">
+        
+        <div id="header-logo">
+            <a href="index.html">
+                <img src="assets/images/ritual_effect_logo_white_transbg.png" alt="Ritual Effect logo">
+            </a>
+        </div>
+    
+    </header>
+
+    <main id="re-player-main" class="general-main-body">
+
+        <div id="re-player" class="music-player music-container">
+
+            <!-- audio element -->
+            <audio src="assets/audio/fossils/10_decomposition.mp3" aria-label="Fossils sample track - Decomposition">
+                <p>Unfortunately, your browser does not support HTML5 audio. Why not stream the whole album instead?</p>
+            </audio>
+
+            <!-- player section 1 -->
+            <section id="re-player-1st">
+                <!-- animated vinyl record and audio visualiser -->
+                <section id="re-player-visuals">
+                    <!-- vinyl record mockup -->
+                    <div class="player-vinyl">
+                        <!-- vinyl rings -->
+                        <div class="ring1 player-vinyl-ring"></div>
+                        <div class="ring2 player-vinyl-ring"></div>
+                        <div class="ring3 player-vinyl-ring"></div>
+                        <div class="ring4 player-vinyl-ring"></div>
+                        <div class="ring5 player-vinyl-ring"></div>
+                        <!-- vinyl label -->
+                        <img class="vinyl-inset" src="assets/images/album-art/fossils_cover.jpg" alt="Album art inset for vinyl record mockup">
+                    </div>
+                    <!-- vinyl centre hole -->
+                    <div class="vinyl-hole"></div>
+                    <!-- vinyl sheen overlay -->
+                    <div class="vinyl-overlay"></div>
+                    <!-- audio visualiser -->
+                    <div class="player-visualiser">
+                        <div class="visualiser-top">
+                            <span class="visualiser-tl"></span>
+                            <span class="visualiser-tr"></span>
+                        </div>
+                        <div class="visualiser-bottom">
+                            <span class="visualiser-bl"></span>
+                            <span class="visualiser-br"></span>
+                        </div>
+                    </div>
+                    <!-- album cover mockup -->
+                    <div class="player-album-art stopped">
+                        <img class="album-cover" src="assets/images/album-art/fossils_cover.jpg" alt="Album art for album cover mockup">
+                        <div class="album-cover-overlay"></div>
+                    </div>
+                </section>
+                <!-- seek slider -->
+                <section id="re-player-seek" class="seek-control">
+                    <!-- track current time -->
+                    <span class="active-time track-time">00:00</span>
+                    <!-- slider -->
+                    <input type="range" min="0" max="100" step="0.1" value="0" class="seek-slider re-player-slider player-slider" aria-label="Adjust current track time">
+                    <!-- track duration -->
+                    <span class="active-length track-length">00:00</span>
+                </section>
+            </section>
+
+            <!-- player section 2 -->
+            <section id="re-player-2nd">
+                <!-- main controls -->
+                <section id="re-player-ctrls-1">
+                    <div class="primary-ctrls player-controls">
+                        <button class="prev-track-btn player-ctrl-btn player-btn" aria-label="Previous track">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="play-pause-btn player-ctrl-btn player-btn" aria-label="Play or pause track">
+                            <i class="fas fa-play"></i>
+                            <!-- <i class="fas fa-pause"></i> -->
+                        </button>
+                        <button class="next-track-btn player-ctrl-btn player-btn" aria-label="Next track">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+                </section>
+                <!-- current ttrack information -->
+                <section id="re-player-info">
+                    <p class="curr-track-name">Decomposition</p>
+                    <p class="curr-track-artist">Ritual Effect</p>
+                    <p class="curr-track-album">Fossils</p>
+                </section>
+                <!-- extra controls -->
+                <section id="re-player-ctrls-2">                
+                    <div class="secondary-ctrls player-controls">
+                        <!-- volume controls -->
+                        <div id="re-player-vol" class="volume-control">
+                            <!-- mute button -->
+                            <button class="mute-btn player-ctrl-btn player-btn" aria-label="Mute volume">
+                                <i class="fas fa-volume-up"></i>
+                                <!-- <i class="fas fa-volume-mute"></i> -->
+                            </button>
+                            <!-- volume slider -->
+                            <input type="range" min="0" max="100" step="1" class="volume-slider re-player-slider player-slider" aria-label="Adjust volume">
+                            <!-- current volume display -->
+                            <span class="volume-output"></span>
+                        </div>
+                        <!-- stop button -->
+                        <button class="stop-btn player-ctrl-btn player-btn" aria-label="Stop track">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        <!-- loop button -->
+                        <button class="loop-btn player-ctrl-btn player-btn" aria-label="Loop track">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    <div class="track-status">
+                        <span class="tracklist-info"></span>
+                        <span class="loop-info">Tracklist Looped</span>
+                    </div>
+                </section>
+                <!-- tracklist menu -->
+                <section class="tracklist-menu popup-container">
+                    <!-- tracklist menu popup -->
+                    <div id="re-player-tracklist" aria-hidden="true">
+                        <div class="re-list-btns tracklist"></div>
+                    </div>
+                    <!-- tracklist toggle button -->
+                    <button class="tracklist-menu-btn player-btn menu-toggle-btn toggle-btn" aria-expanded="false" aria-controls="re-player-tracklist">
+                        <span class="menu-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span class="menu-btn-text">Tracklist</span>
+                    </button>
+                </section>
+                <div class="re-spotify-link">
+                    <a href="https://open.spotify.com/artist/5qX3SpXJjpVVjVjmGVFwTL" target="_blank" rel="noopener" aria-label="Stream our music on spotify (opens in a new tab)"><i class="fab fa-spotify"></i></a>
+                </div>
+                <div class="re-youtube-link">
+                    <a href="https://www.youtube.com/channel/UCXrYUA6jJI4EcwqTGKXV8Pw" target="_blank" rel="noopener" aria-label="Watch us on youtube (opens in a new tab)"><i class="fab fa-youtube"></i></a>
+                </div>
+            </section>
+            
+        </div>
+
+    </main>
+
+    <footer id="re-player-foot">
+        <div class="re-foot-content">
+            <!-- footer links to external sites/pages related to band -->
+            <ul class="social-networks">
+                <li>
+                    <a href="https://soundcloud.com/user-401438334-115246783" target="_blank" rel="noopener" aria-label="Stream our music on soundcloud (opens in a new tab)"><i class="fab fa-soundcloud"></i></a>
+                </li>
+                <li>
+                    <a href="https://open.spotify.com/artist/5qX3SpXJjpVVjVjmGVFwTL" target="_blank" rel="noopener" aria-label="Stream our music on spotify (opens in a new tab)"><i class="fab fa-spotify"></i></a>
+                </li>
+                <li>
+                    <a href="https://music.apple.com/us/artist/ritual-effect/1462308458" target="_blank" rel="noopener" aria-label="Stream our music on Apple Music (opens in a new tab)"><i class="fab fa-apple"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCXrYUA6jJI4EcwqTGKXV8Pw" target="_blank" rel="noopener" aria-label="Watch us on youtube (opens in a new tab)"><i class="fab fa-youtube"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/ritualeffect/" target="_blank" rel="noopener" aria-label="Visit our facebook page (opens in a new tab)"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/ritualeffect" target="_blank" rel="noopener" aria-label="Visit our twitter page (opens in a new tab)"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ritualeffect/?hl=en" target="_blank" rel="noopener" aria-label="Visit our instagram page (opens in a new tab)"><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+            <!-- copyright statement -->
+            <div id="copyright-statement">
+                &copy; <span id="copyright-year"></span> Ritual Effect: all rights reserved
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/e5bba26aba.js" crossorigin="anonymous"></script>
+
+    <!-- custom scripts -->
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/music.js"></script>
+
+</body>
+</html>
