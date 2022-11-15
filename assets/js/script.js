@@ -300,6 +300,9 @@ function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenCla
  * Pass toggle button and class name(s) to handlePopup and
  * handlePopupAria functions.
  * 
+ * Add an extra, one-time 'click' event listener to the toggle
+ * button, calling the handleMusicAlert handler.
+ * 
  * @param {HTMLElement} player - Element containing or consisting of music player popup to be handled.
  */
 function handleMusicPlayerPopup(player) {
@@ -315,6 +318,57 @@ function handleMusicPlayerPopup(player) {
 
     handlePopupAria(playerToggleButton, playerOpenClass);
     handlePopup(playerToggleButton, buttonActiveClass, playerOpenClass);
+
+    playerToggleButton.addEventListener('click', handleMusicAlert, {once: true});
+}
+
+/**
+ * Look for popup alert modal and get the button targeted by the
+ * passed-in 'click' event.
+ * 
+ * If button and modal found: display modal; get modal's 'hide'
+ * button and add 'click event listener to it to call
+ * closeMusicAlert handler; set timeout function to call
+ * closeMusicAlert automatically after 30s.
+ * 
+ * @param {event} event - 'Click' event passed in by event listener.
+ * @returns Nothing - exits the function if specific element not found.
+ */
+function handleMusicAlert(event) {
+    const alertModal = document.querySelector('#music-page-alert');
+    const targetButton = event.target.closest('button');
+    if (!targetButton) return;
+
+    if (alertModal && targetButton.classList.contains('mini-player-btn')) {
+        alertModal.classList.remove('hidden');
+        setTimeout(() => {
+            alertModal.classList.add('active');
+        }, 500);
+
+        const hideButton = alertModal.querySelector('#mpm-close-btn');
+        alertModal.addEventListener('click', e => {
+            if (e.target == hideButton) {
+                closeMusicAlert(alertModal);
+            }
+        });
+
+        setTimeout(() => {
+            closeMusicAlert(alertModal);
+        }, 30000);
+    }
+}
+
+/**
+ * Remove the modal's active 'class' and add its 'hidden' class
+ * once it's transitioned offscreen.
+ * 
+ * @param {HTMLElement} alertModal - Popup alert modal div element.
+ */
+function closeMusicAlert(alertModal) {
+    alertModal.classList.remove('active');
+    alertModal.addEventListener('transitionend', () => {
+        alertModal.classList.add('hidden');
+    }, {once: true});
 }
 
 // ------------------- Music page functions end
