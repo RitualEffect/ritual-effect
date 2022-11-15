@@ -211,6 +211,52 @@ input[type="range"]:active::-ms-thumb {
     cursor: pointer;
 }
 
+/* modals */
+
+.popup-modal {
+    background: url('../images/u_symbol_dark_grey.png') no-repeat center center / contain, #000;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 10px;
+    position: fixed;
+    z-index: 6;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.alert-modal {
+    width: 90vw;
+    max-width: 600px;
+    border: 2px solid #2c3136;
+    text-align: center;
+}
+
+.modal-close-btn {
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #0a0a0a;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #2c3136, #1d2023);
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.1),
+                inset 3px 3px 6px #404348,
+                inset -3px -3px 6px #111214;
+    cursor: pointer;
+}
+
+.modal-close-btn:active {
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.1),
+                inset -3px -3px 6px #404348,
+                inset 3px 3px 3px #111214;
+    font-size: 0.95rem;
+}
+
 /* ------------ main header ----------- */
 
 #main-header {
@@ -602,6 +648,35 @@ summary::marker {
             /* ----------- Music page --------- */
             /*                                  */
             /************************************/
+
+/* popup alert */
+
+#music-page-alert {
+    top: 5px;
+    transform: translateY(-105%);
+    transition: all 0.5s;
+
+    align-self: center;
+}
+
+#music-page-alert.active {
+    transform: translateY(0);
+}
+
+#music-page-alert.hidden {
+    display: none;
+}
+
+#music-page-alert .alert-modal-text p {
+    padding-bottom: 7.5px;
+}
+
+#music-page-alert .alert-modal-text p:first-of-type {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding-top: 2.5px;
+}
 
 /* headings */
 
