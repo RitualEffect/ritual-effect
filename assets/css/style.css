@@ -214,13 +214,26 @@ input[type="range"]:active::-ms-thumb {
 /* modals */
 
 .popup-modal {
-    background: url('../images/u_symbol_dark_grey.png') no-repeat center center / contain, #000;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
-    margin: 0 auto;
     padding: 10px;
     position: fixed;
+    left: 0;
     z-index: 6;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.popup-modal-content {
+    width: 90%;
+    max-width: 750px;
+    background: url('../images/u_symbol_dark_grey.png') no-repeat center center / contain, #000;
+    border: 2px solid #2c3136;
+    text-align: center;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -230,12 +243,19 @@ input[type="range"]:active::-ms-thumb {
 .alert-modal {
     width: 90vw;
     max-width: 600px;
+    background: url('../images/u_symbol_dark_grey.png') no-repeat center center / contain, #000;
     border: 2px solid #2c3136;
     text-align: center;
 }
 
-.modal-close-btn {
-    height: 30px;
+.alert-modal .aria-alert {
+    height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.modal-btn {
+    height: 40px;
     padding: 5px 10px;
     border: 1px solid #0a0a0a;
     border-radius: 5px;
@@ -250,11 +270,15 @@ input[type="range"]:active::-ms-thumb {
     cursor: pointer;
 }
 
-.modal-close-btn:active {
+.modal-btn:active {
     box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.1),
                 inset -3px -3px 6px #404348,
                 inset 3px 3px 3px #111214;
     font-size: 0.95rem;
+}
+
+.modal-close-btn {
+    height: 30px;
 }
 
 /* ------------ main header ----------- */
@@ -653,6 +677,7 @@ summary::marker {
 
 #music-page-alert {
     top: 5px;
+    left: auto;
     transform: translateY(-105%);
     transition: all 0.5s;
 
@@ -667,11 +692,11 @@ summary::marker {
     display: none;
 }
 
-#music-page-alert .alert-modal-text p {
+#music-page-alert .modal-text p {
     padding-bottom: 7.5px;
 }
 
-#music-page-alert .alert-modal-text p:first-of-type {
+#music-page-alert .modal-text p:first-of-type {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 700;
     font-size: 1.125rem;
@@ -766,6 +791,52 @@ summary::marker {
 
 .mini-player-btn.menu-toggle-btn-active .menu-icon i {
     font-size: 14px;
+}
+
+/* ful-featured player launch options modal */
+
+#player-launch-modal {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+#player-launch-modal.active {
+    opacity: 1;
+}
+
+#player-launch-modal.hidden {
+    display: none;
+}
+
+#launch-modal-content {
+    min-width: 320px;
+    min-height: 640px;
+}
+
+.launch-options {
+    padding: 10px;
+}
+
+.launch-options .modal-text {
+    padding: 10px 0 20px;
+}
+
+.launch-options h2 {
+    padding-bottom: 10px;
+}
+
+.launch-new-tab-link {
+    padding-top: 15px;
+}
+
+.launch-iframe-link {
+    padding: 15px 0;
+}
+
+#plm-close-btn {
+    margin: 10px 0;
 }
 
 /* streaming links / embeds */
