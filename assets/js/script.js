@@ -289,6 +289,48 @@ function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenCla
     }
 }
 
+/**
+ * Get all focusable elements within passed in element and find
+ * the first and last.
+ * 
+ * Listen for 'tab' or 'shift + tab' keypresses to signify keyboard
+ * navigation and if the active element is first in the list on 
+ * 'shift + tab' (backwards navigation), set focus to the first (and
+ * vice-versa).
+ * 
+ * ** Credit to Hidde de Vries who put this code in his blog:
+ * https://hidde.blog/using-javascript-to-trap-focus-in-an-element/
+ * 
+ * @param {HTMLElement} element - Element (modal, etc) in which focus is to be trapped
+ */
+function trapFocus(element) {
+    const focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
+    const firstFocusableEl = focusableEls[0];  
+    const lastFocusableEl = focusableEls[focusableEls.length - 1];
+  
+    element.addEventListener('keydown', function(e) {
+        let isTabPressed = (e.key === 'Tab' || e.keyCode === 9);
+    
+        if (!isTabPressed) { 
+            return; 
+        }
+    
+        if ( e.shiftKey ) {
+            /* shift + tab */
+                if (document.activeElement === firstFocusableEl) {
+                lastFocusableEl.focus();
+                    e.preventDefault();
+                }
+            } else {
+            /* tab */
+                if (document.activeElement === lastFocusableEl) {
+                firstFocusableEl.focus();
+                    e.preventDefault();
+                }
+            }
+    });
+  }
+
 // --------------- Popups & dropdowns functions end
 
 // --------------------- Music page functions
@@ -300,8 +342,11 @@ function handlePopupExternalEvent(toggleButton, togglerActiveClass, popupOpenCla
  * Pass toggle button and class name(s) to handlePopup and
  * handlePopupAria functions.
  * 
- * Add an extra, one-time 'click' event listener to the toggle
- * button, calling the handleMusicAlert handler.
+ * Add extra, one-time 'click' event listener to toggle button,
+ * calling the handleMusicAlert handler.
+ * 
+ * Get full-featured player launch button from popup and if found,
+ * pass to handleLaunchModal function.
  * 
  * @param {HTMLElement} player - Element containing or consisting of music player popup to be handled.
  */
@@ -320,22 +365,29 @@ function handleMusicPlayerPopup(player) {
     handlePopup(playerToggleButton, buttonActiveClass, playerOpenClass);
 
     playerToggleButton.addEventListener('click', handleMusicAlert, {once: true});
+
+    const launchButton = player.querySelector('.player-launch-btn');
+    if (launchButton) {
+        handleLaunchModal(launchButton);
+    }
 }
 
 /**
  * Look for popup alert modal and get the button targeted by the
  * passed-in 'click' event.
  * 
- * If button and modal found: display modal; get modal's 'hide'
- * button and add 'click event listener to it to call
- * closeMusicAlert handler; set timeout function to call
- * closeMusicAlert automatically after 30s.
+ * If button and modal found: display modal, dynamically adding
+ * visually hidden version of text content for accessibility; get
+ * modal's 'hide' button and add 'click' event listener to it to
+ * call closeMusicModal handler; set timeout function to call
+ * closeMusicModal automatically after 30s.
  * 
  * @param {event} event - 'Click' event passed in by event listener.
  * @returns Nothing - exits the function if specific element not found.
  */
 function handleMusicAlert(event) {
     const alertModal = document.querySelector('#music-page-alert');
+    const ariaAlert = alertModal.querySelector('.aria-alert');
     const targetButton = event.target.closest('button');
     if (!targetButton) return;
 
@@ -343,18 +395,70 @@ function handleMusicAlert(event) {
         alertModal.classList.remove('hidden');
         setTimeout(() => {
             alertModal.classList.add('active');
+            setTimeout(() => {
+                // Add screen reader text
+                ariaAlert.innerHTML = 'HEADS UP! Navigating away from this page will cause the music to stop playing! To prevent this and for extra functionality, open our full-featured music player using the Launch Full-Featured Player button in the mini player.'
+            }, 4000);
         }, 500);
 
         const hideButton = alertModal.querySelector('#mpm-close-btn');
         alertModal.addEventListener('click', e => {
             if (e.target == hideButton) {
-                closeMusicAlert(alertModal);
+                closeMusicModal(alertModal);
             }
-        });
+        }, {once: true});
 
         setTimeout(() => {
-            closeMusicAlert(alertModal);
+            closeMusicModal(alertModal);
         }, 30000);
+    }
+}
+
+/**
+ * Get music page alert modal. Get full-featured player launch
+ * options modal and its 'close' button.
+ * 
+ * Add 'click' event listener to passed-in launch button to close
+ * alert modal and open launch modal and set focus on it.
+ * 
+ * Pass launch modal to trapFocus function.
+ * 
+ * Add 'click' event listener to launch modal's close button to pass
+ * modal to closeMusicModal function and set focus back to launch
+ * button.
+ * 
+ * @param {HTMLElement} launchButton - Button element controlling opening of modal .
+ */
+function handleLaunchModal(launchButton) {
+    const alertModal = document.querySelector('#music-page-alert');
+    const launchModal = document.querySelector('#player-launch-modal');
+    const closeButton = launchModal.querySelector('#plm-close-btn');
+
+    launchButton.addEventListener('click', () => {
+        launchButton.setAttribute('aria-expanded', true);
+        // launchButton.classList.add('last-focus');
+        if (alertModal && alertModal.classList.contains('active')) {
+            closeMusicModal(alertModal);
+        }
+
+        if (launchModal) {
+            launchModal.classList.remove('hidden');
+            launchModal.focus();
+            setTimeout(() => {
+                launchModal.classList.add('active');
+            }, 500);
+        }
+    });
+
+    trapFocus(launchModal);
+
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            closeMusicModal(launchModal);
+            launchButton.focus();
+            launchButton.setAttribute('aria-expanded', false);
+            // launchButton.classList.remove('last-focus');
+        })
     }
 }
 
@@ -362,12 +466,12 @@ function handleMusicAlert(event) {
  * Remove the modal's active 'class' and add its 'hidden' class
  * once it's transitioned offscreen.
  * 
- * @param {HTMLElement} alertModal - Popup alert modal div element.
+ * @param {HTMLElement} modal - Popup modal div element.
  */
-function closeMusicAlert(alertModal) {
-    alertModal.classList.remove('active');
-    alertModal.addEventListener('transitionend', () => {
-        alertModal.classList.add('hidden');
+function closeMusicModal(modal) {
+    modal.classList.remove('active');
+    modal.addEventListener('transitionend', () => {
+        modal.classList.add('hidden');
     }, {once: true});
 }
 
