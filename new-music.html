@@ -88,7 +88,8 @@
 
         <!-- alert modal -->
         <div id="music-page-alert" class="alert-modal popup-modal hidden">
-            <div class="alert-modal-text">
+            <div class="modal-text" aria-live="polite">
+                <span class="aria-alert"></span>
                 <p>
                     HEADS UP!
                 </p>
@@ -99,7 +100,7 @@
                     To prevent this and for extra functionality, launch our full-featured music player using the button in the mini-player below.
                 </p>
             </div>
-            <button id="mpm-close-btn" class="modal-close-btn">OK, Got it!</button>
+            <button id="mpm-close-btn" class="modal-close-btn modal-btn">OK, Got it!</button>
         </div>
 
         <div id="albums">
@@ -145,7 +146,7 @@
                             <span class="volume-output"></span>
                         </div>
                         <div class="launch-btn-container">
-                            <button class="player-launch-btn player-btn">
+                            <button class="player-launch-btn player-btn" aria-controls="player-launch-modal" aria-expanded="false">
                                 Launch Full-Featured Player
                             </button>
                         </div>
@@ -153,7 +154,7 @@
                     </div>
 
                     <!-- popup player toggle button -->
-                    <button id="fossils-player-btn" class="mini-player-btn menu-toggle-btn toggle-btn" aria-expanded="false" aria-controls="fossils-player">
+                    <button id="fossils-player-btn" class="mini-player-btn menu-toggle-btn toggle-btn" aria-expanded="false" aria-controls="fossils-player" aria-label="Sample tracks. Opens mini player.">
                         <span class="menu-icon">
                             <span></span>
                             <span></span>
@@ -206,6 +207,45 @@
 
             </section>
         
+        </div>
+
+        <!-- full-featured music player launch options modal -->
+        <div id="player-launch-modal" class="popup-modal hidden" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="launch-modal-heading">
+            <div id="launch-modal-content" class="popup-modal-content">
+                <section class="launch-options">
+                    <div class="modal-text">
+                        <h2 id="launch-modal-heading">LAUNCH FULL-FEATURED MUSIC PLAYER</h2>
+                        <p>
+                            Please choose one of the following options:
+                        </p>
+                    </div>
+                    <div id="launch-option-1" class="modal-text">
+                        <p>
+                            To keep listening while continuing to browse our website
+                        </p>
+                        <div class="launch-new-tab-link">
+                            <button id="plm-tab-btn" class="modal-btn">
+                                LAUNCH IN A NEW TAB
+                            </button>
+                        </div>
+                    </div>
+                    <div id="launch-option-2" class="modal-text">
+                        <p>
+                            If you'd rather not open a new tab
+                        </p>
+                        <div class="launch-iframe-link">
+                            <button id="plm-frame-btn" class="modal-btn">
+                                LAUNCH IN THIS WINDOW
+                            </button>
+                        </div>
+                        <p>
+                            PLEASE NOTE: Subsequently closing this window will cause the music to stop playing!
+                        </p>
+                    </div>
+                </section>
+                <section class="full-player-frame"></section>
+                <button id="plm-close-btn" class="modal-close-btn modal-btn">Close Window</button>
+            </div>
         </div>
 
     </main>
