@@ -205,7 +205,8 @@ function handleMusicPlayer(player) {
                     playPause(audio, buttonIcon, isPlaying);
                     // Stop vinyl mockup rotation
                     if (record) {
-                        record.classList.remove('playing');
+                        // record.classList.remove('playing');
+                        record.classList.add('paused');
                     }
                 }
             } else if (targetButton.classList.contains('stop-btn')) {
@@ -590,8 +591,8 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
             // ... when record visible ...
             sleeve.addEventListener('animationend', () => {
                 // Start rotating
-                record.classList.remove('stopped');
-                record.classList.add('playing');
+                record.classList.remove('stopped', 'paused');
+                // record.classList.add('playing');
                 // Remove sleeve from DOM
                 sleeve.classList.add('hidden');
                 // Play
@@ -600,8 +601,8 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
         }, 500);
     } else {
         // ... resume playback (after pause) ...
-        record.classList.remove('stopped');
-        record.classList.add('playing');
+        record.classList.remove('stopped', 'paused');
+        // record.classList.add('playing');
         playPause(audio, buttonIcon, isPlaying);
     }
     // In case rotation angle of record set by seek

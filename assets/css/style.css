@@ -1146,13 +1146,17 @@ input[type="range"].player-slider{
     left: 8.5px;
     overflow: hidden;
     animation: vinylspin 1.8s linear infinite;
-    -webkit-animation-play-state: paused;
-    animation-play-state: paused;
+    /* -webkit-animation-play-state: paused; */
+    /* animation-play-state: paused; */
 }
 
-.player-vinyl.playing {
+/* .player-vinyl.playing {
     -webkit-animation-play-state: running;
     animation-play-state: running;
+} */
+
+.player-vinyl.paused {
+    animation-play-state: paused;
 }
 
 @keyframes vinylspin {
