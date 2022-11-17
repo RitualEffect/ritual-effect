@@ -440,19 +440,27 @@ function handleMusicAlert(event) {
  * Add 'click' event listener to passed-in launch button to close
  * alert modal and open launch modal and set focus on it.
  * 
- * Pass launch modal to trapFocus function.
+ * Pass launch modal to trapFocus and escKeyClose functions.
  * 
- * Add 'click' event listener to launch modal's close button to pass
- * modal to closeMusicModal function and set focus back to launch
- * button.
+ * Add 'click' event listener to launch modal to detect events on
+ * launch links and close button.
+ * 
+ * If click detected on 'close' button or 'new tab' link pass modal
+ * to closeMusicModal function; set focus back to launch button
+ * and reset it's aria-expanded attribute; reset display classes
+ * of full-featured player iframe embed and launch options text
+ * if necessary.
+ * 
+ * If click detected on 'this window' link: hide launch options text
+ * and 'this window button; display full player iframe.
  * 
  * @param {HTMLElement} launchButton - Button element controlling opening of modal .
  */
 function handleLaunchModal(launchButton) {
     const alertModal = document.querySelector('#music-page-alert');
     const launchModal = document.querySelector('#player-launch-modal');
-    // const newTabButton = launchModal.querySelector('#plm-tab-link');
-    // const closeButton = launchModal.querySelector('#plm-close-btn');
+    const modalText = launchModal.querySelectorAll('.modal-text');
+    const modalFrame = launchModal.querySelector('.full-player-frame');
 
     launchButton.addEventListener('click', () => {
         launchButton.setAttribute('aria-expanded', true);
@@ -482,7 +490,28 @@ function handleLaunchModal(launchButton) {
                 closeMusicModal(launchModal);
                 launchButton.focus();
                 launchButton.setAttribute('aria-expanded', false);
+                if (modalFrame.classList.contains('active')) {
+                    setTimeout(() => {
+                        modalFrame.classList.remove('active');
+                        modalFrame.classList.add('hidden');
+                        for (let text of modalText) {
+                            text.classList.remove('hidden');
+                            text.classList.add('active');
+                        }
+                    }, 500);
+                }
             }, 500);
+        }
+
+        if (targetButton.id === 'plm-frame-link') {
+            modalFrame.classList.remove('hidden');
+            for (let text of modalText) {
+                closeMusicModal(text);
+            }
+            setTimeout(() => {
+                modalFrame.classList.add('active');
+            }, 750);
+            // console.log(launchModal.getBoundingClientRect().height);
         }
     });
 }

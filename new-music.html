@@ -213,23 +213,23 @@
         <div id="player-launch-modal" class="popup-modal hidden" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="launch-modal-heading">
             <div id="launch-modal-content" class="popup-modal-content">
                 <section class="launch-options">
-                    <div class="modal-text">
+                    <div class="modal-text active">
                         <h2 id="launch-modal-heading">LAUNCH FULL-FEATURED MUSIC PLAYER</h2>
                         <p>
                             Please choose one of the following options:
                         </p>
                     </div>
-                    <div id="launch-option-1" class="modal-text">
+                    <div id="launch-option-1" class="modal-text active">
                         <p>
                             To keep listening while continuing to browse our website
                         </p>
-                        <div class="launch-new-tab-link">
-                            <a href="re-player.html" target="re-player-tab" id="plm-tab-link" class="modal-btn">
-                                LAUNCH IN A NEW TAB
-                            </a>
-                        </div>
                     </div>
-                    <div id="launch-option-2" class="modal-text">
+                    <div class="launch-new-tab-link">
+                        <a href="re-player.html" target="re-player-tab" id="plm-tab-link" class="modal-btn">
+                            LAUNCH IN A NEW TAB
+                        </a>
+                    </div>
+                    <div id="launch-option-2" class="modal-text active">
                         <p>
                             If you'd rather not open a new tab
                         </p>
@@ -243,7 +243,9 @@
                         </p>
                     </div>
                 </section>
-                <section class="full-player-frame"></section>
+                <section class="full-player-frame hidden">
+                    <iframe id="re-player-embed" name="re-player-frame" src="about:blank" title="Ritual Effect Music Player" frameborder="0"></iframe>
+                </section>
                 <button id="plm-close-btn" class="modal-close-btn modal-btn">Close Window</button>
             </div>
         </div>
