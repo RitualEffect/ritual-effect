@@ -1145,6 +1145,7 @@ input[type="range"].player-slider{
     top: 8.5px;
     left: 8.5px;
     overflow: hidden;
+    -webkit-animation: vinylspinios 1.8s linear infinite;
     animation: vinylspin 1.8s linear infinite;
     /* -webkit-animation-play-state: paused; */
     /* animation-play-state: paused; */
@@ -1156,7 +1157,13 @@ input[type="range"].player-slider{
 } */
 
 .player-vinyl.paused {
+    -webkit-animation-play-state: paused;
     animation-play-state: paused;
+}
+
+@-webkit-keyframes vinylspinios {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(359deg);}
 }
 
 @keyframes vinylspin {
