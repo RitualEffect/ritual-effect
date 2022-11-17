@@ -1145,16 +1145,18 @@ input[type="range"].player-slider{
     top: 8.5px;
     left: 8.5px;
     overflow: hidden;
-    -webkit-animation: vinylspinios 1.8s linear infinite;
-    animation: vinylspin 1.8s linear infinite;
+    /* -webkit-animation: vinylspinios 1.8s linear infinite; */
+    /* animation: vinylspin 1.8s linear infinite; */
     /* -webkit-animation-play-state: paused; */
     /* animation-play-state: paused; */
 }
 
-/* .player-vinyl.playing {
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
-} */
+.player-vinyl.playing {
+    -webkit-animation: vinylspinios 1.8s linear infinite;
+    animation: vinylspin 1.8s linear infinite;
+    /* -webkit-animation-play-state: running; */
+    /* animation-play-state: running; */
+}
 
 .player-vinyl.paused {
     -webkit-animation-play-state: paused;

@@ -592,7 +592,7 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
             sleeve.addEventListener('animationend', () => {
                 // Start rotating
                 record.classList.remove('stopped', 'paused');
-                // record.classList.add('playing');
+                record.classList.add('playing');
                 // Remove sleeve from DOM
                 sleeve.classList.add('hidden');
                 // Play
@@ -602,7 +602,7 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
     } else {
         // ... resume playback (after pause) ...
         record.classList.remove('stopped', 'paused');
-        // record.classList.add('playing');
+        record.classList.add('playing');
         playPause(audio, buttonIcon, isPlaying);
     }
     // In case rotation angle of record set by seek
