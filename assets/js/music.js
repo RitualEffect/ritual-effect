@@ -443,6 +443,7 @@ function addTracklistButtons(tracklist, tracklistContainer) {
             button.classList.add('first-focus');
         }
         numberSpan.classList.add('track-num');
+        numberSpan.setAttribute('aria-label', `Track ${trackNum + 1}`);
         numberSpan.innerHTML = trackNum + 1;
         // Span for 'dot, space' after number - for aesthetics
         const dotSpan = document.createElement('span');
@@ -450,10 +451,12 @@ function addTracklistButtons(tracklist, tracklistContainer) {
         // Track name span
         const nameSpan = document.createElement('span');
         nameSpan.classList.add('track-name');
+        nameSpan.setAttribute('aria-label', `${track.name}.`);
         nameSpan.innerHTML = track.name;
         // Track duration span
         const lengthSpan = document.createElement('span');
         lengthSpan.classList.add('track-length');
+        lengthSpan.setAttribute('aria-label', `Duration ${track.duration}`);
         lengthSpan.innerHTML = track.duration;
         /* Add all elements to button in correct order, appropriate
            to each player type */
@@ -475,9 +478,11 @@ function addTracklistButtons(tracklist, tracklistContainer) {
             // Current time span - updated programatically
             const trackTime = document.createElement('span');
             trackTime.classList.add('track-time');
+            trackTime.setAttribute('aria-hidden', true);
             trackTime.innerHTML = '00:00'
             // Span for separating 'slash'
             const slashSpan = document.createElement('span');
+            slashSpan.setAttribute('aria-hidden', true);
             slashSpan.innerHTML = ' &#47; ';
             timesSpan.appendChild(trackTime);
             timesSpan.appendChild(slashSpan);
@@ -514,6 +519,7 @@ function loadTrack(player, audio, tracklist, trackIndex) {
     const infoWindow = player.querySelector('.tracklist-info');
     // Set audio source
     audio.src = `./assets/audio/${track.src}`;
+    audio.load();
     /* Update display/visual elements - if statements to prevent
        'null setting' errors when function called on mini player */
     if (albumCover) {

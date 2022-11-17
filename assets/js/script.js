@@ -329,7 +329,24 @@ function trapFocus(element) {
                 }
             }
     });
-  }
+}
+
+/**
+ * Add 'keydown' event listener to passed-in element to detect
+ * 'Esc' key presses. Pass element to passed-in handler function
+ * if detected.
+ * 
+ * @param {HTMLElement} element - Element on which the function is called.
+ * @param {function} closeHandler - Handler function used to close or otherwise dismiss element.
+ */
+function escKeyClose(element, closeHandler) {
+    element.addEventListener('keydown', e => {
+        let isEscape = (e.key === 'Escape' || e.key === 'Esc' || (e.keyCode || e.which) === 27);
+
+        if (!isEscape) return;
+        closeHandler(element);
+    });
+}
 
 // --------------- Popups & dropdowns functions end
 
@@ -364,7 +381,9 @@ function handleMusicPlayerPopup(player) {
     handlePopupAria(playerToggleButton, playerOpenClass);
     handlePopup(playerToggleButton, buttonActiveClass, playerOpenClass);
 
-    playerToggleButton.addEventListener('click', handleMusicAlert, {once: true});
+    if (playerToggleButton.classList.contains('mini-player-btn')) {
+        playerToggleButton.addEventListener('click', handleMusicAlert, {once: true});
+    }
 
     const launchButton = player.querySelector('.player-launch-btn');
     if (launchButton) {
@@ -451,6 +470,7 @@ function handleLaunchModal(launchButton) {
     });
 
     trapFocus(launchModal);
+    escKeyClose(launchModal, closeMusicModal);
 
     if (closeButton) {
         closeButton.addEventListener('click', () => {
