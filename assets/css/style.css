@@ -907,7 +907,7 @@ summary::marker {
     min-height: 100%;
     margin: 0;
     /* overflow-y: auto; */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #plm-close-btn {
