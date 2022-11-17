@@ -1152,29 +1152,25 @@ input[type="range"].player-slider{
 }
 
 .player-vinyl.playing {
-    -webkit-animation: vinylspinios 1.8s linear infinite;
+    /* -webkit-animation: vinylspinios 1.8s linear infinite; */
     animation: vinylspin 1.8s linear infinite;
     /* -webkit-animation-play-state: running; */
     /* animation-play-state: running; */
 }
 
 .player-vinyl.paused {
-    -webkit-animation-play-state: paused;
+    /* -webkit-animation-play-state: paused; */
     animation-play-state: paused;
 }
 
-@-webkit-keyframes vinylspinios {
+/* @-webkit-keyframes vinylspinios {
     from {transform: rotate(0deg);}
     to {transform: rotate(359deg);}
-}
+} */
 
 @keyframes vinylspin {
     from {transform: rotate(0deg);}
     to {transform: rotate(359deg);}
-}
-
-.player-vinyl.stopped {
-    animation: none;
 }
 
 .player-vinyl-ring {

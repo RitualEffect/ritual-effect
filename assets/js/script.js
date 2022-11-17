@@ -451,11 +451,12 @@ function handleMusicAlert(event) {
 function handleLaunchModal(launchButton) {
     const alertModal = document.querySelector('#music-page-alert');
     const launchModal = document.querySelector('#player-launch-modal');
-    const closeButton = launchModal.querySelector('#plm-close-btn');
+    // const newTabButton = launchModal.querySelector('#plm-tab-link');
+    // const closeButton = launchModal.querySelector('#plm-close-btn');
 
     launchButton.addEventListener('click', () => {
         launchButton.setAttribute('aria-expanded', true);
-        // launchButton.classList.add('last-focus');
+
         if (alertModal && alertModal.classList.contains('active')) {
             closeMusicModal(alertModal);
         }
@@ -472,14 +473,18 @@ function handleLaunchModal(launchButton) {
     trapFocus(launchModal);
     escKeyClose(launchModal, closeMusicModal);
 
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
-            closeMusicModal(launchModal);
-            launchButton.focus();
-            launchButton.setAttribute('aria-expanded', false);
-            // launchButton.classList.remove('last-focus');
-        })
-    }
+    launchModal.addEventListener('click', e => {
+        let targetButton = e.target.closest('.modal-btn');
+        if (!targetButton) return;
+
+        if (targetButton.id === 'plm-tab-link' || targetButton.id === 'plm-close-btn') {
+            setTimeout(() =>{
+                closeMusicModal(launchModal);
+                launchButton.focus();
+                launchButton.setAttribute('aria-expanded', false);
+            }, 500);
+        }
+    });
 }
 
 /**

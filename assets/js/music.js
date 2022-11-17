@@ -226,13 +226,13 @@ function handleMusicPlayer(player) {
                 loadTrack(player, audio, tracklist, trackIndex);
                 // Reset vinyl mockup if appropriate
                 if (record) {
-                    record.classList.add('stopped');
+                    record.classList.remove('playing');
                 }
                 // Continue playback if appropriate
                 if (isPlaying) {
                     setTimeout(() => {
                         if (record) {
-                            record.classList.remove('stopped');
+                            record.classList.add('playing');
                         }
                         audio.play();
                     }, 500);
@@ -320,13 +320,13 @@ function handleMusicPlayer(player) {
                 }
                 // Reset vinyl mockup if appropriate
                 if (record) {
-                    record.classList.add('stopped');
+                    record.classList.remove('playing');
                 }
                 // Continue playback if appropriate
                 if (isPlaying) {
                     setTimeout(() => {
                         if (record) {
-                            record.classList.remove('stopped');
+                            record.classList.add('playing');
                         }
                         audio.play();
                     }, 500);
@@ -591,7 +591,7 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
             // ... when record visible ...
             sleeve.addEventListener('animationend', () => {
                 // Start rotating
-                record.classList.remove('stopped', 'paused');
+                record.classList.remove('paused');
                 record.classList.add('playing');
                 // Remove sleeve from DOM
                 sleeve.classList.add('hidden');
@@ -601,8 +601,7 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
         }, 500);
     } else {
         // ... resume playback (after pause) ...
-        record.classList.remove('stopped', 'paused');
-        record.classList.add('playing');
+        record.classList.remove('paused');
         playPause(audio, buttonIcon, isPlaying);
     }
     // In case rotation angle of record set by seek
@@ -626,14 +625,15 @@ function handleStop(audio, sleeve, record, slider, timeDisplay) {
     sleeve.classList.add('stopped');
     sleeve.classList.remove('hidden', 'playing');
     // Pause record rotation
-    record.classList.remove('playing');
+    record.classList.add('paused');
+    // record.classList.remove('playing');
     // ... when record hidden ...
     sleeve.addEventListener('animationend', () => {
         // Reset current time, time display and seek slider
         audio.currentTime = 0;
         handleTrackTimeUpdate(audio, slider, timeDisplay);
         // Reset record to 0deg rotation
-        record.classList.add('stopped');
+        record.classList.remove('playing');
         record.removeAttribute('style');
     }, {once: true});
 }
@@ -726,12 +726,12 @@ function handleRecordSeek(audio, record, seek) {
     /* If seeking, remove rotation animation & set angle to match
        current time */
     if (seek) {
-        record.classList.add('stopped');
+        record.classList.remove('playing');
         record.style.transform = `rotate(${angleRotation}deg)`;
     }
     // Resume animation state when seeking done
     if (!seek) {
-        record.classList.remove('stopped');
+        record.classList.add('playing');
         record.removeAttribute('style');
     }
 }
