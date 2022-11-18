@@ -459,11 +459,34 @@ function handleMusicAlert(event) {
 function handleLaunchModal(launchButton) {
     const alertModal = document.querySelector('#music-page-alert');
     const launchModal = document.querySelector('#player-launch-modal');
-    const modalText = launchModal.querySelectorAll('.modal-text');
-    const modalFrame = launchModal.querySelector('.full-player-frame');
+    const launchModalContent = launchModal.querySelector('#launch-modal-content');
+    const modalText = launchModalContent.querySelectorAll('.modal-text');
+    const modalFrame = launchModalContent.querySelector('.full-player-frame-wrap');
+    // let windowHeight;
+    // const playerEmbed = modalFrame.querySelector('#re-player-embed');
+    // let frameContentLoaded = false;
+    // if (!playerEmbed.contentDocument.body.innerHTML) {
+    //     console.log(frameContentLoaded);
+    // }
+    // playerEmbed.contentDocument.addEventListener('beforeunload', () => {
+    //     console.log('loading');
+    // const frameLoadIntervalCheck = setInterval(() => {
+    // if (playerEmbed.contentDocument.readyState == 'complete') {
+        // playerEmbed.contentDocument.addEventListener('DOMContentLoaded', () => {
+            // clearInterval(frameLoadIntervalCheck);
+            // console.log(playerEmbed.contentDocument.body);
+            // frameContentLoaded = true;
+        // });
+    // }
+    // }, 50);
+    // });
 
     launchButton.addEventListener('click', () => {
+        // windowHeight = document.documentElement.clientHeight;
+        // console.log(windowHeight);
+        // resize!!
         launchButton.setAttribute('aria-expanded', true);
+        // setMusicModalHeight(launchModalContent, modalFrame);
 
         if (alertModal && alertModal.classList.contains('active')) {
             closeMusicModal(alertModal);
@@ -504,15 +527,47 @@ function handleLaunchModal(launchButton) {
         }
 
         if (targetButton.id === 'plm-frame-link') {
+            // let windowHeight = window.innerHeight;
+            // let playerBodyHeight;
+            // let frameheight;
+            // console.log(frameContentLoaded);
+            // console.log(windowHeight);
+            // console.log(document.body.clientHeight);
+            
             modalFrame.classList.remove('hidden');
+            // let frameCheck = setInterval(() => {
+            //     let playerBody = playerEmbed.contentDocument.body.innerHTML;
+            //     if (playerBody != null) {
+            //         clearInterval(frameCheck);
+            //         playerEmbed.contentDocument.addEventListener('DOMContentLoaded', () => {
+            //         console.log('loaded');
+            //         console.log(playerEmbed.contentDocument.documentElement.scrollHeight);
+            //         });
+            //     }
+            // }, 50);
+        
+            // setTimeout(() => {
+                // if (playerEmbed.contentDocument.body.innerHTML) {
+                    // frameContentLoaded = true;
+                // }
+                // console.log(frameContentLoaded);
+                // console.log(playerEmbed.contentDocument.body.innerHTML);
+                // if (frameContentLoaded) {
+                    // playerBodyHeight = playerEmbed.contentDocument.body.clientHeight;
+                // }
+                // console.log(playerBodyHeight);
+            // }, 500);
+            // console.log(playerEmbed.contentDocument.body.clientHeight);
+            // console.log(playerEmbed.contentWindow.innerHeight);
+
             for (let text of modalText) {
                 closeMusicModal(text);
             }
             setTimeout(() => {
                 modalFrame.classList.add('active');
             }, 750);
-            // console.log(launchModal.getBoundingClientRect().height);
         }
+
     });
 }
 
