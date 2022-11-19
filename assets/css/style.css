@@ -847,7 +847,7 @@ summary::marker {
 #launch-modal-content {
     max-width: 920px;
     min-width: 320px;
-    min-height: 480px;
+    min-height: 320px;
 }
 
 .launch-options {

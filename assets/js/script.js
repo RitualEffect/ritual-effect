@@ -472,7 +472,6 @@ function handleLaunchModal(launchButton) {
        height - needed for mobile devices where '100vh' breaks */
     const setModalHeight = () => {
         const viewportHeight = document.documentElement.clientHeight;
-        console.log(viewportHeight);
         launchModal.style.height = `${viewportHeight}px`;
     }
     /* Function variable to store call to setPlayerFrameHeight

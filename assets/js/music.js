@@ -185,8 +185,10 @@ function handleMusicPlayer(player) {
                 // Play/pause button handler...
                 // Check/set if at beginning of tracklist
                 if (startTracks) {
-                    trackIndex = 0;
-                    loadTrack(player, audio, tracklist, trackIndex);
+                    if (trackIndex != 0) {
+                        trackIndex = 0;
+                        loadTrack(player, audio, tracklist, trackIndex);
+                    }
                     startTracks = false;
                 }
                 // Play
@@ -205,7 +207,6 @@ function handleMusicPlayer(player) {
                     playPause(audio, buttonIcon, isPlaying);
                     // Stop vinyl mockup rotation
                     if (record) {
-                        // record.classList.remove('playing');
                         record.classList.add('paused');
                     }
                 }
@@ -602,6 +603,7 @@ function handlePlay(audio, buttonIcon, sleeve, record) {
     } else {
         // ... resume playback (after pause) ...
         record.classList.remove('paused');
+        record.classList.add('playing');
         playPause(audio, buttonIcon, isPlaying);
     }
     // In case rotation angle of record set by seek
