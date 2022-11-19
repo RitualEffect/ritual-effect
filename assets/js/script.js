@@ -441,9 +441,10 @@ function handleMusicAlert(event) {
  * for full-featured player iframe.
  * 
  * Add 'click' event listener to passed-in launch button to: close
- * alert modal if open; call function and add 'resize' event
- * listener to window to handle responsive heights of content
- * container and iframe; open launch modal and set focus on it.
+ * alert modal if open; call functions and add 'resize' event
+ * listeners to window to handle responsive heights of launch
+ * options modal, content container and iframe; open launch modal
+ * and set focus on it.
  * 
  * Pass launch modal to trapFocus and escKeyClose functions.
  * 
@@ -451,7 +452,7 @@ function handleMusicAlert(event) {
  * launch options links and 'close' button.
  * 
  * If click detected on 'close' button or 'new tab' link: pass modal
- * to closeMusicModal function; remove 'resize event listener from
+ * to closeMusicModal function; remove 'resize' event listeners from
  * window; set focus back to launch button and reset it's
  * aria-expanded attribute; reset display classes of iframe and
  * launch options text if necessary.
@@ -467,6 +468,13 @@ function handleLaunchModal(launchButton) {
     const launchModalContent = launchModal.querySelector('#launch-modal-content');
     const modalText = launchModalContent.querySelectorAll('.modal-text');
     const modalFrame = launchModalContent.querySelector('.full-player-frame-wrap');
+    /* Function to set height of launch modal to available viewport
+       height - needed for mobile devices where '100vh' breaks */
+    const setModalHeight = () => {
+        const viewportHeight = document.documentElement.clientHeight;
+        console.log(viewportHeight);
+        launchModal.style.height = `${viewportHeight}px`;
+    }
     /* Function variable to store call to setPlayerFrameHeight
        function - used as reference to cancel 'resize' event
        listener later on */
@@ -481,6 +489,9 @@ function handleLaunchModal(launchButton) {
         if (alertModal && alertModal.classList.contains('active')) {
             closeMusicModal(alertModal);
         }
+        // Set responsive height of launch modal
+        setModalHeight();
+        window.addEventListener('resize', setModalHeight);
         // Set responsive height of launch options modal content
         callSetFrameSize();
         window.addEventListener('resize', callSetFrameSize);
@@ -504,6 +515,7 @@ function handleLaunchModal(launchButton) {
         if (targetButton.id === 'plm-tab-link' || targetButton.id === 'plm-close-btn') {
             setTimeout(() =>{
                 closeMusicModal(launchModal);
+                window.removeEventListener('resize', setModalHeight);
                 window.removeEventListener('resize', callSetFrameSize);
                 launchButton.focus();
                 launchButton.setAttribute('aria-expanded', false);
