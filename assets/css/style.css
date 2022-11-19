@@ -841,7 +841,8 @@ summary::marker {
     display: none;
 }
 
-/* height and max-height set by js */
+/* height set by js - max-height not set */
+/* as it's not respected by iOS Safari   */
 #launch-modal-content {
     max-width: 920px;
     min-width: 320px;

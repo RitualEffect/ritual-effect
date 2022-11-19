@@ -554,24 +554,27 @@ function setPlayerFrameHeight(launchModalContent, modalFrame) {
     const windowHeight = document.documentElement.clientHeight;
     const windowWidth = document.documentElement.clientWidth;
     const modalContentHeight = windowHeight - 10;
-    const frameWrapHeight = modalContentHeight - 150;
+    const currentContentHeight = launchModalContent.offsetHeight;
+    const frameWrapHeight = currentContentHeight - 150;
 
     // Frame set to portrait orientation by media query
     if (windowWidth < 740) {
-        if (windowHeight < 810) {
+        if (windowHeight < 1024) {
             launchModalContent.style.height = `${modalContentHeight}px`;
         } else {
-            launchModalContent.style.maxHeight = '1040px';
+            launchModalContent.style.height = '1020px';
         }
     // Frame set to landscape orientation
     } else {
-        if (windowHeight < 710) {
+        if (windowHeight < 768) {
             launchModalContent.style.height = `${modalContentHeight}px`;
         } else {
-            launchModalContent.style.maxHeight = '750px';
+            launchModalContent.style.height = '750px';
         }
     }
-    // Frame height always based on modal content height
+    /* Frame height always based on modal content height -
+       max-height set by CSS to 100% (i.e. all remaining
+       space in content modal) */
     modalFrame.style.height = `${frameWrapHeight}px`;
 }
 
