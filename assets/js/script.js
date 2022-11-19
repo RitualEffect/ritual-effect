@@ -435,24 +435,29 @@ function handleMusicAlert(event) {
 
 /**
  * Get music page alert modal. Get full-featured player launch
- * options modal and its 'close' button.
+ * options modal and its content container.
  * 
- * Add 'click' event listener to passed-in launch button to close
- * alert modal and open launch modal and set focus on it.
+ * Get content container's text container divs and wrapper div
+ * for full-featured player iframe.
+ * 
+ * Add 'click' event listener to passed-in launch button to: close
+ * alert modal if open; call function and add 'resize' event
+ * listener to window to handle responsive heights of content
+ * container and iframe; open launch modal and set focus on it.
  * 
  * Pass launch modal to trapFocus and escKeyClose functions.
  * 
  * Add 'click' event listener to launch modal to detect events on
- * launch links and close button.
+ * launch options links and 'close' button.
  * 
- * If click detected on 'close' button or 'new tab' link pass modal
- * to closeMusicModal function; set focus back to launch button
- * and reset it's aria-expanded attribute; reset display classes
- * of full-featured player iframe embed and launch options text
- * if necessary.
+ * If click detected on 'close' button or 'new tab' link: pass modal
+ * to closeMusicModal function; remove 'resize event listener from
+ * window; set focus back to launch button and reset it's
+ * aria-expanded attribute; reset display classes of iframe and
+ * launch options text if necessary.
  * 
  * If click detected on 'this window' link: hide launch options text
- * and 'this window button; display full player iframe.
+ * and 'this window' button; display full player iframe.
  * 
  * @param {HTMLElement} launchButton - Button element controlling opening of modal .
  */
@@ -462,36 +467,24 @@ function handleLaunchModal(launchButton) {
     const launchModalContent = launchModal.querySelector('#launch-modal-content');
     const modalText = launchModalContent.querySelectorAll('.modal-text');
     const modalFrame = launchModalContent.querySelector('.full-player-frame-wrap');
-    // let windowHeight;
-    // const playerEmbed = modalFrame.querySelector('#re-player-embed');
-    // let frameContentLoaded = false;
-    // if (!playerEmbed.contentDocument.body.innerHTML) {
-    //     console.log(frameContentLoaded);
-    // }
-    // playerEmbed.contentDocument.addEventListener('beforeunload', () => {
-    //     console.log('loading');
-    // const frameLoadIntervalCheck = setInterval(() => {
-    // if (playerEmbed.contentDocument.readyState == 'complete') {
-        // playerEmbed.contentDocument.addEventListener('DOMContentLoaded', () => {
-            // clearInterval(frameLoadIntervalCheck);
-            // console.log(playerEmbed.contentDocument.body);
-            // frameContentLoaded = true;
-        // });
-    // }
-    // }, 50);
-    // });
+    /* Function variable to store call to setPlayerFrameHeight
+       function - used as reference to cancel 'resize' event
+       listener later on */
+    const callSetFrameSize = () => {
+        setPlayerFrameHeight(launchModalContent, modalFrame);
+    }
 
+    // Event listener for mini player launch button
     launchButton.addEventListener('click', () => {
-        // windowHeight = document.documentElement.clientHeight;
-        // console.log(windowHeight);
-        // resize!!
         launchButton.setAttribute('aria-expanded', true);
-        // setMusicModalHeight(launchModalContent, modalFrame);
-
+        // Close alert modal
         if (alertModal && alertModal.classList.contains('active')) {
             closeMusicModal(alertModal);
         }
-
+        // Set responsive height of launch options modal content
+        callSetFrameSize();
+        window.addEventListener('resize', callSetFrameSize);
+        // Open launch options modal
         if (launchModal) {
             launchModal.classList.remove('hidden');
             launchModal.focus();
@@ -500,19 +493,21 @@ function handleLaunchModal(launchButton) {
             }, 500);
         }
     });
-
+    // Handle keyboard events in modal
     trapFocus(launchModal);
     escKeyClose(launchModal, closeMusicModal);
-
+    // Event listener for options links / 'close' button
     launchModal.addEventListener('click', e => {
         let targetButton = e.target.closest('.modal-btn');
         if (!targetButton) return;
-
+        // Handle modal close
         if (targetButton.id === 'plm-tab-link' || targetButton.id === 'plm-close-btn') {
             setTimeout(() =>{
                 closeMusicModal(launchModal);
+                window.removeEventListener('resize', callSetFrameSize);
                 launchButton.focus();
                 launchButton.setAttribute('aria-expanded', false);
+                // Reset launch modal content if appropriate
                 if (modalFrame.classList.contains('active')) {
                     setTimeout(() => {
                         modalFrame.classList.remove('active');
@@ -525,41 +520,9 @@ function handleLaunchModal(launchButton) {
                 }
             }, 500);
         }
-
+        // Hide options and display iframe
         if (targetButton.id === 'plm-frame-link') {
-            // let windowHeight = window.innerHeight;
-            // let playerBodyHeight;
-            // let frameheight;
-            // console.log(frameContentLoaded);
-            // console.log(windowHeight);
-            // console.log(document.body.clientHeight);
-            
             modalFrame.classList.remove('hidden');
-            // let frameCheck = setInterval(() => {
-            //     let playerBody = playerEmbed.contentDocument.body.innerHTML;
-            //     if (playerBody != null) {
-            //         clearInterval(frameCheck);
-            //         playerEmbed.contentDocument.addEventListener('DOMContentLoaded', () => {
-            //         console.log('loaded');
-            //         console.log(playerEmbed.contentDocument.documentElement.scrollHeight);
-            //         });
-            //     }
-            // }, 50);
-        
-            // setTimeout(() => {
-                // if (playerEmbed.contentDocument.body.innerHTML) {
-                    // frameContentLoaded = true;
-                // }
-                // console.log(frameContentLoaded);
-                // console.log(playerEmbed.contentDocument.body.innerHTML);
-                // if (frameContentLoaded) {
-                    // playerBodyHeight = playerEmbed.contentDocument.body.clientHeight;
-                // }
-                // console.log(playerBodyHeight);
-            // }, 500);
-            // console.log(playerEmbed.contentDocument.body.clientHeight);
-            // console.log(playerEmbed.contentWindow.innerHeight);
-
             for (let text of modalText) {
                 closeMusicModal(text);
             }
@@ -569,6 +532,47 @@ function handleLaunchModal(launchButton) {
         }
 
     });
+}
+
+/**
+ * Get browser window's current height and width.
+ * 
+ * Based on intended orientation of full-featured music player
+ * to be loaded into iframe, set height of passed-in content
+ * container to 10 pixels less than window's height if criteria
+ * met, otherwise set its max-width. (Player's orientaion
+ * determined by width of passed-in iframe wrapper, set by CSS
+ * media queries).
+ * 
+ * Set height of iframe wrapper to 150 pixels less than content
+ * container.
+ * 
+ * @param {HTMLElement} launchModalContent - Content container div for modal.
+ * @param {HTMLElement} modalFrame - iframe wrapper element.
+ */
+function setPlayerFrameHeight(launchModalContent, modalFrame) {
+    const windowHeight = document.documentElement.clientHeight;
+    const windowWidth = document.documentElement.clientWidth;
+    const modalContentHeight = windowHeight - 10;
+    const frameWrapHeight = modalContentHeight - 150;
+
+    // Frame set to portrait orientation by media query
+    if (windowWidth < 740) {
+        if (windowHeight < 810) {
+            launchModalContent.style.height = `${modalContentHeight}px`;
+        } else {
+            launchModalContent.style.maxHeight = '1040px';
+        }
+    // Frame set to landscape orientation
+    } else {
+        if (windowHeight < 710) {
+            launchModalContent.style.height = `${modalContentHeight}px`;
+        } else {
+            launchModalContent.style.maxHeight = '750px';
+        }
+    }
+    // Frame height always based on modal content height
+    modalFrame.style.height = `${frameWrapHeight}px`;
 }
 
 /**

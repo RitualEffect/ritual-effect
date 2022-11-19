@@ -841,10 +841,10 @@ summary::marker {
     display: none;
 }
 
+/* height and max-height set by js */
 #launch-modal-content {
     max-width: 920px;
-    max-height: 920px;
-    min-width: 330px;
+    min-width: 320px;
     min-height: 480px;
 }
 
@@ -912,9 +912,12 @@ summary::marker {
     https://stackoverflow.com/questions/49749442/workaround-to-ios-11-webkit-iframe-bugs
 */
 
+/* wrap - sizing obligatory - below are placeholders     */ 
+/* height controlled by js based on modal content height */
+/* width controlled by media queries                     */
 .full-player-frame-wrap {
-    width: 640px;
-    height: 700px;
+    width: 340px;
+    height: 680px;
     max-width: 100%;
     max-height: 100%;
     opacity: 0;
@@ -944,14 +947,11 @@ summary::marker {
 #re-player-embed {
     width: 100%;
     height: 100%;
-    /* min-height: 100%; */
     margin: 0 !important;
     padding: 0 !important;
     position: absolute;
     top: 0;
     left: 0;
-    /* overflow-y: auto; */
-    /* overflow: hidden; */
 }
 
 #plm-close-btn {
@@ -1135,14 +1135,12 @@ input[type="range"].player-slider{
 
 .mini-player-tracklist {
     width: 100%;
-    /* height: 87.5px; */
     height: 33.3%;
     padding-top: 2.5px;
     margin-bottom: 2.5px;
 }
 
 .mini-player-tracklist .tracklist-btn {
-    /* margin: 2.5px 0; */
     height: 33.3%;
 }
 
@@ -1160,7 +1158,6 @@ input[type="range"].player-slider{
 /* volume control */
 
 .mini-player-vol {
-    /* width: 220px; */
     width: 80%;
 }
 
@@ -2535,15 +2532,26 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 
 /* ---------- for responsive design ----------- */
 
-/* for medium-large screens, up to 962 pixels wide */
+/* for large screens, wider than 940 pixels */
 
-@media screen and (max-width: 962px) {
-    
-    /* old gallery page */
-    .picture-box img {
-        height: 150px;
+@media screen and (min-width: 941px) {
+
+    /* music page full player embed */
+    .full-player-frame-wrap {
+        width: 910px;
     }
-            
+
+}
+
+/* for medium-large screens, up to 940 pixels wide */
+
+@media screen and (max-width: 940px) {
+
+    /* music page full player embed */
+    .full-player-frame-wrap {
+        width: 640px;
+    }
+
 }
 
 /* for larger screens, wider than 820 pixels */
@@ -2649,6 +2657,17 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 
     #management, #contact-info {
         width: 100%;
+    }
+
+}
+
+/* for medium-sized screens, up to 740 pixels wide */
+
+@media screen and (max-width: 740px) {
+
+    /* music page full player embed */
+    .full-player-frame-wrap {
+        width: 340px;
     }
 
 }
@@ -2800,8 +2819,15 @@ https://css-tricks.com/snippets/css/non-form-fieldset-look/ */
 
 }
 
-/* @media screen and (min-height: 800px) and (max-width: 720px) {
-    #re-player-embed {
-        height: 680px;
+/* old media queries */
+
+/* for medium-large screens, up to 962 pixels wide */
+
+@media screen and (max-width: 962px) {
+    
+    /* old gallery page */
+    .picture-box img {
+        height: 150px;
     }
-} */
+            
+}
