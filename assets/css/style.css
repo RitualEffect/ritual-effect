@@ -826,10 +826,9 @@ summary::marker {
 
 /* ful-featured player launch options modal */
 
-/* height set by js as '100vh' breaks on mobile devices */
-/* not concerned about vw for now */
 #player-launch-modal {
     width: 100vw;
+    height: 100vh;
     opacity: 0;
     transition: all 0.5s;
 }
