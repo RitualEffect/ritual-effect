@@ -198,7 +198,11 @@ function handleMusicPlayer(player) {
     if (loopStatusWindow) {
         loopStatusWindow.innerHTML = "Looping Off";
     }
+    // Declare window object reference variable
+    let playerWindow = null;
+    let frameAudio;
 
+    // --- Launch Full-featured Player from Mini Player ---
     /**
      * Handler function for music page 'launch full-featured
      * player' links' 'click' event listener.
@@ -207,32 +211,58 @@ function handleMusicPlayer(player) {
      * @returns Nothing - Exits the function if correct anchor tag not found.
      */
     const handleLaunchPlayer = event  => {
-        let playerWindow;
+        // Declare window object reference variable
+        // let playerWindow = null;
+        // let frameAudio;
         // Ensure correct link type targeted
         let targetLink = event.target.closest('.player-launch-link');
         if (!targetLink) return;
         // Prevent link's default action
         event.preventDefault();
+        console.log(isPlaying);
         /* Call function to pause mini player and store current
            track information in browser's local storage */
         storeTrackInfo(audio, tracklist, trackIndex, isPlaying);
         // Launch full-featured player in location specified by link
-        if (targetLink.id === 'plm-tab-link') {
-            playerWindow = window.open('re-player.html', 're-player-tab');
-        } else if (targetLink.id === 'plm-frame-link') {
+        if (targetLink.id === 'plm-frame-link') {
             playerWindow = window.open('re-player.html', 're-player-frame');
+            playerWindow.addEventListener('DOMContentLoaded', () => {
+                console.log('loaded');
+                playerWindow.addEventListener('beforeunload', e => {
+                    console.log('unload imminent!');
+                    e.preventDefault();
+                    frameAudio = playerWindow.document.querySelector('audio');
+                    console.log(frameAudio);
+                    playerWindow.close();
+                });
+            }, {once:true});
         }
-        if (isPlaying) {
-            // isPlaying = false;
-            // startTracks = false;
+        if (targetLink.id === 'plm-tab-link') {
+            // let modalFrameWrap = document.querySelector('.full-player-frame-wrap');
+            // if (modalFrameWrap.classList.contains('active') && isPlaying) {
+            //     isPlaying = true;
+                console.log(frameAudio);
+            // } else if (isPlaying) {
+            //     isPlaying = true;
+            // }
+            // storeTrackInfo(audio, tracklist, trackIndex, isPlaying);
+            playerWindow = window.open('re-player.html', 're-player-tab');
+        }
+        console.log(playerWindow);
+        // Get updated track info
+        data = JSON.parse(localStorage.getItem('currentTrackInfo'));
+        if (data && data.playing === true) {
+            console.log('yup');
+            isPlaying = false; // needed so play/pause button doesn't pause*************
             setTimeout(() => {
                 let playButton = playerWindow.document.querySelector('.play-pause-btn');
                 playButton.click();
-            }, 750);
+            }, 1250);
         }
+        console.log(frameAudio);
         /* As mini player track was paused, set isPlaying to false
            for mini player's next 'play' button click */
-        isPlaying = false;
+        isPlaying = false; // But this resets storage info on 2nd click*************
     }
 
     /* Add 'click' event listeners to music page 'launch
@@ -243,19 +273,25 @@ function handleMusicPlayer(player) {
         }
     }
     
-    // Initialise player...
+    // ----------------- Initialise Player ------------------
+    // Call function to dynamically add player's tracklist buttons
+    addTracklistButtons(tracklist, tracklistContainer);
     // Look for 'currentTrackInfo' object in browser's local storage
     let data = JSON.parse(localStorage.getItem('currentTrackInfo'));
-    // Set track index from 'currentTrackInfo' object
+    // If found, we've got the data, remove it
+    // if (data) {
+    //     localStorage.removeItem('currentTrackInfo');
+    // }
+    // Function to initialise track, volume and seek settings
+    const initialiseSettings = () => {
         if (data && player.id === 're-player') {
+            // Set track index from 'currentTrackInfo' object if found
             trackIndex = tracklist.findIndex(track => track.name == data.name);
         }
-        // Call function to dynamically add player's tracklist buttons
-        addTracklistButtons(tracklist, tracklistContainer);
         // Load first track
         loadTrack(player, audio, tracklist, trackIndex);
         /* Change other initial settings based on 'currentTrackInfo'
-           object */
+        object if found */
         if (data && player.id === 're-player') {
             audio.currentTime = data.time;
             volumeSetting = data.volume;
@@ -264,17 +300,26 @@ function handleMusicPlayer(player) {
         // Set initial volume
         handleVolume(audio, volumeSetting, volumeDisplay);
         /* Reset 'isPlaying' and 'startTracks' variables back to
-           initial states if changed by 'currentTrackInfo' object
-           data */
+           initial states in case play state changed by
+           'currentTrackInfo' object data */
+        console.log(isPlaying);
         if (data && player.id === 're-player') {
             if (isPlaying) {
+                // So play/pause properly set for first click
                 isPlaying = false;
+                // So track initialised by data plays
                 startTracks = false;
             } else if (trackIndex != 0) {
+                // So track initialised by data remains loaded
                 startTracks = false;
             }
         }
-
+        console.log(isPlaying);
+    }
+    // Call initialiseSettings function
+    initialiseSettings();
+    
+    // --------------- Control Buttoms -----------------
     // Loop through control buttons
     for (let button of controlButtons) {
         // Get button icon
@@ -369,6 +414,7 @@ function handleMusicPlayer(player) {
         });
     }
     
+    // ------------------- Sliders ---------------------
     // Loop through sliders
     for (let slider of sliders) {
         // Set initial state of each slider
@@ -403,6 +449,7 @@ function handleMusicPlayer(player) {
         });
     }
 
+    // ------------------ Tracklist Buttons -------------------
     /* 'Click' event listener for tracklist buttons (set on
         container div with event delegation to handle dynamically
         created buttons) */
@@ -440,6 +487,8 @@ function handleMusicPlayer(player) {
         }
     });
 
+    // ------- Canplay, Timeupdate, Seeking, Seeked, Ended -------
+    // --------------------- Event Listeners ---------------------
     /* Audio 'canplay' listener for events that rely on audio track
        being loaded, particularly: update of tracklist buttons; */
     audio.addEventListener('canplay', () => {
