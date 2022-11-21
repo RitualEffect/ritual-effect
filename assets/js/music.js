@@ -227,7 +227,6 @@ function handleMusicPlayer(player) {
             // startTracks = false;
             setTimeout(() => {
                 let playButton = playerWindow.document.querySelector('.play-pause-btn');
-                console.log(playButton);
                 playButton.click();
             }, 750);
         }
@@ -270,6 +269,8 @@ function handleMusicPlayer(player) {
         if (data && player.id === 're-player') {
             if (isPlaying) {
                 isPlaying = false;
+                startTracks = false;
+            } else if (trackIndex != 0) {
                 startTracks = false;
             }
         }
