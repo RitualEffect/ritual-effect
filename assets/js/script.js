@@ -438,7 +438,7 @@ function handleMusicAlert(event) {
  * options modal and its content container.
  * 
  * Get content container's text container divs and wrapper div
- * for full-featured player iframe.
+ * for full-featured player iframe. Get iframe.
  * 
  * Add 'click' event listener to passed-in launch button to close
  * alert modal if open, open launch modal and set focus on it.
@@ -454,7 +454,7 @@ function handleMusicAlert(event) {
  * aria-expanded attribute; reset display classes of iframe and
  * launch options text if necessary; remove any height setting from
  * modal content container that may have been added if player
- * launched in iframe.
+ * launched in iframe. Set iframe source back to 'about:blank'.
  * 
  * If click detected on 'this window' link: hide launch options text
  * and 'this window' button; call function and add 'resize' event
@@ -468,12 +468,13 @@ function handleMusicAlert(event) {
     const launchModal = document.querySelector('#player-launch-modal');
     const launchModalContent = launchModal.querySelector('#launch-modal-content');
     const modalText = launchModalContent.querySelectorAll('.modal-text');
-    const modalFrame = launchModalContent.querySelector('.full-player-frame-wrap');
+    const modalFrameWrap = launchModalContent.querySelector('.full-player-frame-wrap');
+    const modalFrame = modalFrameWrap.querySelector('#re-player-embed');
     /* Function variable to store call to setPlayerFrameHeight
        function - used as reference to cancel 'resize' event
        listener later on */
     const callSetFrameSize = () => {
-        setPlayerFrameHeight(launchModalContent, modalFrame);
+        setPlayerFrameHeight(launchModalContent, modalFrameWrap);
     }
 
     // Event listener for mini player launch button
@@ -507,15 +508,16 @@ function handleMusicAlert(event) {
                 launchButton.focus();
                 launchButton.setAttribute('aria-expanded', false);
                 // Reset launch modal content if appropriate
-                if (modalFrame.classList.contains('active')) {
+                if (modalFrameWrap.classList.contains('active')) {
                     setTimeout(() => {
-                        modalFrame.classList.remove('active');
-                        modalFrame.classList.add('hidden');
+                        modalFrameWrap.classList.remove('active');
+                        modalFrameWrap.classList.add('hidden');
                         launchModalContent.removeAttribute('style');
                         for (let text of modalText) {
                             text.classList.remove('hidden');
                             text.classList.add('active');
                         }
+                        modalFrame.src = 'about:blank';
                     }, 500);
                 }
             }, 500);
@@ -523,7 +525,7 @@ function handleMusicAlert(event) {
         // Handle iframe display
         if (targetButton.id === 'plm-frame-link') {
             // Hide options and display iframe
-            modalFrame.classList.remove('hidden');
+            modalFrameWrap.classList.remove('hidden');
             /* Set responsive heights of launch options modal content div and iframe wrapper */
             callSetFrameSize();
             window.addEventListener('resize', callSetFrameSize);
@@ -531,7 +533,7 @@ function handleMusicAlert(event) {
                 closeMusicModal(text);
             }
             setTimeout(() => {
-                modalFrame.classList.add('active');
+                modalFrameWrap.classList.add('active');
             }, 750);
         }
 
@@ -552,9 +554,9 @@ function handleMusicAlert(event) {
  * container.
  * 
  * @param {HTMLElement} launchModalContent - Content container div for modal.
- * @param {HTMLElement} modalFrame - iframe wrapper element.
+ * @param {HTMLElement} modalFrameWrap - iframe wrapper element.
  */
-function setPlayerFrameHeight(launchModalContent, modalFrame) {
+function setPlayerFrameHeight(launchModalContent, modalFrameWrap) {
     const windowHeight = document.documentElement.clientHeight;
     const windowWidth = document.documentElement.clientWidth;
     const modalContentHeight = windowHeight - 10;
@@ -583,7 +585,7 @@ function setPlayerFrameHeight(launchModalContent, modalFrame) {
         /* Frame height always based on modal content height -
            max-height set by CSS to 100% (i.e. all remaining
            space in content modal) */
-        modalFrame.style.height = `${frameWrapHeight}px`;
+        modalFrameWrap.style.height = `${frameWrapHeight}px`;
     }, 200);
 }
 

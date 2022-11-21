@@ -119,6 +119,8 @@ function timeDisplay(time) {
  * @param {HTMLElement} player - Element containing music player to be handled.
  */
 function handleMusicPlayer(player) {
+    // Get music page 'launch full-featured music player' links
+    const fullPlayerLinks = document.querySelectorAll('.player-launch-link');
     // Call function to construct object containing all tracklists
     const tracklists = constructTracklists();
     /* Extract appropriate tracklist for passed-in player based on
@@ -127,7 +129,7 @@ function handleMusicPlayer(player) {
     // Set initial track index number
     let trackIndex = 0;
     // Get audio element
-    const audio = player.querySelector('audio');
+    let audio = player.querySelector('audio');
     // Get all range sliders
     const sliders = player.querySelectorAll('input[type="range"]');
     // Get seek slider
@@ -162,14 +164,88 @@ function handleMusicPlayer(player) {
     if (loopStatusWindow) {
         loopStatusWindow.innerHTML = "Looping Off";
     }
+
+    /**
+     * Handler function for music page 'launch full-featured
+     * player' links' 'click' event listener.
+     * 
+     * @param {event} event - 'Click' event passed in by event listener.
+     * @returns Nothing - Exits the function if correct anchor tag not found.
+     */
+    const handleLaunchPlayer = event  => {
+        let playerWindow;
+        // Ensure correct link type targeted
+        let targetLink = event.target.closest('.player-launch-link');
+        if (!targetLink) return;
+        // Prevent link's default action
+        event.preventDefault();
+        /* Call function to pause mini player and store current
+           track information in browser's local storage */
+        storeTrackInfo(audio, tracklist, trackIndex, isPlaying);
+        // Launch full-featured player in location specified by link
+        if (targetLink.id === 'plm-tab-link') {
+            playerWindow = window.open('re-player.html', 're-player-tab');
+        } else if (targetLink.id === 'plm-frame-link') {
+            playerWindow = window.open('re-player.html', 're-player-frame');
+        }
+        // if (isPlaying) {
+            // isPlaying = false;
+            // startTracks = false;
+            // setTimeout(() => {
+                // let playButton = playerWindow.document.querySelector('.play-pause-btn');
+                // console.log(playButton);
+                // playButton.click();
+            // }, 750);
+        // }
+        /* As mini player track was paused, set isPlaying to false
+           for mini player's next 'play' button click */
+        isPlaying = false;
+    }
+
+    /* Add 'click' event listeners to music page 'launch
+       full-featured music player' links if found */
+    if (fullPlayerLinks.length > 0) {
+        for (let link of fullPlayerLinks) {
+            link.addEventListener('click', handleLaunchPlayer);
+        }
+    }
     
     // Initialise player...
-    // Call function to dynamically add player's tracklist buttons
-    addTracklistButtons(tracklist, tracklistContainer);
-    // Load first track
-    loadTrack(player, audio, tracklist, trackIndex);
-    // Set initial volume
-    handleVolume(audio, volumeSetting, volumeDisplay);
+    // Look for 'currentTrackInfo' object in browser's local storage
+    let data = JSON.parse(localStorage.getItem('currentTrackInfo'));
+    // setTimeout(() => {
+    // Set track index from 'currentTrackInfo' object
+        if (data && player.id === 're-player') {
+            trackIndex = tracklist.findIndex(track => track.name == data.name);
+        }
+        // Call function to dynamically add player's tracklist buttons
+        addTracklistButtons(tracklist, tracklistContainer);
+        // Load first track
+        loadTrack(player, audio, tracklist, trackIndex);
+        /* Change other initial settings based on 'currentTrackInfo'
+        object */
+        if (data && player.id === 're-player') {
+            audio.currentTime = data.time;
+            volumeSetting = data.volume;
+            isPlaying = data.playing;
+        }
+        // Set initial volume
+        handleVolume(audio, volumeSetting, volumeDisplay);
+        if (data && player.id === 're-player') {
+        // setTimeout(() => {
+            if (isPlaying) {
+                isPlaying = false;
+            }
+            if (trackIndex !=0 || audio.currentTime > 0) {
+                startTracks = false;
+                    
+                // let playButton = player.querySelector('.play-pause-btn');
+                // console.log(playButton);
+                // playButton.click();
+            }
+        // }, 200);
+        }
+    // }, 200);
 
     // Loop through control buttons
     for (let button of controlButtons) {
@@ -362,6 +438,12 @@ function handleMusicPlayer(player) {
         /* Reset time display and seek position for newly loaded
            track (in case track changed while playback paused) */
         handleTrackTimeUpdate(audio, seekSlider, activeTimeDisplay);
+        // setTimeout(() => {
+        // if (data) {
+        //     console.log(data.time);
+        //     audio.currentTime = data.time;
+        // }
+        // }, 500);
     });
     // Time update listener for audio track
     audio.addEventListener('timeupdate', () => {
@@ -419,6 +501,27 @@ function handleMusicPlayer(player) {
 }
 
 // Specific handler functions
+
+function storeTrackInfo(audio, tracklist, trackIndex, isPlaying) {
+    // Get 'play' button icon
+    let buttonIcon = document.querySelector('.play-pause-btn i.fas');
+    if (isPlaying) {
+        // Pause track and change button icon
+        isPlaying = false;
+        playPause(audio, buttonIcon, isPlaying);
+        // Reset isPlaying for local storage
+        isPlaying = true;
+    }
+    // Write track info to browser's local storage if enabled
+    // if (storageAvailable(localStorage)) {}
+    let currentTrackInfo = {
+        name: tracklist[trackIndex].name,
+        time: audio.currentTime,
+        volume: audio.volume * 100,
+        playing: isPlaying
+    }
+    localStorage.setItem('currentTrackInfo', JSON.stringify(currentTrackInfo));
+}
 
 /**
  * Dynamically create tracklist button for each track object in
@@ -521,6 +624,7 @@ function loadTrack(player, audio, tracklist, trackIndex) {
     const infoWindow = player.querySelector('.tracklist-info');
     // Set audio source
     audio.src = `./assets/audio/${track.src}`;
+    audio.setAttribute('aria-label', `${track.album} sample track - ${track.name}`);
     audio.load();
     /* Update display/visual elements - if statements to prevent
        'null setting' errors when function called on mini player */
