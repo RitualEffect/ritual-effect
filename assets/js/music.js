@@ -110,6 +110,40 @@ function timeDisplay(time) {
     return `${displayedMins}:${displayedSecs}`;
 }
 
+/**
+ * Test for availabilty of browser's localStorage/sessionStorage.
+ * 
+ * (Copy/pasted from MDN at: 
+ * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
+ * 
+ * @param {string} type - String denoting the type of storage to be tested for.
+ * @returns True if storage available, exception if not.
+ */
+function storageAvailable(type) {
+    let storage;
+    try {
+        storage = window[type];
+        const x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch (e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
 // Main handler function
 
 /**
@@ -188,15 +222,15 @@ function handleMusicPlayer(player) {
         } else if (targetLink.id === 'plm-frame-link') {
             playerWindow = window.open('re-player.html', 're-player-frame');
         }
-        // if (isPlaying) {
+        if (isPlaying) {
             // isPlaying = false;
             // startTracks = false;
-            // setTimeout(() => {
-                // let playButton = playerWindow.document.querySelector('.play-pause-btn');
-                // console.log(playButton);
-                // playButton.click();
-            // }, 750);
-        // }
+            setTimeout(() => {
+                let playButton = playerWindow.document.querySelector('.play-pause-btn');
+                console.log(playButton);
+                playButton.click();
+            }, 750);
+        }
         /* As mini player track was paused, set isPlaying to false
            for mini player's next 'play' button click */
         isPlaying = false;
@@ -213,7 +247,6 @@ function handleMusicPlayer(player) {
     // Initialise player...
     // Look for 'currentTrackInfo' object in browser's local storage
     let data = JSON.parse(localStorage.getItem('currentTrackInfo'));
-    // setTimeout(() => {
     // Set track index from 'currentTrackInfo' object
         if (data && player.id === 're-player') {
             trackIndex = tracklist.findIndex(track => track.name == data.name);
@@ -223,7 +256,7 @@ function handleMusicPlayer(player) {
         // Load first track
         loadTrack(player, audio, tracklist, trackIndex);
         /* Change other initial settings based on 'currentTrackInfo'
-        object */
+           object */
         if (data && player.id === 're-player') {
             audio.currentTime = data.time;
             volumeSetting = data.volume;
@@ -231,21 +264,15 @@ function handleMusicPlayer(player) {
         }
         // Set initial volume
         handleVolume(audio, volumeSetting, volumeDisplay);
+        /* Reset 'isPlaying' and 'startTracks' variables back to
+           initial states if changed by 'currentTrackInfo' object
+           data */
         if (data && player.id === 're-player') {
-        // setTimeout(() => {
             if (isPlaying) {
                 isPlaying = false;
-            }
-            if (trackIndex !=0 || audio.currentTime > 0) {
                 startTracks = false;
-                    
-                // let playButton = player.querySelector('.play-pause-btn');
-                // console.log(playButton);
-                // playButton.click();
             }
-        // }, 200);
         }
-    // }, 200);
 
     // Loop through control buttons
     for (let button of controlButtons) {
@@ -438,12 +465,6 @@ function handleMusicPlayer(player) {
         /* Reset time display and seek position for newly loaded
            track (in case track changed while playback paused) */
         handleTrackTimeUpdate(audio, seekSlider, activeTimeDisplay);
-        // setTimeout(() => {
-        // if (data) {
-        //     console.log(data.time);
-        //     audio.currentTime = data.time;
-        // }
-        // }, 500);
     });
     // Time update listener for audio track
     audio.addEventListener('timeupdate', () => {
@@ -502,6 +523,16 @@ function handleMusicPlayer(player) {
 
 // Specific handler functions
 
+/**
+ * Pause current track, change 'play/pause' button icon and store
+ * current track information in browser's local storage after
+ * testing for availabilty.
+ * 
+ * @param {HTMLAudioElement} audio - Audio element for handling mp3 files. 
+ * @param {Array} tracklist - Array of objects containing track information. 
+ * @param {number} trackIndex - Array index of current track info. 
+ * @param {boolean} isPlaying - Boolean variable indicating audio play state. 
+ */
 function storeTrackInfo(audio, tracklist, trackIndex, isPlaying) {
     // Get 'play' button icon
     let buttonIcon = document.querySelector('.play-pause-btn i.fas');
@@ -513,14 +544,15 @@ function storeTrackInfo(audio, tracklist, trackIndex, isPlaying) {
         isPlaying = true;
     }
     // Write track info to browser's local storage if enabled
-    // if (storageAvailable(localStorage)) {}
-    let currentTrackInfo = {
-        name: tracklist[trackIndex].name,
-        time: audio.currentTime,
-        volume: audio.volume * 100,
-        playing: isPlaying
+    if (storageAvailable('localStorage')) {
+        let currentTrackInfo = {
+            name: tracklist[trackIndex].name,
+            time: audio.currentTime,
+            volume: Math.round(audio.volume * 100),
+            playing: isPlaying
+        }
+        localStorage.setItem('currentTrackInfo', JSON.stringify(currentTrackInfo));
     }
-    localStorage.setItem('currentTrackInfo', JSON.stringify(currentTrackInfo));
 }
 
 /**
